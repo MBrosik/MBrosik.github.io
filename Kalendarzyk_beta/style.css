@@ -1,3 +1,11 @@
+*::selection {
+    color: none;
+}
+
+*:hover {
+    cursor: default;
+}
+
 body{
     background-color:black;
     color:white;
