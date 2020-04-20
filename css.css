@@ -1,0 +1,173 @@
+body{
+    background-color: white;
+}
+#container{
+    border-style: solid;
+    border-radius: 30px;
+    border-width: 10px;
+    margin-top: 30px;
+    background-color: #e99a25;
+    padding: 20px;
+    box-shadow: 0 0 15px 4px;
+    max-width: 600px;
+}
+
+
+
+#progress_bar{
+    padding: 0;
+    margin-top: 110px;
+    left: 16.66%;
+    border-style: solid;
+    border-width: 5px;
+    height: 25px;
+}
+
+#pytania{
+    margin-top: 30px;
+    left:4.16%;
+    /* border-style: solid;
+    border-width: 5px;
+    border-radius: 20px; */
+    height: 500px;
+    
+}
+
+#pytanie{
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    left:17%;
+    top:1%;
+    font-size: 15px;
+    height:70px;
+    background-color: beige;
+    font-size:13px;
+    padding: 5px;
+    padding-left: 13px;
+
+}
+
+#odpowiedzi{
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    left:4.16%;
+    top:2%;
+    font-size: 15px;
+    margin-top: 20px;
+    height: 350px;
+    background-color: beige
+}
+
+.przyciski{
+    height: 45px;
+    position: absolute;
+    left:8%;
+}
+
+#odp_a{top:10%;} #odp_b{top:30%;} #odp_c{top:50%;} #odp_d{top:70%;}
+
+#przycisk{
+    position: absolute;
+    top: 85%;
+    left: 40%;
+}
+
+#koniec{
+    border-style: solid;
+    border-width: 5px;
+    border-radius: 20px;
+    background-color: beige;
+    text-align: center;
+    height: 50px;
+}
+
+/*--------------------------------------*/
+
+/* zegar */
+
+/*--------------------------------------*/
+
+#zegarek{
+    left: 50%;
+    transform: translate(-50%, 0%);
+    margin-top: 45px;
+    margin-bottom: 45px;
+}
+
+
+.clock {
+    border-radius: 50%;
+    background-image: url("zegar/zegar.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100px;
+    position: absolute;
+    width: 100px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+  }
+  
+  .clock.simple:after {
+    background: #000;
+    border-radius: 50%;
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 5%;
+    height: 5%;
+    z-index: 10;
+  }
+  .hours {
+    background: #000;
+    height: 20%;
+    left: 48.75%;
+    position: absolute;
+    top: 30%;
+    transform-origin: 50% 100%;
+    width: 2.5%;
+  }
+  .minutes {
+    background: #000;
+    height: 40%;
+    left: 49%;
+    position: absolute;
+    top: 10%;
+    transform-origin: 50% 100%;
+    width: 2%;
+  }
+  
+  .minutes-container, .hours-container, .seconds-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  
+  
+  .seconds { 
+    background: #000;
+    height: 45%; 
+    left: 49.5%; 
+    position: absolute; 
+    top: 14%; 
+    transform-origin: 50% 80%; 
+    width: 1%; 
+    z-index: 8; 
+  }
+  
+  @keyframes rotate { 100% { transform: rotateZ(360deg); } }
+  
+  
+  
+  .hours-container { animation: rotate 43200s infinite linear; } .minutes-container { animation: rotate 3600s infinite linear; } .seconds-container { animation: rotate 60s infinite linear; }
+  
+  
+  
