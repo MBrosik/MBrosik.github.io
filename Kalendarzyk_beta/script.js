@@ -120,6 +120,7 @@ var dzien = full.getDate();
 var ilosctygodni=parseInt(dzien/7);
 var niedziela= (dzien-(7*ilosctygodni))-dzientygodnia;
 var dzienostatni=7-niedziela;
+if(dzienostatni>7){dzienostatni-=7}
 
 
 function oblicz(){
