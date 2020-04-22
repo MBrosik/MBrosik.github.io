@@ -1,3 +1,10 @@
+body{
+    background-color:black;
+    color:white;
+    overflow: hidden;
+
+}
+
 *::selection {
     color: none;
 }
@@ -6,72 +13,72 @@
     cursor: default;
 }
 
-body{
-    background-color:black;
-    color:white;
-    overflow: hidden;
-}
-
-#container{
-    margin-left: auto;
-    margin-right: auto;
-    width:1000px;
+#container{ 
+    /* background-color: grey; */
+    width: 100vw;
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 #calendar{
     border-style: solid;
-    border-radius: 50px;
+    border-radius: 5.336vh;
     border-color: #ffffff;
-    width:650px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
+    width: 65vh;
     text-align: center;
-    padding:40px;
+    padding:4vh;
+    height: 73vh;
+    border-width: 0.32vh;
 }
 
 #rok{
-    font-size: 50px;
-    margin-bottom: 10px;
-    margin-top: 20px;
+    font-size: 5.336vh;
+    margin-bottom: 1.067vh;
+    margin-top: 2.134vh;
 }
 #miesiac{
-    font-size:30px;
-    margin-top: 0px;
+    font-size:3.201vh;
+    margin-top: 0vh;
 }
 #dni{
-    width:600px;
-    height: 520px;
+    width:64.034vh;
+    height: 55.49vh;
     border-style: solid;
-    border-radius: 20px;
+    border-radius: 2.134vh;
     border-color: #ffffff;
     margin-left: auto;
     margin-right:auto;
-    padding-left: 0px;
-    padding-right: 0px;
-    padding-top: 10px;
+    padding-left: 0vh;
+    padding-right: 0vh;
+    padding-top: 1.067vh;
+    border-width: 0.32vh;
 }
 .dzien{
-    width:50px;
-    height:50px;
+    width:5.336vh;
+    height:5.336vh;
     border-style: solid;
-    border-width: 3px;
-    border-radius: 20px;
+    border-width: 0.32vh;
+    border-radius: 2.134vh;
     border-color: #ffffff;
     float: left;
-    margin-left: 20px;
-    margin-top: 20px;
-    padding: 0px;
+    margin-left: 2.134vh;
+    margin-top: 2.134vh;
+    padding: 0vh;
+    font-size: 1.75vh;
 
 }
 
 .ktory_dzien{
-    margin-top: 10px;
+    margin-top: 1.067vh;
 }
 
 .nazwy_tygodnia{
-    margin-left: 20px;
+    margin-left: 2.134vh;
     float: left; 
-    width:56px;
+    width:5.976vh;
     justify-content: center;
-    margin-top: 5px;
+    margin-top: 0.533vh;
+    font-size: 1.75vh;
 }

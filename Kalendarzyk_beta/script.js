@@ -97,14 +97,14 @@ function calendar()
 
     for (f=0;f<=6;f++)
     {
-        if(f%7==0){days +='<div style="margin-left: 40px;" class="nazwy_tygodnia">'+nazwa_tygodnia[f]+'</div>'}
+        if(f%7==0){days +='<div style="margin-left: 4.268vh;" class="nazwy_tygodnia">'+nazwa_tygodnia[f]+'</div>'}
         else {days +='<div class="nazwy_tygodnia">'+nazwa_tygodnia[f]+'</div>'}
         if(f%7==6){days+= '<div style="clear: both;"></div>'}
     }
 
     for (f=1; f<=42; f++)
     {
-        if(f%7==1){days +='<div class="dzien" style="margin-left:40px" id="dzien'+ f + '"></div>'}
+        if(f%7==1){days +='<div class="dzien" style="margin-left:4.268vh" id="dzien'+ f + '"></div>'}
         else {days +='<div class="dzien" id="dzien'+ f + '"></div>'}
         if(f%7==0){days+= '<div style="clear: both;"></div>'}
     }
