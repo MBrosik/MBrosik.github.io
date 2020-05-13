@@ -1,0 +1,186 @@
+@media only screen and (max-width:960px) {
+
+/* ------------------------------------------------------*/
+/* logo */
+/* ------------------------------------------------------*/
+
+
+    .logo span{
+        margin: 0px 0.27vw 0px 0.27vw;
+    }
+
+      
+/* ------------------------------------------------------*/
+/* menu */
+/* ------------------------------------------------------*/
+
+    .menu{
+        border-radius: 1.1vw;
+    }
+
+    #animacja{
+        border-radius: 1.1vw;
+    }
+
+    .menu a{
+        font-size: 1.8vw;
+    }
+
+
+/* ------------------------------------------------------*/
+/* content */
+/* ------------------------------------------------------*/
+
+
+    .content{
+        margin-top:3vw;
+        grid-gap: 4vw;
+    }
+
+    .card figure{
+        border-radius: 4vw;
+    }
+    .card_photo{
+        border-radius: 4vw;
+    }
+
+/* ------------------------------------------------------*/
+/* footer */
+/* ------------------------------------------------------*/
+    .footer{
+        margin-top: 4vw;
+        border-radius: 2vw;
+
+    }
+    #footer_row{
+        height: 23vw;
+        
+    }
+
+    #footer_row *{
+        font-size: 2vw;
+    }
+    #small_foot > div:first-child{margin-top: 2vw;}
+    #small_foot > div:last-child{margin-bottom: 2vw;}
+    #small_foot > div > p{
+        margin-left: 1vw;
+    }
+
+    #small_foot > div{
+        width: 26.5vw;
+    }
+
+    .Social_image{
+        height: 4.5vw;
+    }
+
+    #copyrights{
+        margin-top: 0.5vw;
+        font-size: 1.5vw;
+    }
+
+} 
+
+
+
+/* ------------------------------------------------------*/
+/* media: 550px */
+/* ------------------------------------------------------*/
+
+@media only screen and (max-width:550px){
+
+    /* ------------------------------------------------------*/
+    /* logo */
+    /* ------------------------------------------------------*/
+    .logo{
+        font-size: 15vw;
+    }
+
+
+
+    /* ------------------------------------------------------*/
+    /* menu */
+    /* ------------------------------------------------------*/
+    #animacja{
+        border-radius: 5vw;
+        width: 100%;
+        height: 20%;
+    }
+    .menu{
+        height: 60vw;
+        max-height: none;
+        flex-direction: column;
+        border-radius: 5vw;
+    }
+
+    .menu a{
+        
+        width: 100%;
+        height: 20%;
+        font-size: 5vw;
+    }
+
+
+
+    /* ------------------------------------------------------*/
+    /* content */
+    /* ------------------------------------------------------*/
+
+    .content{
+        grid-template-columns: auto;
+        margin-top: 10vw;
+    }
+
+    .events{
+        width: 80vw;
+        height: 70vw;
+    }
+
+    /* ------------------------------------------------------*/
+    /* footer */
+    /* ------------------------------------------------------*/
+
+    #small_foot{
+        height: 50vw;
+    }
+
+    #small_foot > div *{
+        font-size: 4vw;
+    }
+
+    #small_foot > div{
+        width: 70vw;
+    
+    }
+
+    #small_foot > div > p{
+        margin-left: 3vw;
+    }
+
+    
+    #small_foot > div > img{
+        margin-left: 5vw;
+    }
+    
+
+    #Social_Media{
+        
+        border-width: 0.1vw;
+        height: 30vw;
+        
+    }
+
+    .Social_image{
+        height: 10vw;
+        margin-top: 8vw;
+    }
+
+    #footer_row *{
+        font-size: 5vw;
+    }
+
+    #copyrights{
+        margin-top: 4vw;
+        font-size: 4vw;
+    }
+}
