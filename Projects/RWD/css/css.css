@@ -127,11 +127,13 @@ a:hover{
     height:100%;
     transition: all 1s ease-in-out;
     transform-style: preserve-3d;
+
     
 }
 
 .events:hover .card{
     transform: rotateY(180deg);
+
 }
 
 .card figure{
@@ -145,12 +147,17 @@ a:hover{
     align-items: center;
     flex-direction: column;
     box-shadow: 0 2px 3px 0 #09162f;
+
+    /* firefox */
+    backface-visibility: hidden;
+    transform: rotateX(0deg); 
     
 }
 
 .card .front{
     background-color: #58728d;
     text-align: center;
+
     
 }
 
@@ -158,6 +165,7 @@ a:hover{
     background-color:#58728d;
     transform: rotateY(180deg);
     translate: rotateX(100px);
+
 }
 
 .card .back > p{

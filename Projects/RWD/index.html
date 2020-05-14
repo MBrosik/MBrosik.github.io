@@ -1,160 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
-  <!-- Basic Page Needs
+	<!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta charset="utf-8">
-  <title>Portfolio</title>
-  <meta name="description" content="Portfolio">
-  <meta name="author" content="Piotr Niewiadomski">
+	<meta charset="utf-8">
+	<title>Portfolio</title>
+	<meta name="description" content="Portfolio">
+	<meta name="author" content="Piotr Niewiadomski">
 
-  <!-- Mobile Specific Metas
+	<!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- FONT
+	<!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-
-  
-  <!-- biblioteka
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->  
-
-  <link rel="stylesheet" href="Biblioteka/normalize.css">
-  <link rel="stylesheet" href="Biblioteka/skeleton.css">
+	<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
 
 
-    <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->  
-  <link rel="stylesheet" href="css/css.css">
-  <link rel="stylesheet" href="css/media.css">
+	<!-- biblioteka
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 
- <!-- Favicon
+	<link rel="stylesheet" href="Biblioteka/normalize.css">
+	<link rel="stylesheet" href="Biblioteka/skeleton.css">
+
+
+	<!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="./Zdjęcia/Ikona.png">
+	<link rel="stylesheet" href="css/css.css">
+	<link rel="stylesheet" href="css/media.css">
+
+	<!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="icon" type="image/png" href="./Zdjęcia/Ikona.png">
 
 </head>
+
 <body>
-  <div class="container">
+	<div class="container">
 
 
-<!-- -------------------------------------------------- -->
-<!-- logo -->
-<!-- -------------------------------------------------- -->
+		<!-- -------------------------------------------------- -->
+		<!-- logo -->
+		<!-- -------------------------------------------------- -->
 
-	<div class="row">
-	<div class=" twelve columns logo">
-		<span>P</span>
-		<span>o</span>
-		<span>r</span>
-		<span>t</span>
-		<span>f</span>
-		<span>o</span>
-		<span>l</span>
-		<span>i</span>
-		<span>o</span>
-	</div>
-	</div>
-
-<!-- -------------------------------------------------- -->
-<!-- menu  -->
-<!-- -------------------------------------------------- -->
-
-	<div class="row">
-	<div class="menu twelve columns ">
-		<a onclick="start_Wszystkie()" id="wszystkie"> Wszystkie</a>
-		<a onclick="start_Ilustracje()" id="Ilustracje">Ilustracje</a>
-		<a onclick="start_Plakaty()" id="Plakaty">Plakaty</a>
-		<a onclick="start_Topografia()" id="Topografia">Topografia</a>
-		<a onclick="start_Opakowania()" id="Opakowania">Opakowania</a>
-		<div id="animacja"></div>
-	</div>
-	</div>
-
-
-<!-- -------------------------------------------------- -->
-<!-- content -->
-<!-- -------------------------------------------------- -->
-
-
-	<div class="row"><div class="twelve columns content"></div></div>
-
-
-
-<!-- -------------------------------------------------- -->
-<!-- footer -->
-<!-- -------------------------------------------------- -->
-
-
-
-	<div class="row">
-	<div class="twelve columns footer">
-
-	<div class="row" id="footer_row">
-
-      <!-- -------------------------------------------------- -->
-      <!-- small foot -->
-      <!-- -------------------------------------------------- -->
-
-		<div class="six columns" id="small_foot">
-			<div>
-				<img src="./Zdjęcia/Kontakt/Kontakt.png" alt="xx" id="small_foot_image_one"/>
-				<p>Piotr Niewiadomski</p>
-			</div>
-			<div>
-            		<img src="./Zdjęcia/Kontakt/Phone.png" alt="xx" id="small_foot_image_two"/>
-            		<p>(+48) 600-700-800</p>
-          		</div>
-          		<div>
-            		<img src="./Zdjęcia/Kontakt/mail.png" alt="xx" id="small_foot_image_three"/>
-            		<p> piotrek@niewiadomski.pl</p>
-          		</div>
-    		</div>
-        
-        <!-- -------------------------------------------------- -->
-        <!-- Social media -->
-        <!-- -------------------------------------------------- -->
-		
-      	<div class="six columns" id="Social_Media">
-			<div>
-				<img class="Social_image" src="./Zdjęcia/Social Media/Dribble (1).png" alt="xx" onclick="location.href='https://dribbble.com/'"
-					onmouseover="Social_one('Dribble.png', 0)" onmouseout="Social_one_over('Dribble (1).png', 0)"/>
-            		<p>Dribble</p>
-          		</div>
-          		<div>
-				<img  class="Social_image" src="./Zdjęcia/Social Media/Facebook (1).png" alt="xx" onclick="location.href='https://www.facebook.com/'"
-					onmouseover="Social_one('Facebook.png', 1)" onmouseout="Social_one_over('Facebook (1).png', 1)"/>
-            		<p>Facebook</p>
-          		</div>
-          		<div>
-				<img class="Social_image" src="./Zdjęcia/Social Media/Twitter (1).png" alt="xx" onclick="location.href='https://twitter.com/'"
-					onmouseover="Social_one('Twitter.png', 2)" onmouseout="Social_one_over('Twitter (1).png', 2)"/>
-            		<p>Twitter</p>
-          		</div>
-		</div>
-	</div>
-
-	        
-        <!-- -------------------------------------------------- -->
-        <!-- Copy rights -->
-        <!-- -------------------------------------------------- -->
-
-		
-	</div>
-	</div>
-	
 		<div class="row">
-      	<div class="twelve columns" id="copyrights">
-      		© Piotr Niewiadomski
-		</div>
+			<div class=" twelve columns logo">
+				<span>P</span>
+				<span>o</span>
+				<span>r</span>
+				<span>t</span>
+				<span>f</span>
+				<span>o</span>
+				<span>l</span>
+				<span>i</span>
+				<span>o</span>
+			</div>
 		</div>
 
-</div>
+		<!-- -------------------------------------------------- -->
+		<!-- menu  -->
+		<!-- -------------------------------------------------- -->
 
-  
-  <script src="js/js.js"></script>
+		<div class="row">
+			<div class="menu twelve columns ">
+				<a onclick="start_Wszystkie()" id="wszystkie"> Wszystkie</a>
+				<a onclick="start_Ilustracje()" id="Ilustracje">Ilustracje</a>
+				<a onclick="start_Plakaty()" id="Plakaty">Plakaty</a>
+				<a onclick="start_Topografia()" id="Topografia">Topografia</a>
+				<a onclick="start_Opakowania()" id="Opakowania">Opakowania</a>
+				<div id="animacja"></div>
+			</div>
+		</div>
+
+
+		<!-- -------------------------------------------------- -->
+		<!-- content -->
+		<!-- -------------------------------------------------- -->
+
+
+		<div class="row">
+			<div class="twelve columns content"></div>
+		</div>
+
+
+
+		<!-- -------------------------------------------------- -->
+		<!-- footer -->
+		<!-- -------------------------------------------------- -->
+
+
+
+		<div class="row">
+			<div class="twelve columns footer">
+
+				<div class="row" id="footer_row">
+
+					<!-- -------------------------------------------------- -->
+					<!-- small foot -->
+					<!-- -------------------------------------------------- -->
+
+					<div class="six columns" id="small_foot">
+						<div>
+							<img src="./Zdjęcia/Kontakt/Kontakt.png" alt="xx" id="small_foot_image_one" />
+							<p>Piotr Niewiadomski</p>
+						</div>
+						<div>
+							<img src="./Zdjęcia/Kontakt/Phone.png" alt="xx" id="small_foot_image_two" />
+							<p>(+48) 600-700-800</p>
+						</div>
+						<div>
+							<img src="./Zdjęcia/Kontakt/mail.png" alt="xx" id="small_foot_image_three" />
+							<p> piotrek@niewiadomski.pl</p>
+						</div>
+					</div>
+
+					<!-- -------------------------------------------------- -->
+					<!-- Social media -->
+					<!-- -------------------------------------------------- -->
+
+					<div class="six columns" id="Social_Media">
+						<div>
+							<img class="Social_image" src="./Zdjęcia/Social Media/Dribble (1).png"
+								alt="xx" onclick="location.href='https://dribbble.com/'"
+								onmouseover="Social_one('Dribble.png', 0)"
+								onmouseout="Social_one_over('Dribble (1).png', 0)" />
+							<p>Dribble</p>
+						</div>
+						<div>
+							<img class="Social_image" src="./Zdjęcia/Social Media/Facebook (1).png"
+								alt="xx" onclick="location.href='https://www.facebook.com/'"
+								onmouseover="Social_one('Facebook.png', 1)"
+								onmouseout="Social_one_over('Facebook (1).png', 1)" />
+							<p>Facebook</p>
+						</div>
+						<div>
+							<img class="Social_image" src="./Zdjęcia/Social Media/Twitter (1).png"
+								alt="xx" onclick="location.href='https://twitter.com/'"
+								onmouseover="Social_one('Twitter.png', 2)"
+								onmouseout="Social_one_over('Twitter (1).png', 2)" />
+							<p>Twitter</p>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- -------------------------------------------------- -->
+				<!-- Copy rights -->
+				<!-- -------------------------------------------------- -->
+
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="twelve columns" id="copyrights">
+				© Piotr Niewiadomski
+			</div>
+		</div>
+
+	</div>
+
+
+	<script src="js/js.js"></script>
 </body>
+
 </html>
-
-
