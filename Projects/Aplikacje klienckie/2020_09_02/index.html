@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+
+      <style>
+            th, td{
+                border-color: white;  
+                border-width: 1px;
+                height: 15px;
+                width: 30px;
+                font-size: 10px;
+                color: white;
+                text-align: center;
+                background-color: rgb(255, 255, 255);
+            }
+
+
+
+      </style>
+</head>
+<body>
+      <script>
+            // Zad.1 
+            // a)
+            document.write("<b> Witaj JavaScript </b>")
+            document.write(" </br> </br>")
+
+            // b)
+            for(let x=-111; x<=111; x++){
+                  document.write(x +"</br>")
+            }
+
+            document.write(" </br> </br>")
+            // c)
+
+            for (let x = 50; x>0; x-=3) {
+                  document.write(x, " ");
+                  
+            }
+
+            document.write(" </br> </br>")
+
+
+            // d)
+
+            for (let x = 50; x >= 10; x--) {
+                  if(x<=20 || x>=40){
+                        document.write(x, " ");
+                  }
+                  
+            }
+
+            document.write(" </br> </br>")
+
+            // Zad. 2 
+            // a) 
+
+            for (let x = -30; x < 40; x++) {
+
+                  if((x>14 || x<5) & x%2==0){
+                        console.log(x);
+                  }
+            }
+
+
+            console.log(" ");
+            console.log(" ");
+
+            // b)
+
+
+            for (let x = -20; x < 40; x++) {
+
+                  if((x>12 || x<3) & x%2==1){
+                        console.log(x);
+                  }
+            }
+
+
+            console.log(" ");
+            console.log(" ");
+
+
+            // c)
+
+            
+            for (let x = -100; x < 41; x++) {
+
+                  if((x>12 || x<-50) & x%3==0){
+                        console.log(x);
+                  }
+            }
+
+
+            console.log(" ");
+            console.log(" ");
+
+
+
+            // Zad. 3
+
+            // a)
+
+            var index = Math.round(prompt("Napisz liczbę"));
+
+            for (let x = 0; x <index ; x++) {
+                  document.write("x");
+            }
+
+            document.write(" </br> </br>")
+
+
+            
+            // b)
+
+            document.write("<pre>");
+
+            for (let x = 0; x < index ; x++){
+
+                  if(x==0 || x== index-1){
+                        for (let y = 0; y < index ; y++) {
+                              document.write("x" + " ");
+                        }
+                  }
+                  else{
+                        document.write("x" + " ");
+                        for (let y = 0; y < index-2 ; y++) {
+                              document.write("  ");
+                        }
+                        document.write("x");
+
+                  }
+
+                  document.write("</br>");
+            }
+
+            document.write("</pre>")
+
+
+            document.write(" </br> </br>")
+
+            // c)
+            
+            document.write("<pre>");
+
+            var number = 1;
+            for (let x = 0; x <index; x++) {
+
+                  for (let y = 0; y <= (2*index)-1 ; y++) {
+                        if (y>=(((2*index)-1)-number)/2 & y<=((((2*index)-1)-number)/2)+number-1){  // obliczam środek  
+                              document.write("x");
+                        }
+                        else{
+                              document.write(" ");
+                        }
+                        
+                  }
+
+                  document.write("</br>");
+                number+=2;  
+            }
+
+
+            document.write("</pre>");
+
+            document.write(" </br> </br>")
+
+            // d)
+
+            document.write("<pre>");
+            for (let x = 1; x <= index ; x++) {
+                  
+                  for (let y = 1; y <= x; y++) {
+                        
+                        document.write(y)     
+                  }
+
+                  document.write("</br>");
+            }
+
+            document.write("</pre>");
+
+            document.write(" </br> </br>")
+
+            // e)
+
+            document.write("<pre>");
+
+            for (let x = 1; x <= index ; x++) {
+                  
+                  for (let y = 1; y <= index; y++) {
+                        if(y>=index-(x-1)){               // obliczam miejsca ostatnich liczb
+                              document.write(index-(y-1))
+                        }
+
+                        else{
+                              document.write(" ")
+                        }
+                        
+                  }
+
+                  document.write("</br>");
+            }
+
+
+            document.write("</pre>");
+
+            document.write(" </br> </br>")
+
+            // f) 
+
+            function Factorials (factorial){
+                  var numberv2=1;
+                  for (let x = 1; x <= factorial; x++) {
+                        numberv2*=x;
+                        
+                  } 
+
+                  return numberv2
+            }
+
+            document.write(Factorials(index));
+
+            document.write(" </br> </br>")
+
+
+            // g)
+
+            var numberv3=0;
+
+            for (let x = 0; x <= index; x++) {
+                  if(x%2==1){
+                        numberv3+=x;
+                  }
+            }
+
+            document.write(numberv3);
+
+            document.write(" </br> </br>")
+
+
+            // h)
+
+            function fNumbers(first){
+                  var boolean=false;
+
+                  for (let x = 2; x < first; x++) {
+                        if(first%x==0) boolean=true;
+    
+                  }
+
+                  if (boolean==false) return "Liczba jest pierwsza";
+                  else return "Liczba nie jest pierwsza";
+
+            }
+
+            alert(fNumbers(index))
+
+            document.write(" </br> </br>")
+            
+            //i)
+
+            var down=1;
+
+            document.write("<table>")
+            document.write("<tr>")
+            document.write("<td> </td>")
+            
+            
+            for (let x = 1; x <=20 ; x++) {
+                  document.write("<td style='background-color: rgb(59, 79, 167);'>" + x + "</td>")             
+                        
+            }
+
+            document.write("</tr>")
+
+            for (let x = 1; x <=20; x++) {
+                  document.write("<tr>")
+                  document.write("<td style='background-color: rgb(59, 79, 167);'>" + x + "</td>")
+
+                  for (let y = 1; y <=20 ; y++) {
+                        if(x==y){
+                              document.write("<td style='background-color: white; color:black'>" + (x*y) + "</td>")
+                        }
+                        else{
+                              document.write("<td style='background-color: rgb(187, 156, 53); color:black'>" + (x*y) + "</td>")
+                        }
+                        
+                  }
+                  document.write("</tr>")
+                  
+            }
+
+
+
+            document.write("</table>");
+
+            document.write(" </br> </br>");     
+
+            // Zad. 4
+
+            // a)
+
+            var pesel=prompt("Podaj pesel");
+            
+
+
+      </script>
+</body>
+</html>
