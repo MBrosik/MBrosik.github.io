@@ -307,6 +307,85 @@
             var pesel=prompt("Podaj pesel");
             
 
+            if(pesel.length==11){
+                  var suma = 9*parseInt(pesel[0])+7*parseInt(pesel[1])+3*parseInt(pesel[2])+parseInt(pesel[3])+9*parseInt(pesel[4])+7*parseInt(pesel[5])+3*parseInt(pesel[6])+parseInt(pesel[7])+9*parseInt(pesel[8])+7*parseInt(pesel[9])
+                  console.log(suma);
+
+                  if (suma%10==pesel[10]){
+
+                        alert("Pesel jest poprawny");      
+                        plec();
+                        
+                  }
+                  else alert("Pesel nie jest poprawny")
+            }
+            else alert("Pesel nie jest poprawny")
+
+
+            // b) a)
+
+            function plec(){
+
+                  var m=[1,3,5,7,9]
+
+                  var ż=true;
+
+                  m.forEach(element => {
+
+                    if(element==pesel[9]) {
+                          alert("Jesteś mężczyzną");
+                          ż=false;
+                          
+                        }
+                  })
+
+                  if(ż==true) alert("Jesteś kobietą");
+
+                  
+                  data()
+            }
+
+
+            // b) b)
+
+            function data(){
+                  var rok=pesel[0]+pesel[1];
+                  var msc=parseInt(pesel[2]+pesel[3]);
+                  var msc1;
+                  var rok1;
+
+                  if(msc>80 & msc<100){
+                        msc1= msc-80
+                        rok1="18"+rok;
+                  }
+                  else if(msc>0 & msc<20){
+                        msc1= msc
+                        rok1="19"+rok;
+                  }
+                  else if(msc>20 & msc<40){
+                        msc1= msc-20
+                        rok1="20"+rok;
+                  }
+                  else if(msc>40 & msc<60){
+                        msc1= msc-40
+                        rok1="21"+rok;
+                  }
+                  else if(msc>60 & msc<80){
+                        msc1= msc-60
+                        rok1="22"+rok;
+                  }
+
+                  var msc2;
+
+                  var pelna= pesel[4]+pesel[5]+"."+msc1+"."+rok1;
+
+                  alert("Twój rok urodzenia: "+pelna);
+
+
+            }
+            
+
+
 
       </script>
 </body>
