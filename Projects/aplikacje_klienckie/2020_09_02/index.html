@@ -23,18 +23,19 @@
 </head>
 <body>
       <script>
-            // Zad.1 
-            // a)
+            // Zad.1 Na stronie wypisz:
+            // 1.2) wytłuszczony napis "Witaj JavaScript"
+
             document.write("<b> Witaj JavaScript </b>")
             document.write(" </br> </br>")
 
-            // b)
+            // b) jedna pod drugą liczby z zakresu: <-111;111>
             for(let x=-111; x<=111; x++){
                   document.write(x +"</br>")
             }
 
             document.write(" </br> </br>")
-            // c)
+            // c) malejąco co trzecią liczbę (oddzielone spacjami) z zakresu: (0;50> => "50 47 44 41 38 35 32 29 26 23 20 17 14 11 8 5 2"
 
             for (let x = 50; x>0; x-=3) {
                   document.write(x, " ");
@@ -44,7 +45,7 @@
             document.write(" </br> </br>")
 
 
-            // d)
+            // d) malejąco liczby z zakresu: <10;50> \ (20;40)
 
             for (let x = 50; x >= 10; x--) {
                   if(x<=20 || x>=40){
@@ -55,8 +56,8 @@
 
             document.write(" </br> </br>")
 
-            // Zad. 2 
-            // a) 
+            // Zad. 2 W konsoli wypisz:
+            // a) liczby parzyste z przedziału: <-30;40) \ (5;14)
 
             for (let x = -30; x < 40; x++) {
 
@@ -69,7 +70,7 @@
             console.log(" ");
             console.log(" ");
 
-            // b)
+            // b) liczb nieparzyste z przedziału: <-20;40) \ (3;12)
 
 
             for (let x = -20; x < 40; x++) {
@@ -84,7 +85,7 @@
             console.log(" ");
 
 
-            // c)
+            // c) tylko liczby podzielne przez 3 z przedziału: <-100;41) \ (-50;12)
 
             
             for (let x = -100; x < 41; x++) {
@@ -100,9 +101,9 @@
 
 
 
-            // Zad. 3
+            // Zad. 3  Używając okna dialogowego pobierz wartość od użytkownika i wypisz na stronie (np. dla liczby 6):
 
-            // a)
+            // a) XXXXXX
 
             var index = Math.round(prompt("Napisz liczbę"));
 
@@ -114,7 +115,7 @@
 
 
             
-            // b)
+            // b) Kwadrat
 
             document.write("<pre>");
 
@@ -142,7 +143,7 @@
 
             document.write(" </br> </br>")
 
-            // c)
+            // c) Piramida
             
             document.write("<pre>");
 
@@ -168,7 +169,7 @@
 
             document.write(" </br> </br>")
 
-            // d)
+            // d) Piramida v2
 
             document.write("<pre>");
             for (let x = 1; x <= index ; x++) {
@@ -185,7 +186,7 @@
 
             document.write(" </br> </br>")
 
-            // e)
+            // e) Piramida v3
 
             document.write("<pre>");
 
@@ -210,7 +211,7 @@
 
             document.write(" </br> </br>")
 
-            // f) 
+            // f) silnię podanej liczby
 
             function Factorials (factorial){
                   var numberv2=1;
@@ -227,7 +228,7 @@
             document.write(" </br> </br>")
 
 
-            // g)
+            // g) sumę liczb nieparzystych w zakresie 0 do podanej lczby
 
             var numberv3=0;
 
@@ -242,7 +243,7 @@
             document.write(" </br> </br>")
 
 
-            // h)
+            // h) w oknie dialogowym informację czy podana liczba jest pierwsza
 
             function fNumbers(first){
                   var boolean=false;
@@ -261,7 +262,7 @@
 
             document.write(" </br> </br>")
             
-            //i)
+            // i) w tabelece html'owej tabliczkę mnożenia wraz z nagłówkami, zachowaj kolorystykę (przekątna nagłówki, "połówki") i pozbądź się 0 w lewym górnym rogu
 
             var down=1;
 
@@ -270,18 +271,18 @@
             document.write("<td> </td>")
             
             
-            for (let x = 1; x <=20 ; x++) {
+            for (let x = 1; x <=index ; x++) {
                   document.write("<td style='background-color: rgb(59, 79, 167);'>" + x + "</td>")             
                         
             }
 
             document.write("</tr>")
 
-            for (let x = 1; x <=20; x++) {
+            for (let x = 1; x <=index; x++) {
                   document.write("<tr>")
                   document.write("<td style='background-color: rgb(59, 79, 167);'>" + x + "</td>")
 
-                  for (let y = 1; y <=20 ; y++) {
+                  for (let y = 1; y <=index ; y++) {
                         if(x==y){
                               document.write("<td style='background-color: white; color:black'>" + (x*y) + "</td>")
                         }
@@ -300,9 +301,9 @@
 
             document.write(" </br> </br>");     
 
-            // Zad. 4
+            // Zad. 4 Pobierz od użytkownika PESEL
 
-            // a)
+            // 4.1) sprawdź jego poprawność (jeśli zły stosowna informacja)
 
             var pesel=prompt("Podaj pesel");
             
@@ -322,7 +323,8 @@
             else alert("Pesel nie jest poprawny")
 
 
-            // b) a)
+            // 4.2) wypisz pochodzące z niego informację tj:
+            // a) płeć (M/K)
 
             function plec(){
 
@@ -346,7 +348,7 @@
             }
 
 
-            // b) b)
+            // b) datę urodzenia (weź pod uwagę różne stulecia)
 
             function data(){
                   var rok=pesel[0]+pesel[1];
@@ -375,7 +377,7 @@
                         rok1="22"+rok;
                   }
 
-                  var msc2;
+                  if(msc1<10) msc1="0"+ msc1
 
                   var pelna= pesel[4]+pesel[5]+"."+msc1+"."+rok1;
 
