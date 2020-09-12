@@ -121,7 +121,7 @@
                 if (element.toLowerCase() == text1.toLowerCase() + "," || element.toLowerCase() == text1.toLowerCase() + ".") {
 
                     text2 += "<u>" + element.slice(0, -1) + "</u>" + element.substr(-1, 1) + " "
-                    console.log(text2);
+                    
 
                 }
 
@@ -136,7 +136,7 @@
                 if (element.toLowerCase() == text1.toLowerCase() || element.toLowerCase() == text1.toLowerCase()) {
 
                     text2 += "<u>" + element + "</u>" + " "
-                    console.log(text2);
+                    
 
                 }
 
@@ -173,12 +173,12 @@
         });
 
 
-        console.log(zlicztab);
+        
 
 
         var zlicztab1 = [... new Set(zlicztab)]
 
-        console.log(zlicztab1);
+        
 
 
         zliczstatics = {
@@ -186,7 +186,7 @@
             values: []
         };
 
-        console.log(zliczstatics);
+        
 
 
         for (let x = 0; x < zlicztab1.length; x++) {
@@ -197,16 +197,16 @@
 
             }
 
-            console.log("temp:" + x);
-            console.log(temp1);
+            
+            
             zliczstatics.keys[x] = zlicztab1[x];
 
             zliczstatics.values[x] = parseInt(temp1);
 
 
         }
-        console.log("zliczstatistics przed:");
-        console.log(zliczstatics);
+        
+        
 
         var temp = true;
 
@@ -216,26 +216,23 @@
 
             for (let x = 0; x < zliczstatics.keys.length-1; x++) {
 
-                console.log("xd");
-                console.log(x);
-                console.log(zliczstatics.values[x]);
-                console.log(zliczstatics.values[x+1]);
+                
 
 
                 if (zliczstatics.values[x] < zliczstatics.values[x+1]) {
 
-                    console.log(x);
+                    
 
-                    // [zliczstatics.values[x-1], zliczstatics.values[x]] = [zliczstatics.values[x], zliczstatics.values[x-1]];
-                    // [zliczstatics.keys[x-1], zliczstatics.keys[x]] = [zliczstatics.keys[x], zliczstatics.keys[x-1]];
+                    [zliczstatics.values[x], zliczstatics.values[x+1]] = [zliczstatics.values[x+1], zliczstatics.values[x]];
+                    [zliczstatics.keys[x], zliczstatics.keys[x+1]] = [zliczstatics.keys[x+1], zliczstatics.keys[x]];
 
-                    var tmp = zliczstatics.values[x];
-                    zliczstatics.values[x] = zliczstatics.values[x+1];
-                    zliczstatics.values[x+1] = tmp;
+                    // var tmp = zliczstatics.values[x];
+                    // zliczstatics.values[x] = zliczstatics.values[x+1];
+                    // zliczstatics.values[x+1] = tmp;
 
-                    var tmp = zliczstatics.keys[x];
-                    zliczstatics.keys[x] = zliczstatics.keys[x+1];
-                    zliczstatics.keys[x+1] = tmp
+                    // var tmp = zliczstatics.keys[x];
+                    // zliczstatics.keys[x] = zliczstatics.keys[x+1];
+                    // zliczstatics.keys[x+1] = tmp
 
                     temp = true;
 
@@ -246,8 +243,7 @@
 
         }
 
-        console.log("zliczstatistics po:");
-        console.log(zliczstatics);
+
 
         document.write("<br/>")
 
