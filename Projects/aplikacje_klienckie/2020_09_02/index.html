@@ -150,8 +150,8 @@
             var number = 1;
             for (let x = 0; x <index; x++) {
 
-                  for (let y = 0; y <= (2*index)-1 ; y++) {
-                        if (y>=(((2*index)-1)-number)/2 & y<=((((2*index)-1)-number)/2)+number-1){  // obliczam środek  
+                  for (let y = 0; y <= (2*index)-1 ; y++) {                   // 6 rząd posiada 11 iksów, czyli 2*6-1
+                        if (y>=(((2*index)-1)-number)/2 & y<=((((2*index)-1)-number)/2)+number-1){  // obliczam środek oraz od którego miejsca do którego miejsca mają być iksy
                               document.write("x");
                         }
                         else{
@@ -161,7 +161,7 @@
                   }
 
                   document.write("</br>");
-                number+=2;  
+                number+=2;                //Za każdym razem dodaje liczbę iksów
             }
 
 
@@ -190,10 +190,10 @@
 
             document.write("<pre>");
 
-            for (let x = 1; x <= index ; x++) {
+            for (let x = 1; x <= index ; x++) {    // Przechodzę przez rzędy
                   
-                  for (let y = 1; y <= index; y++) {
-                        if(y>=index-(x-1)){               // obliczam miejsca ostatnich liczb
+                  for (let y = 1; y <= index; y++) {   // Przechodzę przez miejsca w linijce
+                        if(y>=index-(x-1)){               // obliczam miejsca dla liczb dla każdej linijki od góry +1 dla miejsca gla literek dla drugiej linijki dla liczby 6: 6-(2-1)
                               document.write(index-(y-1))
                         }
 
