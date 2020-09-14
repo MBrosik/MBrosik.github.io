@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document</title>
 
       <style>
-            th, td{
-                border-color: white;  
-                border-width: 1px;
-                height: 15px;
-                width: 30px;
-                font-size: 10px;
-                color: white;
-                text-align: center;
-                background-color: rgb(255, 255, 255);
+            th,
+            td {
+                  border-color: white;
+                  border-width: 1px;
+                  height: 15px;
+                  width: 30px;
+                  font-size: 10px;
+                  color: white;
+                  text-align: center;
+                  background-color: rgb(255, 255, 255);
             }
-
-
-
       </style>
 </head>
+
 <body>
       <script>
             // Zad.1 Na stronie wypisz:
@@ -30,16 +30,16 @@
             document.write(" </br> </br>")
 
             // b) jedna pod drugą liczby z zakresu: <-111;111>
-            for(let x=-111; x<=111; x++){
-                  document.write(x +"</br>")
+            for (let x = -111; x <= 111; x++) {
+                  document.write(x + "</br>")
             }
 
             document.write(" </br> </br>")
             // c) malejąco co trzecią liczbę (oddzielone spacjami) z zakresu: (0;50> => "50 47 44 41 38 35 32 29 26 23 20 17 14 11 8 5 2"
 
-            for (let x = 50; x>0; x-=3) {
+            for (let x = 50; x > 0; x -= 3) {
                   document.write(x, " ");
-                  
+
             }
 
             document.write(" </br> </br>")
@@ -48,10 +48,10 @@
             // d) malejąco liczby z zakresu: <10;50> \ (20;40)
 
             for (let x = 50; x >= 10; x--) {
-                  if(x<=20 || x>=40){
+                  if (x <= 20 || x >= 40) {
                         document.write(x, " ");
                   }
-                  
+
             }
 
             document.write(" </br> </br>")
@@ -61,7 +61,7 @@
 
             for (let x = -30; x < 40; x++) {
 
-                  if((x>14 || x<5) & x%2==0){
+                  if ((x > 14 || x < 5) & x % 2 == 0) {
                         console.log(x);
                   }
             }
@@ -75,7 +75,7 @@
 
             for (let x = -20; x < 40; x++) {
 
-                  if((x>12 || x<3) & x%2==1){
+                  if ((x > 12 || x < 3) & x % 2 == 1) {
                         console.log(x);
                   }
             }
@@ -87,10 +87,10 @@
 
             // c) tylko liczby podzielne przez 3 z przedziału: <-100;41) \ (-50;12)
 
-            
+
             for (let x = -100; x < 41; x++) {
 
-                  if((x>12 || x<-50) & x%3==0){
+                  if ((x > 12 || x < -50) & x % 3 == 0) {
                         console.log(x);
                   }
             }
@@ -107,28 +107,28 @@
 
             var index = Math.round(prompt("Napisz liczbę"));
 
-            for (let x = 0; x <index ; x++) {
+            for (let x = 0; x < index; x++) {
                   document.write("x");
             }
 
             document.write(" </br> </br>")
 
 
-            
+
             // b) Kwadrat
 
             document.write("<pre>");
 
-            for (let x = 0; x < index ; x++){
+            for (let x = 0; x < index; x++) {
 
-                  if(x==0 || x== index-1){
-                        for (let y = 0; y < index ; y++) {
+                  if (x == 0 || x == index - 1) {
+                        for (let y = 0; y < index; y++) {
                               document.write("x" + " ");
                         }
                   }
-                  else{
+                  else {
                         document.write("x" + " ");
-                        for (let y = 0; y < index-2 ; y++) {
+                        for (let y = 0; y < index - 2; y++) {
                               document.write("  ");
                         }
                         document.write("x");
@@ -144,24 +144,24 @@
             document.write(" </br> </br>")
 
             // c) Piramida
-            
+
             document.write("<pre>");
 
             var number = 1;
-            for (let x = 0; x <index; x++) {
+            for (let x = 0; x < index; x++) {
 
-                  for (let y = 0; y <= (2*index)-1 ; y++) {                   // 6 rząd posiada 11 iksów, czyli 2*6-1
-                        if (y>=(((2*index)-1)-number)/2 & y<=((((2*index)-1)-number)/2)+number-1){  // obliczam środek oraz od którego miejsca do którego miejsca mają być iksy
+                  for (let y = 0; y <= (2 * index) - 1; y++) {                   // 6 rząd posiada 11 iksów, czyli 2*6-1
+                        if (y >= (((2 * index) - 1) - number) / 2 & y <= ((((2 * index) - 1) - number) / 2) + number - 1) {  // obliczam środek oraz od którego miejsca do którego miejsca mają być iksy
                               document.write("x");
                         }
-                        else{
+                        else {
                               document.write(" ");
                         }
-                        
+
                   }
 
                   document.write("</br>");
-                number+=2;                //Za każdym razem dodaje liczbę iksów
+                  number += 2;                //Za każdym razem dodaje liczbę iksów
             }
 
 
@@ -172,11 +172,11 @@
             // d) Piramida v2
 
             document.write("<pre>");
-            for (let x = 1; x <= index ; x++) {
-                  
+            for (let x = 1; x <= index; x++) {
+
                   for (let y = 1; y <= x; y++) {
-                        
-                        document.write(y)     
+
+                        document.write(y)
                   }
 
                   document.write("</br>");
@@ -190,17 +190,21 @@
 
             document.write("<pre>");
 
-            for (let x = 1; x <= index ; x++) {    // Przechodzę przez rzędy
-                  
+            for (let x = 1; x <= index; x++) {    // Przechodzę przez rzędy
+
                   for (let y = 1; y <= index; y++) {   // Przechodzę przez miejsca w linijce
-                        if(y>=index-(x-1)){               // obliczam miejsca dla liczb dla każdej linijki od góry +1 dla miejsca gla literek dla drugiej linijki dla liczby 6: 6-(2-1)
-                              document.write(index-(y-1))
+                        if (y >= index - (x - 1)) {               // obliczam miejsca dla liczb dla każdej linijki od góry +1 dla miejsca gla literek dla drugiej linijki dla liczby 6: 6-(2-1)
+                              document.write(index - (y - 1))
                         }
 
-                        else{
-                              document.write(" ")
+                        else {
+                              var spacenumber = Math.floor(Math.log((index-(y-1))) / Math.LN10)  //obliczam ilość spacji w zależności od ilości cyfr
+                              for (let z = 0; z <= spacenumber; z++) {
+                                    document.write(" ")
+                              }
+
                         }
-                        
+
                   }
 
                   document.write("</br>");
@@ -213,12 +217,12 @@
 
             // f) silnię podanej liczby
 
-            function Factorials (factorial){
-                  var numberv2=1;
+            function Factorials(factorial) {
+                  var numberv2 = 1;
                   for (let x = 1; x <= factorial; x++) {
-                        numberv2*=x;
-                        
-                  } 
+                        numberv2 *= x;
+
+                  }
 
                   return numberv2
             }
@@ -230,11 +234,11 @@
 
             // g) sumę liczb nieparzystych w zakresie 0 do podanej lczby
 
-            var numberv3=0;
+            var numberv3 = 0;
 
             for (let x = 0; x <= index; x++) {
-                  if(x%2==1){
-                        numberv3+=x;
+                  if (x % 2 == 1) {
+                        numberv3 += x;
                   }
             }
 
@@ -245,15 +249,15 @@
 
             // h) w oknie dialogowym informację czy podana liczba jest pierwsza
 
-            function fNumbers(first){
-                  var boolean=false;
+            function fNumbers(first) {
+                  var boolean = false;
 
                   for (let x = 2; x < first; x++) {
-                        if(first%x==0) boolean=true;
-    
+                        if (first % x == 0) boolean = true;
+
                   }
 
-                  if (boolean==false) return "Liczba jest pierwsza";
+                  if (boolean == false) return "Liczba jest pierwsza";
                   else return "Liczba nie jest pierwsza";
 
             }
@@ -261,62 +265,62 @@
             alert(fNumbers(index))
 
             document.write(" </br> </br>")
-            
+
             // i) w tabelece html'owej tabliczkę mnożenia wraz z nagłówkami, zachowaj kolorystykę (przekątna nagłówki, "połówki") i pozbądź się 0 w lewym górnym rogu
 
-            var down=1;
+            var down = 1;
 
             document.write("<table>")
             document.write("<tr>")
             document.write("<td> </td>")
-            
-            
-            for (let x = 1; x <=index ; x++) {
-                  document.write("<td style='background-color: rgb(59, 79, 167);'>" + x + "</td>")             
-                        
+
+
+            for (let x = 1; x <= index; x++) {
+                  document.write("<td style='background-color: rgb(59, 79, 167);'>" + x + "</td>")
+
             }
 
             document.write("</tr>")
 
-            for (let x = 1; x <=index; x++) {
+            for (let x = 1; x <= index; x++) {
                   document.write("<tr>")
                   document.write("<td style='background-color: rgb(59, 79, 167);'>" + x + "</td>")
 
-                  for (let y = 1; y <=index ; y++) {
-                        if(x==y){
-                              document.write("<td style='background-color: white; color:black'>" + (x*y) + "</td>")
+                  for (let y = 1; y <= index; y++) {
+                        if (x == y) {
+                              document.write("<td style='background-color: white; color:black'>" + (x * y) + "</td>")
                         }
-                        else{
-                              document.write("<td style='background-color: rgb(187, 156, 53); color:black'>" + (x*y) + "</td>")
+                        else {
+                              document.write("<td style='background-color: rgb(187, 156, 53); color:black'>" + (x * y) + "</td>")
                         }
-                        
+
                   }
                   document.write("</tr>")
-                  
+
             }
 
 
 
             document.write("</table>");
 
-            document.write(" </br> </br>");     
+            document.write(" </br> </br>");
 
             // Zad. 4 Pobierz od użytkownika PESEL
 
             // 4.1) sprawdź jego poprawność (jeśli zły stosowna informacja)
 
-            var pesel=prompt("Podaj pesel");
-            
+            var pesel = prompt("Podaj pesel");
 
-            if(pesel.length==11){
-                  var suma = 9*parseInt(pesel[0])+7*parseInt(pesel[1])+3*parseInt(pesel[2])+parseInt(pesel[3])+9*parseInt(pesel[4])+7*parseInt(pesel[5])+3*parseInt(pesel[6])+parseInt(pesel[7])+9*parseInt(pesel[8])+7*parseInt(pesel[9])
+
+            if (pesel.length == 11) {
+                  var suma = 9 * parseInt(pesel[0]) + 7 * parseInt(pesel[1]) + 3 * parseInt(pesel[2]) + parseInt(pesel[3]) + 9 * parseInt(pesel[4]) + 7 * parseInt(pesel[5]) + 3 * parseInt(pesel[6]) + parseInt(pesel[7]) + 9 * parseInt(pesel[8]) + 7 * parseInt(pesel[9])
                   console.log(suma);
 
-                  if (suma%10==pesel[10]){
+                  if (suma % 10 == pesel[10]) {
 
-                        alert("Pesel jest poprawny");      
+                        alert("Pesel jest poprawny");
                         plec();
-                        
+
                   }
                   else alert("Pesel nie jest poprawny")
             }
@@ -326,69 +330,70 @@
             // 4.2) wypisz pochodzące z niego informację tj:
             // a) płeć (M/K)
 
-            function plec(){
+            function plec() {
 
-                  var m=[1,3,5,7,9]
+                  var m = [1, 3, 5, 7, 9]
 
-                  var ż=true;
+                  var ż = true;
 
                   m.forEach(element => {
 
-                    if(element==pesel[9]) {
-                          alert("Jesteś mężczyzną");
-                          ż=false;
-                          
+                        if (element == pesel[9]) {
+                              alert("Jesteś mężczyzną");
+                              ż = false;
+
                         }
                   })
 
-                  if(ż==true) alert("Jesteś kobietą");
+                  if (ż == true) alert("Jesteś kobietą");
 
-                  
+
                   data()
             }
 
 
             // b) datę urodzenia (weź pod uwagę różne stulecia)
 
-            function data(){
-                  var rok=pesel[0]+pesel[1];
-                  var msc=parseInt(pesel[2]+pesel[3]);
+            function data() {
+                  var rok = pesel[0] + pesel[1];
+                  var msc = parseInt(pesel[2] + pesel[3]);
                   var msc1;
                   var rok1;
 
-                  if(msc>80 & msc<100){
-                        msc1= msc-80
-                        rok1="18"+rok;
+                  if (msc > 80 & msc < 100) {
+                        msc1 = msc - 80
+                        rok1 = "18" + rok;
                   }
-                  else if(msc>0 & msc<20){
-                        msc1= msc
-                        rok1="19"+rok;
+                  else if (msc > 0 & msc < 20) {
+                        msc1 = msc
+                        rok1 = "19" + rok;
                   }
-                  else if(msc>20 & msc<40){
-                        msc1= msc-20
-                        rok1="20"+rok;
+                  else if (msc > 20 & msc < 40) {
+                        msc1 = msc - 20
+                        rok1 = "20" + rok;
                   }
-                  else if(msc>40 & msc<60){
-                        msc1= msc-40
-                        rok1="21"+rok;
+                  else if (msc > 40 & msc < 60) {
+                        msc1 = msc - 40
+                        rok1 = "21" + rok;
                   }
-                  else if(msc>60 & msc<80){
-                        msc1= msc-60
-                        rok1="22"+rok;
+                  else if (msc > 60 & msc < 80) {
+                        msc1 = msc - 60
+                        rok1 = "22" + rok;
                   }
 
-                  if(msc1<10) msc1="0"+ msc1
+                  if (msc1 < 10) msc1 = "0" + msc1
 
-                  var pelna= pesel[4]+pesel[5]+"."+msc1+"."+rok1;
+                  var pelna = pesel[4] + pesel[5] + "." + msc1 + "." + rok1;
 
-                  alert("Twój rok urodzenia: "+pelna);
+                  alert("Twój rok urodzenia: " + pelna);
 
 
             }
-            
+
 
 
 
       </script>
 </body>
+
 </html>
