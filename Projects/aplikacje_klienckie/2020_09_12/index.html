@@ -30,12 +30,12 @@
             if (element == "a" || element == "e" || element == "i" || element == "o" || element == "u" || element == "y" || element == "ą" || element == "ę") {
 
 
-                c += ("<span>" + element + "</span>").fontcolor("red")
+                c += (element ).fontcolor("red")
                     .bold()
 
             }
             else {
-                c += "<span>" + element + "</span>";
+                c += element;
             }
         });
 
@@ -108,7 +108,7 @@
 
 
         var text = prompt("Podaj tekst do podkreślenie")
-        var text1 = prompt("Co należy podkreślić?")
+        var text1 = prompt("Co należy podkreślić?").toLowerCase()
 
         textsplit = text.split(" ")
 
@@ -156,14 +156,15 @@
 
 
         var zlicz = prompt("Podaj zdanie do zliczenia")
+        zlicz= zlicz.toLowerCase();
 
         var zlicztab = zlicz.split(" ")
 
         zlicztab.forEach((element, index, arr) => {
 
-            arr[index] = element.toLowerCase();
+            // arr[index] = element.toLowerCase();
 
-            if (element.includes(",") || element.includes(".")) {
+            if (element.includes(",") || element.includes(".") || element.includes(":")) {
 
                 var temp = arr[index].slice(0, -1);
                 arr[index] = temp;
@@ -256,13 +257,13 @@
             return color;
         }
 
-        var color= getRandomColor();
-
         for (let x = 0; x < zliczstatics.values.length; x++) {
 
-            if(x<5) document.write((zliczstatics.keys[x] + ": " + zliczstatics.values[x] + "<br/>").fontcolor(color)) 
+            if(x%5==0) var color= getRandomColor();
+            document.write((zliczstatics.keys[x] + ": " + zliczstatics.values[x] + "<br/>").fontcolor(color)) 
+            // if(x<5) document.write((zliczstatics.keys[x] + ": " + zliczstatics.values[x] + "<br/>").fontcolor(color)) 
 
-            else document.write(zliczstatics.keys[x] + ": " + zliczstatics.values[x] + "<br/>")
+            // else document.write(zliczstatics.keys[x] + ": " + zliczstatics.values[x] + "<br/>")
 
 
 
