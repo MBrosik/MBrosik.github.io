@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        /* * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        } */
+
+        body>* {
+            margin-left: 30px;
+        }
+
+        #zad1,
+        #zad4 {
+            width: 1000px;
+            height: 600px;
+            border: 1px black solid;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #zad1 img {
+            position: absolute;
+            width: 100px;
+            top: 0;
+            left: 0;
+
+
+        }
+
+        #zad3 {
+            width: 400px;
+            height: 270px;
+        }
+
+        #zad4 {
+            width: 800px;
+            height: 800px;
+            background-image: url("galaxy.jpg");
+            background-color: #cccccc;
+            
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        #zad4 img {
+            width: 150px;
+            transform: translate(-50%, -50%);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transition: transform .9s ease-in-out;
+        }
+
+        #zad4 img:nth-child(2) {
+            width: 150px;
+
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+
+
+    <script>
+
+        function zad1() {
+            //guma
+            document.write("<p>zad.1</p>")
+            document.write("<div id='zad1'></div>")
+
+
+
+            guma = document.getElementById("zad1");
+            guma.innerHTML = '<img src="./Memhub.png" alt="">';
+            pguma = guma.querySelector("img");
+
+
+
+            pgumaWidth = 270;
+
+            decision = true;
+
+            setInterval(function () {
+
+
+                if (decision == true) {
+                    pgumaWidth = pgumaWidth * 1.003
+                    pguma.style.width = pgumaWidth + "px";
+
+                    // console.log(pguma.style.width);
+                    if (parseFloat((pguma.style.width).slice(0, -2)) > 1000) {
+                        decision = false;
+                    }
+                }
+
+                else {
+                    pgumaWidth = pgumaWidth / 1.004
+                    pguma.style.width = pgumaWidth + "px";
+
+                    // console.log(pguma.style.width);
+                    if (parseFloat((pguma.style.width).slice(0, -2)) < 270) {
+                        decision = true;
+                    }
+                }
+
+            }, 1)
+        }
+
+
+
+        zad1();
+
+
+        function zad2() {
+
+            document.write("<p> zad.2 </p>")
+            document.write("<input type='text' id='zad2' style='font-family:courier' size='40'>")
+
+            input = document.getElementById("zad2");
+            txt = "Przykładowy tekst, który jest"
+
+            var space = "";
+            for (let i = 0; i < input.size; i++) {
+                space += " ";
+
+            }
+
+            txt = space + txt;
+
+            setInterval(() => {
+                input.value = txt;
+                txt = txt.substr(1, txt.length) + txt.substr(0, 1);
+            }, 150)
+
+
+
+        }
+
+
+        zad2();
+
+
+        function zad3() {
+            document.write("<p> zad.3 </p>")
+            document.write("<textarea id='zad3' style='font-family:courier' rows='15' cols='23'></textarea>")
+
+
+
+            textarea = document.getElementById("zad3");
+
+            let txt1 = []
+
+            txt1.push("        Przykładowy tekst1 \n")
+            txt1.push("        Przykładowy tekst2 \n")
+            txt1.push("        Przykładowy tekst3 \n")
+
+            for (let i = 0; i < textarea.rows; i++) {
+                txt1.push("\n")
+            }
+
+            setInterval(() => {
+                let txt2 = ""
+                txt1.forEach(element => {
+                    txt2 += element
+                });
+
+
+                textarea.innerHTML = txt2;
+                let txt3 = []
+
+                for (let x = 0; x < txt1.length; x++) {
+
+                    if (x == 0) {
+                        txt3[x] = txt1[txt1.length - 1]
+                    }
+
+                    else {
+                        txt3[x] = txt1[x - 1]
+                    }
+
+                }
+
+                txt1 = txt3
+
+            }, 150)
+
+
+        }
+
+        zad3()
+
+
+        function zad4() {
+            document.write("<p>zad.4</p>")
+            document.write("<div id='zad4'></div>")
+
+            pole = document.getElementById("zad4");
+            pole.innerHTML = '<img src="./sasin.png" alt="">'
+            pole.innerHTML += '<img src="./karty.png" alt="">'
+
+            sasin = pole.querySelector('img');
+
+            promien = 40;
+
+            rad = 0;
+
+            rotate = true;
+            setInterval(() => {
+
+                var x
+                var y
+                x = (Math.cos(rad) * promien) + 50
+                y = (Math.sin(rad) * promien) + 50
+
+                rad += 0.003;
+
+                console.log("x: ", x);
+                console.log("y: ", y);
+
+                sasin.style.left = x + "%";
+                sasin.style.top = y + "%";
+
+                if (x >= 49 & x <= 51 & y > 50 & rotate == true) {
+                    sasin.style.transform = "rotateY(180deg) translate(50%, -50%) ";
+                    rotate = false;
+                }
+                else if (x >= 45 & x <= 46 & y < 50 & rotate == true) {
+                    sasin.style.transform = "rotateY(0deg) translate(-50%, -50%)";
+                }
+                else {
+                    console.log("xd");
+                    rotate = true;
+                }
+
+
+
+            }, 1)
+
+
+
+
+
+        }
+
+        zad4()
+
+
+
+    </script>
+
+
+</body>
+
+</html>
