@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            width: 100vw;
+            height: 100vh;
+
+        }
+
+        #container div {
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lewy {
+            height: 100%;
+            width: calc(50% - 25px);
+            background-color: grey;
+
+        }
+
+        .pasek {
+            height: 100%;
+            width: 50px;
+            background-color: blue;
+            cursor: move;
+        }
+
+
+        .prawy {
+            height: 100%;
+            width: calc(50% - 25px);
+            background-color: yellow;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $(window).on("mousedown", function () {
+                $(this).on("mousemove", function (e) {
+                    $(".lewy").width(e.clientX - 25)
+                    $(".prawy").width(window.innerWidth - e.clientX - 25)
+
+                })
+
+            })
+            $(window).on("mouseup", function () {
+                $(this).off("mousemove")
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div class="lewy">A</div>
+        <div class="pasek"></div>
+        <div class="prawy">B</div>
+    </div>
+
+
+</body>
+
+</html>

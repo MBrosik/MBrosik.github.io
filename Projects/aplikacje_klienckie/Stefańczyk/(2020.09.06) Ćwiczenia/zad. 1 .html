@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title> Document </title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+      <style>
+            div{
+                  width: 50px;
+                  height: 50px;
+                  background-color: blue;
+            }
+
+
+      </style>
+
+      <script>
+            $("document").ready(()=>{
+
+
+                  $("button").click( () => {
+                        
+                  var confirn= confirm("Test")
+
+                        
+                  if(confirn == true){
+                        $("div").width($("div").width() * 2)
+                        $("div").height($("div").height() * 2)
+                  }
+
+                  else{
+                        $("div").width($("div").width() / 3 )
+                        $("div").height($("div").height() / 3 )
+                  }
+                        
+
+                  })
+
+
+            });
+      </script>
+</head>
+<body>
+      <!-- a. Na stronie jest div i buton. klik butona, pokazuje się confirm, 
+      w zależności od ok/cancel div zmienia wielkość na dwa razy większy lub 3 razy mniejszy -->
+
+
+      <button>Click me</button>
+
+      <div></div>
+
+      
+</body>
+</html>

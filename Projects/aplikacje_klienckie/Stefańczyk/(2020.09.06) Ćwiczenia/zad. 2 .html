@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+      <style>
+            div {
+                  position: relative;
+                  width: 150px;
+                  height: 150px;
+                  left: 0%;
+                  background-color: blue;
+            }
+      </style>
+
+      <script>
+
+            $("document").ready(() => {
+
+                  temp= true;
+
+                  $("div").click(() => {
+
+
+
+                        if (temp == true) {
+                              
+                              $("div").css("left","calc(100% - 150px)");
+
+                              temp= false;
+                        }
+
+                        else {
+
+                              $("div").css("left","0%");
+                              temp=true
+                        }
+
+
+                  })
+
+
+            });
+      </script>
+
+
+</head>
+
+<body>
+      <!-- b. Na stronie jest div. Za 1 jego kliknięciem div ustawia się przy prawej krawędzi strony a przy 2 kliknięciu przy lewej -->
+
+      <div></div>
+
+</body>
+
+</html>

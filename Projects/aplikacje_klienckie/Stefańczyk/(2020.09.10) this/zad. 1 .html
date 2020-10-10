@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        .menu {
+            width: 200px;
+            height: 20px;
+            background-color: rgb(66, 144, 212);
+
+        }
+
+        #main {
+
+            margin-top: 20px;
+            width: 100%;
+            min-height: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+    <script>
+
+        $("document").ready(() => {
+            var main = $("#main");
+
+
+
+
+
+            $("#bt1").click(() => {
+
+
+                var select = $("#select").val();
+
+
+                for (let x = 0; x <= select; x++) {
+                    var bt = $("<button class='menu'></button>").on("click", function(){
+
+                        this.remove()
+                    })
+                    main.append(bt.html(x));
+
+                    console.log(x);
+
+                    
+
+                }
+
+            })
+
+            $("#bt2").click(() => {
+
+                main.empty()
+
+
+            })
+
+
+            // $(".menu").click(()=>{
+            //     $(this).remove()
+
+
+            // })
+
+        })
+
+    </script>
+</head>
+
+<body>
+    <button id="bt1">Utwórz menu</button>
+    <button id="bt2">Usuń memu</button>
+    <select name="" id="select">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value=5>5</option>
+    </select>
+
+    <div id="main"></div>
+</body>
+
+</html>;

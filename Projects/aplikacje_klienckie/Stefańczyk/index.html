@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: rgb(37, 36, 36);
+            /* height: 100vh; */
+            padding: 0;
+            margin: 0;
+            display: flex;
+            color: white;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Itim', cursive;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-top: 15vh;
+        }
+
+        .projects {
+            margin-bottom: 50px;
+            width: 80vw;
+            max-width: 300px;
+            height: 20vw;
+            max-height: 75px;
+            transition: all ease .3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .projects:hover {
+            height: 35vw;
+            max-height: 140px;
+        }
+
+        #cwiczenia:hover {
+            height: 80vw;
+            max-height: 400px;
+        }
+
+        #this:hover {
+            height: 40vw;
+            max-height: 270px;
+        }
+        #TabLab:hover {
+            height: 40vw;
+            max-height: 205px;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all ease .3s;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        a.button {
+            z-index: 4;
+            background-color: rgb(37, 36, 36);
+            width: 80vw;
+            max-width: 300px;
+            height: 20vw;
+            max-height: 75px;
+            border: rgb(105, 101, 101) solid 4px;
+            position: absolute;
+        }
+
+        a.button:hover {
+            background-color: rgb(126, 120, 120);
+        }
+
+        a.download {
+            transform: translate(-50%, -100%);
+            left: 50%;
+            top: 100%;
+            width: 40vw;
+            max-width: 150px;
+            height: 10vw;
+            max-height: 50px;
+            font-size: 20px;
+            background-color: blue;
+            border-radius: 10px;
+            position: absolute;
+            z-index: 0;
+        }
+
+
+        /* ------------------------------------- */
+        /* Projekty z osobnymi zadaniami */
+        /* ------------------------------------- */
+        div.ZadContainer {
+            width: 72vw;
+            max-width: 270px;
+            height: 13vw;
+            max-height: 50px;
+            position: absolute;
+            transform: translate(-50%, -100%);
+            left: 50%;
+            top: 100%;
+        }
+
+        a.Zad {
+            width: 32vw;
+            max-width: 120px;
+            height: 13vw;
+            max-height: 50px;
+            transform: translate(0, -50%);
+            top: 50%;
+            font-size: 20px;
+        }
+
+        a.ZadDownload {
+            transform: translate(-100%, -50%);
+            left: 100%;
+            top: 50%;
+            width: 40vw;
+            max-width: 110px;
+            height: 10vw;
+            max-height: 50px;
+            font-size: 20px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Projekty:</h1>
+
+    <!-- ------------------------ -->
+    <!-- Listenery -->
+    <!-- ------------------------ -->
+    <div class="projects">
+        <a href="./(2020.09.05) Listenery/" class="button">Listenery</a>
+        <a href="./(2020.09.05) Listenery/(2020.09.05) Listenery.zip" class="download" download="Listenery.zip">
+            download</a>
+    </div>
+
+    <!-- ------------------------ -->
+    <!-- cwiczenia -->
+    <!-- ------------------------ -->
+    <div class="projects" id="cwiczenia">
+        <a class="button"> Ćwiczenia </a>
+        <div class="ZadContainer" style="top: calc(100% - 260px)">
+            <a href="./(2020.09.06) Ćwiczenia/zad. 1 .html" class="button Zad">1</a>
+            <a href="./(2020.09.06) Ćwiczenia/zad. 1 .html" class="download ZadDownload"
+                download="zad1.html">Download</a>
+        </div>
+
+        <div class="ZadContainer" style="top: calc(100% - 195px)">
+            <a href="./(2020.09.06) Ćwiczenia/zad. 2 .html" class="button Zad">2</a>
+            <a href="./(2020.09.06) Ćwiczenia/zad. 2 .html" class="download ZadDownload"
+                download="zad2.html">Download</a>
+        </div>
+        <div class="ZadContainer" style="top: calc(100% - 130px)">
+            <a href="./(2020.09.06) Ćwiczenia/zad. 3 .html" class="button Zad">3</a>
+            <a href="./(2020.09.06) Ćwiczenia/zad. 3 .html" class="download ZadDownload"
+                download="zad3.html">Download</a>
+        </div>
+        <div class="ZadContainer" style="top: calc(100% - 65px)">
+            <a href="./(2020.09.06) Ćwiczenia/zad. 4 .html" class="button Zad">4</a>
+            <a href="./(2020.09.06) Ćwiczenia/zad. 4 .html" class="download ZadDownload"
+                download="zad4.html">Download</a>
+        </div>
+        <div class="ZadContainer">
+            <a href="./(2020.09.06) Ćwiczenia/zad. 5 .html" class="button Zad">5</a>
+            <a href="./(2020.09.06) Ćwiczenia/zad. 5 .html" class="download ZadDownload"
+                download="zad5.html">Download</a>
+        </div>
+    </div>
+
+    <!-- ------------------------ -->
+    <!-- this -->
+    <!-- ------------------------ -->
+    <div class="projects" id="this">
+        <a class="button"> This </a>
+
+        <div class="ZadContainer" style="top: calc(100% - 130px)">
+            <a href="./(2020.09.10) this/zad. 1 .html" class="button Zad">1</a>
+            <a href="./(2020.09.10) this/zad. 1 .html" class="download ZadDownload" download="zad1.html">Download</a>
+        </div>
+        <div class="ZadContainer" style="top: calc(100% - 65px)">
+            <a href="./(2020.09.10) this/zad. 2 .html" class="button Zad">2</a>
+            <a href="./(2020.09.10) this/zad. 2 .html" class="download ZadDownload" download="zad2.html">Download</a>
+        </div>
+        <div class="ZadContainer">
+            <a href="./(2020.09.10) this/zad. 3 .html" class="button Zad">3</a>
+            <a href="./(2020.09.10) this/zad. 3 .html" class="download ZadDownload" download="zad3.html">Download</a>
+        </div>
+    </div>
+
+    <!-- ------------------------ -->
+    <!-- tablice, labirynt -->
+    <!-- ------------------------ -->
+    <div class="projects" id="TabLab">
+        <a class="button"> Tablice, labirynt </a>
+
+        <div class="ZadContainer" style="top: calc(100% - 65px)">
+            <a href="./(2020.09.17) tablice, labirynt/zad.1.html" class="button Zad">1</a>
+            <a href="./(2020.09.17) tablice, labirynt/zad.1.html" class="download ZadDownload" download="zad1.html">Download</a>
+        </div>
+        <div class="ZadContainer">
+            <a href="./(2020.09.17) tablice, labirynt/zad.2.html" class="button Zad">2</a>
+            <a href="./(2020.09.17) tablice, labirynt/zad.2.html" class="download ZadDownload" download="zad2.html">Download</a>
+        </div>
+    </div>
+
+    <!-- ------------------------ -->
+    <!-- Rakieta -->
+    <!-- ------------------------ -->
+    <div class="projects">
+        <a href="./(2020.09.24) Rakieta/" class="button">Rakieta</a>
+        <a href="./(2020.09.24) Rakieta/index.html" class="download" download="index.html">download</a>
+    </div>
+
+</body>
+
+</html>

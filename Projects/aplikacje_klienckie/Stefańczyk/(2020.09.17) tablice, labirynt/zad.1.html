@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        th,
+        td,
+        tr,
+        table {
+            border: 2px black solid;
+        }
+
+        th,
+        td {
+            width: 100px;
+        }
+    </style>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+    <script>
+        $(document).ready(() => {
+            var lps = ["lp", "cena", "produkt"]
+            var ceny = ["5,60", "3,23", "7,45", "10,00", "3,20"]
+            var produkty = ["chleb", "mąka", "masło", "kefir", "dżem"]
+
+
+
+
+            var table = $("<table>")
+
+            var line = $("<tr>")
+
+            lps.forEach(element => {
+                line.append($("<th>").html(element))
+            });
+            console.log(table);
+
+            table.append(line)
+
+            for (let x = 0; x < ceny.length; x++) {
+                var line = $("<tr>")
+                line.append($("<td>").html(x))
+                line.append($("<td>").html(parseFloat(ceny[x].replace(",", "."))))
+                line.append($("<td>").html(produkty[x]))
+                table.append(line)
+
+            }
+
+            line = $("<tr>")
+
+            var suma=0
+
+            ceny.forEach(element => {
+                var tmp= parseFloat(element.replace(",", "."));
+                suma+=tmp;
+
+            });
+
+            line
+                .append($("<th>").html("suma"))
+                .append($("<th>").attr("colspan", "2")
+                    .html(suma))
+
+
+            table.append(line)
+
+
+
+            $("body").append(table)
+        })
+    </script>
+</head>
+
+<body>
+
+
+
+
+</body>
+
+</html>

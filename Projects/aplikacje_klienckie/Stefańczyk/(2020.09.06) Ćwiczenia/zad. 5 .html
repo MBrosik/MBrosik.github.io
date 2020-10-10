@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+      <style>
+            div {
+                  position: relative;
+                  width: 150px;
+                  height: 150px;
+                  left: 0%;
+                  background-color: blue;
+                  display: flex;
+                  align-items: center;   
+                  justify-content: center; 
+            }
+      </style>
+
+      <script>
+
+            $("document").ready(() => {
+
+                  temp=0 ;
+
+                  $("div").click(() => {
+
+                        $("div").html(temp);
+
+                        if (temp%2==0) {
+                              $("div").css("background-color","green")
+                        }
+
+                        else {
+                              $("div").css("background-color","red")
+                        }
+
+                        temp++
+                  })
+
+
+            });
+      </script>
+
+
+</head>
+<body>
+
+      <!-- e. Na stronie jest div. Przy kliknięciu, w divie widać coraz większą cyfrę. Jeśli cyfra jest parzysta to div ma tło zielone, jeśli nie to czerwone -->
+
+      <div></div>
+      
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+
+      <style>
+            * {
+                  margin-top: 20px;
+            }
+
+            #square {
+                  height: 500px;
+                  width: 500px;
+                  background-color: brown;
+                  font-size: 50px;
+                  font-style: italic;
+                  font-weight: bold;
+            }
+
+            p{
+                  color: blue;
+                  font-size: 20px;
+                  font-weight: 900;
+
+            }
+      </style>
+
+
+      <script src="./biblioteka/jquery.js"></script>
+
+      <script>
+
+
+            $("document").ready(() => {
+
+                  var temp = 1;
+
+                  $("button").click(function () {
+
+
+                        if (temp == 1) {
+
+                              $("#square").on("mouseover", () => {
+                                    $("#square").css("background-color", "blue")
+                                                .html("boldem italic");
+                              });
+
+                              $("#square").mouseout(() => {
+                                    $("#square").css("background-color", "black")
+                                                .html("");
+                              });
+
+
+                              $("p").text("listenery dodane")
+
+
+                              temp=0;
+                        }
+
+                        else{
+                              $("#square").off("mouseover")
+                                          .off("mouseout");
+
+                              $("p").text("listenery usunięte");
+
+                              temp=1;
+
+
+                        }
+
+                  });
+
+            });
+
+
+
+      </script>
+</head>
+
+<body>
+      <p>T: jQuery - zdarzenia</p>
+      <button id="b1">DODAJ / USUŃ LISTENERY</button>
+      <div id="square"></div>
+
+</body>
+
+</html>

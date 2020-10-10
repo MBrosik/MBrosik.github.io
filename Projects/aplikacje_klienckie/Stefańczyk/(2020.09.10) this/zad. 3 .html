@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        button {
+            margin: 0;
+            padding: 0;
+
+        }
+
+        #main {
+
+            margin-top: 20px;
+            width: 200px;
+            min-height: 10px;
+            margin-right: auto;
+            margin-left:auto;
+            /* display: flex;
+            flex-direction: column;
+            align-items: center; */
+        }
+
+
+        .menu {
+            width: 200px;
+            height: 50px;
+            background-color: rgb(211, 207, 207);
+            border: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu div, .childhood div {
+            height: 50px;
+            width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            outline-width: 0px;
+            border: 0;
+        }
+
+        .menu button, .childhood button {
+            border: none;
+            height: 50px;
+            width: 50px;
+            color: white;
+        }
+
+        .Delete {
+            background-color: blue;
+        }
+
+        .childAdd {
+            background-color: green;
+        }
+
+        .childhood {
+            margin-left:50px;
+            width: 150px;
+            height: 50px;
+            background-color: rgb(211, 207, 207);
+            border: none;
+            display: flex;
+            align-items: center;
+
+
+        }
+    </style>
+    <script>
+
+        $("document").ready(() => {
+            var main = $("#main");
+
+
+
+
+
+            $("#bt1").click(() => {
+
+
+                var select = $("#select").val();
+
+
+                for (let x = 0; x <= select; x++) {
+                    var bt = $("<div class='menu'></div>");
+
+                    bt.append("<div>parent " + x + "</div>")
+
+                    bt.append($("<button class='childAdd'>0</button>").on("click", function () {
+
+                        $(this).html(parseInt($(this).html()) + 1)
+
+                        var child = $("<div class='childhood'> <div>Child</div> </div>")
+                        child.append($("<button class='Delete'>X</button>").on("click", function(){
+                            $(this).parent().remove();   
+                            $(".childAdd").eq(x).html(parseInt($(".childAdd").eq(x).html()) - 1)
+                        }))
+                        child.insertAfter($(this).parent());
+
+                    }))
+
+
+                    bt.append($("<button class='Delete'>X</button>").on("click", function () {
+                        $(this).parent().remove();
+                    }))
+
+
+                    main.append(bt);
+
+                    // btx.on("click", function(){
+
+                    //     bt.remove();
+                    // })
+
+
+                    console.log(x);
+                    // console.log(btx.click());
+
+
+
+                }
+
+            })
+
+            $("#bt2").click(() => {
+
+                main.empty()
+
+
+            })
+
+
+            // $(".menu").click(()=>{
+            //     $(this).remove()
+
+
+            // })
+
+        })
+
+    </script>
+</head>
+
+<body>
+    <button id="bt1">Utwórz menu</button>
+    <button id="bt2">Usuń menu</button>
+    <select name="" id="select">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value=5>5</option>
+    </select>
+
+    <div id="main"></div>
+</body>
+
+</html>

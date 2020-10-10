@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+      <style>
+            div {
+                  width: 150px;
+                  height: 150px;
+                  background-color: blue;
+                  
+            }
+      </style>
+
+      <script>
+
+            $("document").ready(() => {
+
+                  var temp = true;
+                  var temp1 = 1;
+                  var temp2 = 1;
+
+                  
+
+
+                  $("div").click(() => {
+
+
+
+                        if (temp == true) {
+                              
+                              $("div").css("margin-left",temp1*50+"px");
+                              temp= false;
+                              temp1++;
+                        }
+
+                        else {
+
+
+                              $("div").css("margin-top", temp2*50+"px");
+                              temp=true;
+                              temp2++;
+                        }
+
+                        console.log(" ");
+
+                        console.log("margin-left " + $("div").css("margin-left"));
+                        console.log("margin-top " + $("div").css("margin-top"));
+
+
+                  })
+
+
+            });
+      </script>
+      
+</head>
+<body>
+      <!-- c. Na stronie jest div. Każde kliknięcie przemieszcza go - raz o 50 px w prawo raz o 50px w dół -->
+
+      <div></div>
+
+</body>
+</html>

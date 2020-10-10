@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+        #container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            /* background-color:blue; */
+        }
+
+        #game {
+            position: relative;
+            width: calc(100vw - 200px);
+            height: 100vh;
+            background-color: blue;
+        }
+
+        /* ----------------------------- */
+        /* buttons */
+        /* ----------------------------- */
+
+        button,
+        input {
+            position: absolute;
+            /* top: 50px; */
+            left: calc(100% - 150px);
+            width: 100px;
+
+        }
+
+        #steps {
+            top: 50px;
+            /* transform: translate(-100%, 0%); */
+        }
+
+        #jumping {
+            top: 80px;
+        }
+
+        #fly {
+            top: 110px;
+        }
+
+        #direction {
+            top: 145px;
+        }
+
+
+        /* ----------------------------- */
+        /* objects */
+        /* ----------------------------- */
+
+
+
+        #rocket {
+            position: absolute;
+            width: 35px;
+            height: 70px;
+            border-radius: 100% 100% 0% 0%;
+            background-color: black;
+            transform: translate(-50%, -50%);
+            /* top: 50%;
+            left: 50%; */
+            z-index: 5;
+        }
+
+        .satelit {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: blueviolet;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="game">
+
+
+        </div>
+        <button id="steps">steps</button>
+        <button id="jumping">jumping</button>
+        <button id="fly">fly</button>
+        <input type="checkbox" name="direction" id="direction">
+
+    </div>
+
+
+    <script>
+        // console.log($("#game").clientX);
+
+
+        // -------------------------------------
+        // Dodawanie nowych obiektów
+        // -------------------------------------
+
+        var tab = []
+
+        $("#game").on("click", function (e) {
+            // var positionX = e.clientX;
+            var xPercent = e.clientX / $(this).width() * 100;
+            // var positionY = e.clientY;
+            var yPercent = e.clientY / $(this).height() * 100;
+
+            var satelit = $("<div>")
+
+            satelit.addClass("satelit")
+                .css("left", xPercent + "%")
+                .css("top", yPercent + "%")
+
+            $(this).append(satelit);
+
+            tab.push({ x: [xPercent], y: [yPercent] })
+            // console.log(tab);
+
+
+
+        })
+
+            .append('<div id="rocket" style="left:50%; top:50%"></div>')
+
+        var movenumber = 0
+
+
+
+        // -------------------------------------
+        // Funkcje chodzenia
+        // -------------------------------------
+
+
+        function stepping() {
+
+            $("#rocket").css("left", tab[movenumber].x + "%");
+            $("#rocket").css("top", tab[movenumber].y + "%");
+
+            // console.log($("#rocket").css("left"));
+            // console.log($("#rocket").css("top"));
+
+            movenumber++
+
+            if (movenumber == tab.length) {
+                movenumber = 0;
+            }
+        }
+
+        $("#steps").on("click", stepping)
+
+        $("#jumping").on("click", function () {
+            setInterval(stepping, 145)
+        })
+
+
+        // -------------------------------------
+        // Latanie
+        // -------------------------------------      
+
+        $("#fly").on("click", fly);
+
+        movenumber2 = 0;
+
+        function fly() {
+
+            posA = {
+                x: [parseFloat((($("#rocket").css("left")).slice(0, -2)) / $("#game").width()) * 100],
+                y: [parseFloat((($("#rocket").css("top")).slice(0, -2)) / $("#game").height()) * 100]
+            };
+
+            posB = {
+                x: [parseFloat(tab[movenumber2].x)],
+                y: [parseFloat(tab[movenumber2].y)]
+
+            }
+
+            diff = {
+                x: [parseFloat(posB.x - posA.x)],
+                y: [parseFloat(posB.y - posA.y)],
+            }
+
+            diff1 = {
+                x: [parseFloat(tab[movenumber2].x / 100 * $("#game").width()) - parseFloat(($("#rocket").css("left")).slice(0, -2))],
+                y: [parseFloat(tab[movenumber2].y / 100 * $("#game").height()) - parseFloat(($("#rocket").css("top")).slice(0, -2))]
+            }
+            // console.log(parseFloat(tab[movenumber2].x / 100 * $("#game").width()) -  parseFloat(($("#rocket").css("left")).slice(0, -2)));
+
+
+            time = Math.ceil(Math.sqrt(Math.pow(diff1.x, 2) + Math.pow(diff1.y, 2)) / 1);
+
+            // console.log(diff);
+            // console.log(time);
+
+            licz = 1
+
+            if ($("#direction").prop("checked") == true) direction_calculation();
+
+            flysymulation();
+        }
+
+
+
+        function flysymulation() {
+
+            if (licz == time) {
+                movenumber2++
+                if (movenumber2 == tab.length) {
+                    movenumber2 = 0;
+                }
+                fly();
+            }
+
+            else {
+                posA.x = parseFloat(posA.x) + parseFloat(diff.x / time);
+                posA.y = parseFloat(posA.y) + parseFloat(diff.y / time);
+                $("#rocket").css("left", posA.x + "%");
+                $("#rocket").css("top", posA.y + "%");
+                licz++
+                setTimeout(flysymulation, 1)
+            }
+
+        }
+
+
+        // -------------------------------------
+        // Kierunek obrotu
+        // ------------------------------------- 
+
+        function direction_calculation() {
+            tangens = Math.atan(Math.abs(diff1.y / diff1.x)) / (Math.PI) * 180;
+            cosinus = Math.atan(Math.abs(diff1.y / diff1.x)) / (Math.PI) * 180;
+
+            console.log(diff1);
+
+            if (diff1.x >= 0 & diff1.y >= 0) {
+                $("#rocket").css("transform", "translate(-50%, -50%) " + "rotate(" + parseFloat(90 + tangens) + "deg)")
+                // console.log("1 xd " + parseFloat(90 + tangens));
+            }
+
+            else if (diff1.x < 0 & diff1.y >= 0) {
+                $("#rocket").css("transform", "translate(-50%, -50%) " + "rotate(" + parseFloat(180 + (90- tangens)) + "deg)")
+                // console.log("2 xd " + parseFloat(180 + tangens));
+            }
+
+            else if (diff1.x < 0 & diff1.y < 0) {
+                $("#rocket").css("transform", "translate(-50%, -50%) " + "rotate(" + parseFloat(270 + tangens) + "deg)")
+                // console.log("3 xd " + parseFloat(270 + tangens));
+            }
+
+            else if (diff1.x >= 0 & diff1.y < 0) {
+                $("#rocket").css("transform", "translate(-50%, -50%) " + "rotate(" + parseFloat(90-tangens) + "deg)")
+                // console.log("4 xd " + tangens);
+            }
+            // console.log(tangens);
+
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>

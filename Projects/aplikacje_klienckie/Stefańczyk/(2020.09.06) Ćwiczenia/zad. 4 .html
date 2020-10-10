@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+      <style>
+
+            *{
+                  box-sizing: border-box;
+            }
+            div {
+                  position: relative;
+                  width: 150px;
+                  height: 150px;
+                  border-color: black;
+                  border-style: solid;
+                  border-width: 2px;
+                  display: flex;
+                  align-items: center;   
+                  justify-content: center;               
+            }
+      </style>
+
+      <script>
+
+            $("document").ready(() => {
+
+                  temp = 0;
+
+                  $("div").mouseover(() => {
+
+                        if (temp % 5 == 0 & temp !=0) {
+
+                              $("div").width($("div").width() * 2)
+                              $("div").height($("div").height() * 2)
+
+                        }
+
+                        $("div").html(temp);
+
+                        temp++;
+
+                  })
+
+
+                  $("div").mouseout(() => {
+
+                        $("div").html("");
+
+                  })
+
+
+            });
+      </script>
+</head>
+
+<body>
+
+      <!-- d. Na stronie jest div. Przy wskazaniu myszą (mouseover) w divie wypisuje się zwiększająca się cyfra. 
+            Jak dojdzie do 5 to div powiększa się dwa razy -->
+
+      <div>
+
+      </div>
+
+</body>
+
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+</head>
+
+<body>
+
+
+
+      <script>
+            document.querySelector("body").style.padding = 0;
+            document.querySelector("body").style.margin = 0;
+
+            create();
+            function create() {
+
+                  // -------------------------
+                  // container
+                  // -------------------------
+
+                  document.write('<div id="container"></div>')
+
+                  var container = document.getElementById("container");
+                  container.style.width = "100vw";
+                  container.style.height = "100vh";
+                  container.style.height = "100vh";
+                  container.style["display"] = "flex";
+                  container.style["justifyContent"] = "center";
+                  container.style["alignItems"] = "center";
+
+
+                  // -------------------------
+                  // computer
+                  // -------------------------
+
+
+                  container.innerHTML += "<div id='computer'> <div/>"
+
+                  computer = document.getElementById("computer");
+
+                  // computer.style.transform = "translate(-50%, -50%)";
+                  computer.style.position = "relative"
+                  computer.style.width = "90vh";
+                  computer.style.height = "90vh";
+                  computer.style.border = "5px solid blue";
+                  computer.style.overflow = "hidden";
+
+
+                  CreateQuadroArray();
+            }
+
+
+            function CreateQuadroArray() {
+
+                  // -------------------------
+                  // create array
+                  // -------------------------
+
+                  QuadrosArray = [];
+
+                  for (let x = 0; x < 12; x++) {
+
+                        QuadrosArray.push([]);
+
+                        for (let y = 0; y < 12; y++) {
+                              QuadrosArray[x].push(0);
+
+                        }
+                  }
+
+                  SetShips(4)
+                  for (let i = 0; i < 2; i++) SetShips(3)
+                  for (let i = 0; i < 3; i++) SetShips(2)
+                  for (let i = 0; i < 4; i++) SetShips(1)
+
+                  console.log(QuadrosArray);
+
+                  PushingToHTML();
+            }
+
+
+            function SetShips(kind) {
+
+                  // -------------------------
+                  // random number
+                  // -------------------------
+
+                  directions = [false, true] // true => prawo ; false => w dół
+                  direction = directions[Math.round(Math.random())]
+
+                  // if (kind == 4) { direction = false; }
+                  // -------------------------
+                  // start point
+                  // -------------------------
+
+                  if (direction == true) {
+                        xPosition = Math.round(Math.random() * (9 - (kind - 1))) + 1;
+                        yPosition = Math.round(Math.random() * 9) + 1;
+
+                  }
+                  else {
+                        xPosition = Math.round(Math.random() * 9) + 1;
+                        yPosition = Math.round(Math.random() * (9 - (kind - 1))) + 1;
+                  }
+                  console.log("xPosition: " + xPosition);
+                  console.log("yPosition: " + yPosition);
+                  console.log(direction);
+
+                  // -------------------------
+                  // testing blank positions
+                  // -------------------------
+
+                  blank = true;
+
+
+                  // if (QuadrosArray[yPosition - 1][xPosition - 1] == 0
+                  //       && QuadrosArray[yPosition - 1][xPosition] == 0
+                  //       && QuadrosArray[yPosition - 1][xPosition + 1] == 0
+                  //       && QuadrosArray[yPosition][xPosition - 1] == 0
+                  //       && QuadrosArray[yPosition][xPosition] == 0
+                  //       && QuadrosArray[yPosition][xPosition + 1] == 0
+                  //       && QuadrosArray[yPosition + 1][xPosition - 1] == 0
+                  //       && QuadrosArray[yPosition + 1][xPosition] == 0
+                  //       && QuadrosArray[yPosition + 1][xPosition + 1] == 0) {
+
+                  //       console.log("xddd " + yPosition + " " + xPosition);
+                  //       console.log("");
+
+                  //       blank = true;
+                  // }
+
+                  if (QuadrosArray[yPosition - 1][xPosition - 1] != 0) blank = false;
+                  else if (QuadrosArray[yPosition - 1][xPosition] != 0) blank = false;
+                  else if (QuadrosArray[yPosition - 1][xPosition + 1] != 0) blank = false;
+                  else if (QuadrosArray[yPosition][xPosition - 1] != 0) blank = false;
+                  else if (QuadrosArray[yPosition][xPosition] != 0) blank = false;
+                  else if (QuadrosArray[yPosition][xPosition + 1] != 0) blank = false;
+                  else if (QuadrosArray[yPosition + 1][xPosition - 1] != 0) blank = false;
+                  else if (QuadrosArray[yPosition + 1][xPosition] != 0) blank = false;
+                  else if (QuadrosArray[yPosition + 1][xPosition + 1] != 0) blank = false;
+
+
+
+                  if (blank == true) {
+
+                        if (direction == true) {
+
+                              for (let x = 0; x < kind; x++) {
+                                    if (QuadrosArray[yPosition + 1][xPosition + x + 1] != 0) blank = false;
+                                    else if (QuadrosArray[yPosition][xPosition + x + 1] != 0) blank = false;
+                                    else if (QuadrosArray[yPosition - 1][xPosition + x + 1] != 0) blank = false;
+
+                              }
+                        }
+                        else {
+
+                              for (let x = 0; x < kind; x++) {
+                                    if (QuadrosArray[yPosition + x + 1][xPosition + 1] != 0) blank = false;
+                                    else if (QuadrosArray[yPosition + x + 1][xPosition] != 0) blank = false;
+                                    else if (QuadrosArray[yPosition + x + 1][xPosition - 1] != 0) blank = false;
+
+                              }
+                        }
+                  }
+
+                  // -------------------------
+                  // pushing figure to table
+                  // -------------------------
+
+                  if (blank == true) {
+
+                        if (direction == true) {
+                              for (let x = 0; x < kind; x++) {
+                                    QuadrosArray[yPosition][xPosition + x] = kind
+                              }
+                        }
+                        else {
+                              for (let x = 0; x < kind; x++) {
+                                    QuadrosArray[yPosition + x][xPosition] = kind
+                              }
+                        }
+                  }
+                  else {
+                        SetShips(kind)
+                  }
+
+
+            }
+
+
+
+            function PushingToHTML() {
+
+                  // -------------------------
+                  // pushing to html
+                  // -------------------------
+
+                  for (let x = 1; x < 11; x++) {
+
+                        for (let y = 1; y < 11; y++) {
+
+                              if (QuadrosArray[x][y] == 0) computer.innerHTML += "<div class='Quadros' style='top: " + parseInt((x - 1) * 10) + "%; left:" + parseInt((y - 1) * 10) + "%'></div>";
+                              else computer.innerHTML += "<div class='Quadros ships' style='top: " + parseInt((x - 1) * 10) + "%; left:" + parseInt((y - 1) * 10) + "%'></div>";
+
+                        }
+                  }
+
+                  // var Quadros = document.querySelectorAll(".Quadros");
+
+                  document.querySelectorAll(".Quadros").forEach((element, index, arr) => {
+                        arr[index].style.border = "1px solid orange";
+                        arr[index].style.position = "absolute";
+                        arr[index].style.width = "10%";
+                        arr[index].style.height = "10%";
+                  });
+
+                  document.querySelectorAll(".ships").forEach((element, index, arr) => {
+                        arr[index].style.backgroundColor = "orange"
+                  })
+
+
+            }
+
+
+            // -------------------------
+            // Adding something to css
+            // -------------------------
+
+            // document.querySelectorAll("*").forEach((element, index, arr) => {
+
+            //       arr[index].style.boxSizing = "border-box";
+            // })
+      </script>
+</body>
+
+</html>

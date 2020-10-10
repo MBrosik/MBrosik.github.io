@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #labirynt {
+            border: solid 2px black;
+            width: 500px;
+            height: 500px;
+            position: relative;
+            transform: translate(-50%, 0);
+            left: 50%;
+            margin-top: 50px;
+
+        }
+
+        #labirynt .smallquadro {
+            width: 100px;
+            height: 100px;
+            border: solid 2px black;
+            position: absolute;
+
+        }
+
+        button {
+            width: 150px;
+        }
+
+        button:first-child {
+            margin-left: calc(50% - 230px);
+        }
+
+        .wheels {
+            border-radius: 50%;
+            border: none;
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            /* border: solid 10px white;       */
+
+
+        }
+
+        #wheel1 {
+            left: -105px;
+            top: 0;
+            background-color: tomato;
+        }
+
+        #wheel2 {
+            left: -105px;
+            top: 100px;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="btn1">START GAME</button>
+    <button id="btn2">NEXT MOVE</button>
+    <button id="btn3">RESET GAME</button>
+    <div id="labirynt"></div>
+
+    <script>
+
+        let quadro = $("#labirynt");
+
+        labcreat();
+
+        function labcreat() {
+            move = [];
+
+            for (let x = 0; x < 5; x++) {
+                let top = x * 100 + "px"
+
+                for (let y = 0; y < 5; y++) {
+                    let left = y * 100 + "px"
+
+                    quadro.append($("<div>")
+                        .css("left", left)
+                        .css("top", top)
+                        .addClass("smallquadro")
+                        .on("click", function () {
+
+                            $(this).css("background-color", "yellow");
+                            move.push({ x: parseFloat($(this).css("left").slice(0, -2)), y: parseFloat($(this).css("top").slice(0, -2)) })
+                            $(this).off("click");
+                        })
+
+                    )
+                }
+            }
+
+            quadro.append($("<div class='wheels'id='wheel1'></div>"))
+            quadro.append($("<div class='wheels'id='wheel2'></div>"))
+
+
+            nextmove = false;
+            movenumber = 1
+            gamingstart=false;
+
+
+        }
+
+        $("#btn1").on("click", function () {
+            if (move.length <= 3) {
+                alert("Zaznacz więcej kwadratów")
+            }
+
+            else if(gamingstart==true) alert("Już zacząłeś grę");
+
+            else {
+                $(".smallquadro").off("click");
+                $("#wheel1").css("left", move[0].x + 10 + "px")
+                    .css("top", move[0].y + 10 + "px")
+
+                $("#wheel2").css("left", move[move.length - 1].x + 10 + "px")
+                    .css("top", move[move.length - 1].y + 10 + "px")
+
+                nextmove = true;
+                gamingstart=true
+            }
+        })
+
+        $("#btn2").on("click", function () {
+            if (nextmove == false) alert("Jeszcze nie zacząłeś gry");
+
+            else if (movenumber < move.length) {
+
+                $("#wheel1").css("left", move[movenumber].x + 10 + "px")
+                    .css("top", move[movenumber].y + 10 + "px")
+
+                $("#wheel2").css("left", move[move.length - (1 + movenumber)].x + 10 + "px")
+                    .css("top", move[move.length - (1 + movenumber)].y + 10 + "px")
+
+                movenumber++
+            }
+
+            else {
+                alert("Koniec gry!!")
+            }
+        })
+
+
+        $("#btn3").click(function () {
+
+            quadro.empty();
+            labcreat();
+        })
+
+    </script>
+
+</body>
+
+</html>

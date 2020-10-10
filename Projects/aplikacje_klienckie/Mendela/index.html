@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        body {
+            background-color: rgb(37, 36, 36);
+            /* height: 100vh; */
+            padding: 0;
+            margin: 0;
+            display: flex;
+            color: white;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Itim', cursive;
+        }
+
+        h1 {
+            font-size: 40px;
+            margin-top: 15vh;
+        }
+
+        .projects {
+            margin-bottom: 50px;
+            width: 80vw;
+            max-width: 300px;
+            height: 20vw;
+            max-height: 75px;
+            transition: all ease .3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .projects:hover {
+            height: 35vw;
+            max-height: 140px;
+        }
+
+
+        a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all ease .3s;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        a.button {
+            z-index: 4;
+            background-color: rgb(37, 36, 36);
+            width: 80vw;
+            max-width: 300px;
+            height: 20vw;
+            max-height: 75px;
+            border: rgb(105, 101, 101) solid 4px;
+            position: absolute;
+        }
+
+        a.button:hover {
+            background-color: rgb(126, 120, 120);
+        }
+
+        a.download {
+            transform: translate(-50%, -100%);
+            left: 50%;
+            top: 100%;
+            width: 40vw;
+            max-width: 150px;
+            height: 10vw;
+            max-height: 50px;
+            font-size: 20px;
+            background-color: blue;
+            border-radius: 10px;
+            position: absolute;
+            z-index: 0;
+        }
+
+
+        /* ------------------------------------- */
+        /* Projekty z osobnymi zadaniami */
+        /* ------------------------------------- */
+        div.ZadContainer{
+            width: 72vw;
+            max-width: 270px;
+            height: 13vw;
+            max-height: 50px;
+            position: absolute;
+            transform: translate(-50%, -100%);
+            left: 50%;
+            top: 100%;
+        }
+        a.Zad{
+            width: 32vw;
+            max-width: 120px;
+            height: 13vw;
+            max-height: 50px;
+            transform: translate(0, -50%);
+            top: 50%;
+            font-size: 20px;
+        }
+        a.ZadDownload{
+            transform: translate(-100%, -50%);
+            left: 100%;
+            top: 50%;
+            width: 40vw;
+            max-width: 110px;
+            height: 10vw;
+            max-height: 50px;
+            font-size: 20px;
+
+        }
+    </style>
+    <script src="./libs/jszip.js"></script>
+</head>
+
+<body>
+
+    <h1>Projekty:</h1>
+    <div class="projects">
+        <a href="./(2020.09.02) Składnia/" class="button"> Składnia</a>
+        <a href="./(2020.09.02) Składnia/index.html" class="download" download="index.html"> download</a>
+    </div>
+    <div class="projects">
+        <a href="./(2020.09.12) Stringi i tablice/" class="button"> Stringi i tablice</a>
+        <a href="./(2020.09.12) Stringi i tablice/index.html" class="download" download="index.html"> download</a>
+    </div>
+    <div class="projects">
+        <a href="./(2020.09.16) Funkcje/" class="button"> Funkcje </a>
+        <a href="./(2020.09.16) Funkcje/2020_09_16.zip" class="download" download="2020_09_16.zip"> download</a>
+    </div>
+    <div class="projects">
+        <a href="./(2020.09.23) Statki cz.1/" class="button"> Statki cz.1 </a>
+        <a href="./(2020.09.23) Statki cz.1/index.html" class="download" download="index.html"> download</a>
+    </div>
+</body>
+
+</html>
