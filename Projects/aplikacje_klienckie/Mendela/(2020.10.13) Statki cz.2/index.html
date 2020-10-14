@@ -333,26 +333,29 @@
                                                             if (arr[index].style.backgroundColor != "rgb(86, 86, 236)") arr[index].style.backgroundColor = "rgb(128, 224, 108)";
                                                       });
 
-                                                      if (this.style.backgroundColor != "rgb(86, 86, 236)"){
+                                                      if (this.style.backgroundColor != "rgb(86, 86, 236)") {
                                                             this.onclick = function () {
-                                                                  futureship.forEach((element, index, arr) => {
-                                                                        arr[index].style.backgroundColor = "rgb(86, 86, 236)";
+                                                                  if (KindOfShip != 0) {
+                                                                        futureship.forEach((element, index, arr) => {
+                                                                              arr[index].style.backgroundColor = "rgb(86, 86, 236)";
 
-                                                                        document.getElementById("choice" + KindOfShip + NumberKindOfShip).style.display = "none";
+                                                                              document.getElementById("choice" + KindOfShip + NumberKindOfShip).style.display = "none";
 
-                                                                        arr[index].IdOfChoiceShip = document.getElementById("choice" + KindOfShip + NumberKindOfShip);
-                                                                        arr[index].ShipArray = futureship;
+                                                                              arr[index].IdOfChoiceShip = document.getElementById("choice" + KindOfShip + NumberKindOfShip);
+                                                                              arr[index].ShipArray = futureship;
 
-                                                                        arr[index].onclick = function () {
-                                                                              arr[index].IdOfChoiceShip.style.display = "";
-                                                                              arr[index].ShipArray.forEach((element, inedex1, arr1) => {
-                                                                                    arr1[inedex1].style.backgroundColor = "white";
-                                                                              });
-                                                                        }
-                                                                  });
+                                                                              arr[index].onclick = function () {
+                                                                                    arr[index].IdOfChoiceShip.style.display = "";
+                                                                                    arr[index].IdOfChoiceShip.style.backgroundColor = "white";
+                                                                                    arr[index].ShipArray.forEach((element, inedex1, arr1) => {
+                                                                                          arr1[inedex1].style.backgroundColor = "white";
+                                                                                    });
+                                                                              }
+                                                                        });
 
 
-                                                                  KindOfShip = 0;
+                                                                        KindOfShip = 0;
+                                                                  }
                                                             }
                                                       }
                                                 }
@@ -361,7 +364,7 @@
                                                             if (arr[index].style.backgroundColor != "rgb(86, 86, 236)") arr[index].style.backgroundColor = "rgb(231, 89, 89)";
                                                       });
 
-                                                      if (this.style.backgroundColor != "rgb(86, 86, 236)"){this.onclick = function () { }}
+                                                      if (this.style.backgroundColor != "rgb(86, 86, 236)") { this.onclick = function () { } }
                                                 }
 
                                           }
