@@ -65,7 +65,7 @@
 
                   paragraf = document.createElement("p");
                   paragraf.setAttribute("id", "test");
-                  paragraf.innerHTML = "ppppp";
+                  // paragraf.innerHTML = "ppppp";
                   paragraf.style.position = "absolute";
                   paragraf.style.top = "10px";
                   paragraf.style.left = "50%";
@@ -194,21 +194,14 @@
 
                                                       if (direction) {
                                                             if (KindOfShip % 2 == 0) {
-                                                                  try {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2) + parseInt(this.ynumber + x)) != null) throw "aa"
-                                                                  }
-                                                                  catch (err) {
+                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2) + parseInt(this.ynumber + x)) != null) {
                                                                         if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") {
                                                                               blank = false;
                                                                         }
                                                                   }
                                                             }
                                                             else {
-
-                                                                  try {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2) + parseInt(this.ynumber + x)) != null) throw "aa";
-                                                                  }
-                                                                  catch (err) {
+                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2) + parseInt(this.ynumber + x)) != null) {
                                                                         if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") {
                                                                               blank = false;
                                                                         }
@@ -218,20 +211,15 @@
                                                       else {
 
                                                             if (KindOfShip % 2 == 0) {
-                                                                  try {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - KindOfShip / 2)) != null) throw "aa";
-                                                                  }
-                                                                  catch (err) {
+                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - KindOfShip / 2)) != null) {
                                                                         if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - KindOfShip / 2)).style.backgroundColor == "rgb(86, 86, 236)") {
                                                                               blank = false;
                                                                         }
                                                                   }
                                                             }
                                                             else {
-                                                                  try {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - (KindOfShip + 1) / 2)) != null) throw "aa";
-                                                                  }
-                                                                  catch (err) {
+
+                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - (KindOfShip + 1) / 2)) != null) {
                                                                         if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - (KindOfShip + 1) / 2)).style.backgroundColor == "rgb(86, 86, 236)") {
                                                                               blank = false;
                                                                         }
@@ -244,88 +232,54 @@
                                                       for (let x = 1; x <= KindOfShip; x++) {
                                                             if (direction) {
                                                                   if (KindOfShip % 2 == 0) {
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber - 1)) != null) throw "aa";
-                                                                        }
-                                                                        catch (err) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber - 1)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber - 1)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
-                                                                        
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber)) != null) throw "aa";
-                                                                        }
-                                                                        catch (err) {
+
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
 
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber + 1)) != null) throw "aa";
-                                                                        }
-                                                                        catch (err) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber + 1)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber + 1)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
 
 
                                                                   }
                                                                   else {
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber - 1)) != null) throw "aa";
-                                                                        }
-                                                                        catch (err) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber - 1)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber - 1)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber)) != null) throw "aa";
-                                                                        }
-                                                                        catch (err) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
 
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber + 1)) != null) throw "aa";
-                                                                        }
-                                                                        catch (err) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber + 1)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber + 1)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
                                                                   }
                                                             }
                                                             else {
                                                                   if (KindOfShip % 2 == 0) {
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - 1) + parseInt(this.ynumber - KindOfShip / 2 + x)) != null) throw "aa";
-                                                                        } catch (error) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - 1) + parseInt(this.ynumber - KindOfShip / 2 + x)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - 1) + parseInt(this.ynumber - KindOfShip / 2 + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
-                                                                        
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber) + parseInt(this.ynumber - KindOfShip / 2 + x)) != null) throw "aa";
-                                                                        } catch (error) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber) + parseInt(this.ynumber - KindOfShip / 2 + x)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber) + parseInt(this.ynumber - KindOfShip / 2 + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
-
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + 1) + parseInt(this.ynumber - KindOfShip / 2 + x)) != null) throw "aa";
-                                                                        } catch (error) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + 1) + parseInt(this.ynumber - KindOfShip / 2 + x)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + 1) + parseInt(this.ynumber - KindOfShip / 2 + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
 
                                                                   }
                                                                   else {
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - 1) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)) != null) throw "aa";
-                                                                        } catch (error) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - 1) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - 1) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
-                                                                        
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)) != null) throw "aa";
-                                                                        } catch (error) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
-
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + 1) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)) != null) throw "aa";
-                                                                        } catch (error) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + 1) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + 1) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
 
@@ -340,18 +294,14 @@
 
                                                             if (direction) {
                                                                   if (KindOfShip % 2 == 0) {
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + KindOfShip / 2 + 1) + parseInt(this.ynumber + x)) != null) throw "aa";
-                                                                        } catch (error) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + KindOfShip / 2 + 1) + parseInt(this.ynumber + x)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + KindOfShip / 2 + 1) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") {
                                                                                     blank = false;
                                                                               }
                                                                         }
                                                                   }
                                                                   else {
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + (KindOfShip - 1) / 2 + 1) + parseInt(this.ynumber + x)) != null) throw "aa";
-                                                                        } catch (error) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + (KindOfShip - 1) / 2 + 1) + parseInt(this.ynumber + x)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + (KindOfShip - 1) / 2 + 1) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") {
                                                                                     blank = false;
                                                                               }
@@ -361,18 +311,14 @@
                                                             else {
 
                                                                   if (KindOfShip % 2 == 0) {
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + KindOfShip / 2 + 1)) != null) throw "null";
-                                                                        } catch (error) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + KindOfShip / 2 + 1)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + KindOfShip / 2 + 1)).style.backgroundColor == "rgb(86, 86, 236)") {
                                                                                     blank = false;
                                                                               }
                                                                         }
                                                                   }
                                                                   else {
-                                                                        try {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + (KindOfShip - 1) / 2 + 1)) != null) throw "null";
-                                                                        } catch (error) {
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + (KindOfShip - 1) / 2 + 1)) != null) {
                                                                               if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + (KindOfShip - 1) / 2 + 1)).style.backgroundColor == "rgb(86, 86, 236)") {
                                                                                     blank = false;
                                                                               }
@@ -387,25 +333,27 @@
                                                             if (arr[index].style.backgroundColor != "rgb(86, 86, 236)") arr[index].style.backgroundColor = "rgb(128, 224, 108)";
                                                       });
 
-                                                      this.onclick = function () {
-                                                            futureship.forEach((element, index, arr) => {
-                                                                  arr[index].style.backgroundColor = "rgb(86, 86, 236)";
+                                                      if (this.style.backgroundColor != "rgb(86, 86, 236)"){
+                                                            this.onclick = function () {
+                                                                  futureship.forEach((element, index, arr) => {
+                                                                        arr[index].style.backgroundColor = "rgb(86, 86, 236)";
 
-                                                                  document.getElementById("choice" + KindOfShip + NumberKindOfShip).style.display = "none";
-                                                                  
-                                                                  arr[index].IdOfChoiceShip = document.getElementById("choice" + KindOfShip + NumberKindOfShip);
-                                                                  arr[index].ShipArray = futureship;
+                                                                        document.getElementById("choice" + KindOfShip + NumberKindOfShip).style.display = "none";
 
-                                                                  arr[index].onclick= function(){
-                                                                        arr[index].IdOfChoiceShip.style.display="";
-                                                                        arr[index].ShipArray.forEach((element,inedex1, arr1) => {
-                                                                              arr1[inedex1].style.backgroundColor="white";
-                                                                        });
-                                                                  }
-                                                            });
-                                                            
+                                                                        arr[index].IdOfChoiceShip = document.getElementById("choice" + KindOfShip + NumberKindOfShip);
+                                                                        arr[index].ShipArray = futureship;
 
-                                                            KindOfShip = 0;
+                                                                        arr[index].onclick = function () {
+                                                                              arr[index].IdOfChoiceShip.style.display = "";
+                                                                              arr[index].ShipArray.forEach((element, inedex1, arr1) => {
+                                                                                    arr1[inedex1].style.backgroundColor = "white";
+                                                                              });
+                                                                        }
+                                                                  });
+
+
+                                                                  KindOfShip = 0;
+                                                            }
                                                       }
                                                 }
                                                 else {
@@ -413,7 +361,7 @@
                                                             if (arr[index].style.backgroundColor != "rgb(86, 86, 236)") arr[index].style.backgroundColor = "rgb(231, 89, 89)";
                                                       });
 
-                                                      this.onclick = function () { }
+                                                      if (this.style.backgroundColor != "rgb(86, 86, 236)"){this.onclick = function () { }}
                                                 }
 
                                           }
