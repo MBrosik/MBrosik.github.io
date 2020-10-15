@@ -42,6 +42,11 @@
                   // -------------------------
 
                   direction = true;
+
+                  directionlist = {
+                        top: true,
+                        right: false,
+                  }
                   container.innerHTML += "<div id='player'> <div/>"
 
                   player = document.getElementById("player");
@@ -62,18 +67,6 @@
                   playstl.height = "450px";
                   playstl.border = "5px solid black";
                   playstl.overflow = "hidden";
-
-                  paragraf = document.createElement("p");
-                  paragraf.setAttribute("id", "test");
-                  // paragraf.innerHTML = "ppppp";
-                  paragraf.style.position = "absolute";
-                  paragraf.style.top = "10px";
-                  paragraf.style.left = "50%";
-                  paragraf.style.transform = "translate(-50%, -100%)";
-                  paragraf.style.color = "red";
-                  paragraf.style.fontSize = "20px";
-
-                  container.appendChild(paragraf);
 
 
                   CreatePlayerQuadroArray();
@@ -110,160 +103,108 @@
                               Quadro.style.left = parseInt((y - 1) * 10) + "%";
                               Quadro.xnumber = x;
                               Quadro.ynumber = y;
-                              // Quadro.addEventListener("click", function(){
-
-                              // })
 
                               // -------------------------
                               // adding events
                               // -------------------------
                               Quadro.onmouseover = function () {
                                     if (KindOfShip != 0) {
-
-
                                           futureship = [];
-                                          try {
 
-                                                CatchErrors = true;
-                                                document.getElementById("test").innerHTML = "Spróbuj nie wychodzić poza planszę :)";
-                                                for (let x = 1; x <= KindOfShip; x++) {
-                                                      if (direction) {
-                                                            if (KindOfShip % 2 == 0) {
-                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + this.ynumber) == null) CatchErrors = false;
-                                                            }
-                                                            else {
-                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + this.ynumber) == null) CatchErrors = false;
-                                                            }
-                                                      }
-                                                      else {
-                                                            if (KindOfShip % 2 == 0) {
-                                                                  if (document.getElementById("QuadroPlayer" + this.xnumber + parseInt(this.ynumber - KindOfShip / 2 + x)) == null) CatchErrors = false;
-                                                            }
-                                                            else {
-                                                                  if (document.getElementById("QuadroPlayer" + this.xnumber + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)) == null) CatchErrors = false;
-                                                            }
-                                                      }
-                                                }
-                                                // console.log("tryy");
-                                                if (CatchErrors) throw "Spróbuj nie wychodzić poza planszę";
-                                                // console.log("try")
-                                          }
-
-                                          // -------------------------
-                                          // if there was no errors, go to catch(err)
-                                          // -------------------------
-                                          catch (err) {
-                                                document.getElementById("test").innerHTML = "";
-
-                                                // console.log("finally");
-                                                // document.getElementById("test").innerHTML = "";
-                                                // console.log(this.xnumber);
-                                                // console.log(this.ynumber);
-
-                                                // -------------------------
-                                                // push to futureship[]
-                                                // -------------------------
-
-                                                for (let x = 1; x <= KindOfShip; x++) {
-                                                      if (direction) {
-                                                            if (KindOfShip % 2 == 0) {
-                                                                  futureship.push(document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + this.ynumber))
-                                                            }
-                                                            else {
-                                                                  futureship.push(document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + this.ynumber))
-                                                            }
-                                                      }
-                                                      else {
-                                                            if (KindOfShip % 2 == 0) {
-                                                                  futureship.push(document.getElementById("QuadroPlayer" + this.xnumber + parseInt(this.ynumber - KindOfShip / 2 + x)))
-                                                            }
-                                                            else {
-                                                                  futureship.push(document.getElementById("QuadroPlayer" + this.xnumber + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)))
-                                                            }
-                                                      }
-                                                }
-                                                // console.table(futureship);
-
-                                                // -------------------------
-                                                // checking blank quadros
-                                                // -------------------------
-
-                                                blank = true;
-
-                                                for (let y = 0; y <= KindOfShip + 1; y++) {
-                                                      for (let x = -1; x <= 1; x++) {
-                                                            if (direction) {
-                                                                  if (KindOfShip % 2 == 0) {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + y) + parseInt(this.ynumber + x)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + y) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-                                                                  }
-                                                                  else {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + y) + parseInt(this.ynumber + x)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + y) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-                                                                  }
-                                                            }
-                                                            else {
-
-                                                                  if (KindOfShip % 2 == 0) {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - KindOfShip / 2 + y)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - KindOfShip / 2 + y)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-                                                                  }
-                                                                  else {
-
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + y)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + y)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-                                                                  }
-                                                            }
-                                                      }
-                                                }
-
-
-
-
-                                                if (blank) {
-                                                      futureship.forEach((element, index, arr) => {
-                                                            if (arr[index].style.backgroundColor != "rgb(86, 86, 236)") arr[index].style.backgroundColor = "rgb(128, 224, 108)";
-                                                      });
-
-                                                      if (this.style.backgroundColor != "rgb(86, 86, 236)") {
-                                                            this.onclick = function () {
-                                                                  if (KindOfShip != 0) {
-                                                                        futureship.forEach((element, index, arr) => {
-                                                                              arr[index].style.backgroundColor = "rgb(86, 86, 236)";
-
-                                                                              document.getElementById("choice" + KindOfShip + NumberKindOfShip).style.display = "none";
-
-                                                                              arr[index].IdOfChoiceShip = document.getElementById("choice" + KindOfShip + NumberKindOfShip);
-                                                                              arr[index].ShipArray = futureship;
-
-                                                                              arr[index].onclick = function () {
-                                                                                    arr[index].IdOfChoiceShip.style.display = "";
-                                                                                    arr[index].IdOfChoiceShip.style.backgroundColor = "white";
-                                                                                    arr[index].ShipArray.forEach((element, inedex1, arr1) => {
-                                                                                          arr1[inedex1].style.backgroundColor = "white";
-                                                                                    });
-                                                                              }
-                                                                        });
-
-
-                                                                        KindOfShip = 0;
-                                                                  }
-                                                            }
+                                          LastShip = 0;
+                                          for (let x = 0; x < KindOfShip; x++) {
+                                                if (direction == directionlist.top) {
+                                                      if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + this.ynumber) == null) {
+                                                            LastShip = KindOfShip - x;
+                                                            break
                                                       }
                                                 }
                                                 else {
-                                                      futureship.forEach((element, index, arr) => {
-                                                            if (arr[index].style.backgroundColor != "rgb(86, 86, 236)") arr[index].style.backgroundColor = "rgb(231, 89, 89)";
-                                                      });
-
-                                                      if (this.style.backgroundColor != "rgb(86, 86, 236)") { this.onclick = function () { } }
+                                                      if (document.getElementById("QuadroPlayer" + this.xnumber + parseInt(this.ynumber + x)) == null) {
+                                                            LastShip = KindOfShip - x;
+                                                            break
+                                                      }
                                                 }
-
                                           }
+
+                                          // -------------------------
+                                          // push to futureship[]
+                                          // -------------------------
+
+                                          for (let x = 0; x < KindOfShip; x++) {
+                                                if (direction == directionlist.top) {
+                                                      futureship.push(document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x - LastShip) + this.ynumber))
+                                                }
+                                                else {
+                                                      futureship.push(document.getElementById("QuadroPlayer" + this.xnumber + parseInt(this.ynumber + x - LastShip)))
+                                                }
+                                          }
+
+                                          // -------------------------
+                                          // checking blank quadros
+                                          // -------------------------
+
+                                          blank = true;
+
+                                          for (let y = KindOfShip; y >= -1; y--) {
+                                                for (let x = -1; x <= 1; x++) {
+                                                      if (direction == directionlist.top) {
+                                                            if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + y - LastShip) + parseInt(this.ynumber + x)) != null) {
+                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + y - LastShip) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
+                                                            }
+                                                      }
+                                                      else {
+
+                                                            if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + y - LastShip)) != null) {
+                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + y - LastShip)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
+                                                            }
+                                                      }
+                                                }
+                                          }
+
+
+
+
+                                          if (blank) {
+                                                futureship.forEach((element, index, arr) => {
+                                                      if (arr[index].style.backgroundColor != "rgb(86, 86, 236)") arr[index].style.backgroundColor = "rgb(128, 224, 108)";
+                                                });
+
+                                                if (this.style.backgroundColor != "rgb(86, 86, 236)") {
+                                                      this.onclick = function () {
+                                                            if (KindOfShip != 0) {
+                                                                  futureship.forEach((element, index, arr) => {
+                                                                        arr[index].style.backgroundColor = "rgb(86, 86, 236)";
+
+                                                                        document.getElementById("choice" + KindOfShip + NumberKindOfShip).style.display = "none";
+
+                                                                        arr[index].IdOfChoiceShip = document.getElementById("choice" + KindOfShip + NumberKindOfShip);
+                                                                        arr[index].ShipArray = futureship;
+
+                                                                        arr[index].onclick = function () {
+                                                                              arr[index].IdOfChoiceShip.style.display = "";
+                                                                              arr[index].IdOfChoiceShip.style.backgroundColor = "white";
+                                                                              arr[index].ShipArray.forEach((element, inedex1, arr1) => {
+                                                                                    arr1[inedex1].style.backgroundColor = "white";
+                                                                              });
+                                                                        }
+                                                                  });
+
+
+                                                                  KindOfShip = 0;
+                                                            }
+                                                      }
+                                                }
+                                          }
+                                          else {
+                                                futureship.forEach((element, index, arr) => {
+                                                      if (arr[index].style.backgroundColor != "rgb(86, 86, 236)") arr[index].style.backgroundColor = "rgb(231, 89, 89)";
+                                                });
+
+                                                if (this.style.backgroundColor != "rgb(86, 86, 236)") { this.onclick = function () { } }
+                                          }
+
+
                                     }
                               }
 
@@ -273,7 +214,6 @@
                                     });
                               }
                               player.appendChild(Quadro);
-                              // player.innerHTML += "<div class='Quadros' style='top: " + parseInt((x - 1) * 10) + "%; left:" + parseInt((y - 1) * 10) + "%'></div>";
                         }
                   }
 
