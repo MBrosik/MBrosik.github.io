@@ -61,6 +61,7 @@
                   // -------------------------
 
                   QuadrosArray = [];
+                  // console.table(QuadrosArray);
 
                   for (let x = 0; x < 12; x++) {
 
@@ -108,6 +109,7 @@
                   }
                   console.log("xPosition: " + xPosition);
                   console.log("yPosition: " + yPosition);
+                  console.log(kind);
                   console.log(direction);
 
                   // -------------------------
@@ -116,55 +118,16 @@
 
                   blank = true;
 
-
-                  // if (QuadrosArray[yPosition - 1][xPosition - 1] == 0
-                  //       && QuadrosArray[yPosition - 1][xPosition] == 0
-                  //       && QuadrosArray[yPosition - 1][xPosition + 1] == 0
-                  //       && QuadrosArray[yPosition][xPosition - 1] == 0
-                  //       && QuadrosArray[yPosition][xPosition] == 0
-                  //       && QuadrosArray[yPosition][xPosition + 1] == 0
-                  //       && QuadrosArray[yPosition + 1][xPosition - 1] == 0
-                  //       && QuadrosArray[yPosition + 1][xPosition] == 0
-                  //       && QuadrosArray[yPosition + 1][xPosition + 1] == 0) {
-
-                  //       console.log("xddd " + yPosition + " " + xPosition);
-                  //       console.log("");
-
-                  //       blank = true;
-                  // }
-
-                  if (QuadrosArray[yPosition - 1][xPosition - 1] != 0) blank = false;
-                  else if (QuadrosArray[yPosition - 1][xPosition] != 0) blank = false;
-                  else if (QuadrosArray[yPosition - 1][xPosition + 1] != 0) blank = false;
-                  else if (QuadrosArray[yPosition][xPosition - 1] != 0) blank = false;
-                  else if (QuadrosArray[yPosition][xPosition] != 0) blank = false;
-                  else if (QuadrosArray[yPosition][xPosition + 1] != 0) blank = false;
-                  else if (QuadrosArray[yPosition + 1][xPosition - 1] != 0) blank = false;
-                  else if (QuadrosArray[yPosition + 1][xPosition] != 0) blank = false;
-                  else if (QuadrosArray[yPosition + 1][xPosition + 1] != 0) blank = false;
-
-
-
-                  if (blank == true) {
-
-                        if (direction == true) {
-
-                              for (let x = 0; x < kind; x++) {
-                                    if (QuadrosArray[yPosition + 1][xPosition + x + 1] != 0) blank = false;
-                                    else if (QuadrosArray[yPosition][xPosition + x + 1] != 0) blank = false;
-                                    else if (QuadrosArray[yPosition - 1][xPosition + x + 1] != 0) blank = false;
-
+                  for (let x = -1; x <= kind; x++) {
+                        for (let y = -1; y <= 1; y++) {
+                              if (direction) {
+                                    if (QuadrosArray[yPosition + y][xPosition + x] != 0) blank = false;
+                              }
+                              else {
+                                    if (QuadrosArray[yPosition + x][xPosition + y] != 0) blank = false;
                               }
                         }
-                        else {
 
-                              for (let x = 0; x < kind; x++) {
-                                    if (QuadrosArray[yPosition + x + 1][xPosition + 1] != 0) blank = false;
-                                    else if (QuadrosArray[yPosition + x + 1][xPosition] != 0) blank = false;
-                                    else if (QuadrosArray[yPosition + x + 1][xPosition - 1] != 0) blank = false;
-
-                              }
-                        }
                   }
 
                   // -------------------------
@@ -230,10 +193,10 @@
             // Adding something to css
             // -------------------------
 
-            // document.querySelectorAll("*").forEach((element, index, arr) => {
+            document.querySelectorAll("*").forEach((element, index, arr) => {
 
-            //       arr[index].style.boxSizing = "border-box";
-            // })
+                  arr[index].style.boxSizing = "border-box";
+            })
       </script>
 </body>
 
