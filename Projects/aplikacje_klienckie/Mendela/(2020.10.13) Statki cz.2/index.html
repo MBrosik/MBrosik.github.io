@@ -190,143 +190,39 @@
 
                                                 blank = true;
 
-                                                for (let x = -1; x <= 1; x++) {
-
-                                                      if (direction) {
-                                                            if (KindOfShip % 2 == 0) {
-                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2) + parseInt(this.ynumber + x)) != null) {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") {
-                                                                              blank = false;
-                                                                        }
-                                                                  }
-                                                            }
-                                                            else {
-                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2) + parseInt(this.ynumber + x)) != null) {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") {
-                                                                              blank = false;
-                                                                        }
-                                                                  }
-                                                            }
-                                                      }
-                                                      else {
-
-                                                            if (KindOfShip % 2 == 0) {
-                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - KindOfShip / 2)) != null) {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - KindOfShip / 2)).style.backgroundColor == "rgb(86, 86, 236)") {
-                                                                              blank = false;
-                                                                        }
-                                                                  }
-                                                            }
-                                                            else {
-
-                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - (KindOfShip + 1) / 2)) != null) {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - (KindOfShip + 1) / 2)).style.backgroundColor == "rgb(86, 86, 236)") {
-                                                                              blank = false;
-                                                                        }
-                                                                  }
-                                                            }
-                                                      }
-                                                }
-
-                                                if (blank) {
-                                                      for (let x = 1; x <= KindOfShip; x++) {
-                                                            if (direction) {
-                                                                  if (KindOfShip % 2 == 0) {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber - 1)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber - 1)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber + 1)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + x) + parseInt(this.ynumber + 1)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-
-
-                                                                  }
-                                                                  else {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber - 1)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber - 1)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber + 1)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + x) + parseInt(this.ynumber + 1)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-                                                                  }
-                                                            }
-                                                            else {
-                                                                  if (KindOfShip % 2 == 0) {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - 1) + parseInt(this.ynumber - KindOfShip / 2 + x)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - 1) + parseInt(this.ynumber - KindOfShip / 2 + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber) + parseInt(this.ynumber - KindOfShip / 2 + x)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber) + parseInt(this.ynumber - KindOfShip / 2 + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + 1) + parseInt(this.ynumber - KindOfShip / 2 + x)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + 1) + parseInt(this.ynumber - KindOfShip / 2 + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-
-                                                                  }
-                                                                  else {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - 1) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - 1) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + 1) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + 1) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
-                                                                        }
-
-                                                                  }
-                                                            }
-                                                      }
-                                                }
-
-                                                if (blank) {
-
+                                                for (let y = 0; y <= KindOfShip + 1; y++) {
                                                       for (let x = -1; x <= 1; x++) {
-
                                                             if (direction) {
                                                                   if (KindOfShip % 2 == 0) {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + KindOfShip / 2 + 1) + parseInt(this.ynumber + x)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + KindOfShip / 2 + 1) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") {
-                                                                                    blank = false;
-                                                                              }
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + y) + parseInt(this.ynumber + x)) != null) {
+                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - KindOfShip / 2 + y) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
                                                                   }
                                                                   else {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + (KindOfShip - 1) / 2 + 1) + parseInt(this.ynumber + x)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + (KindOfShip - 1) / 2 + 1) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") {
-                                                                                    blank = false;
-                                                                              }
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + y) + parseInt(this.ynumber + x)) != null) {
+                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber - (KindOfShip + 1) / 2 + y) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
                                                                   }
                                                             }
                                                             else {
 
                                                                   if (KindOfShip % 2 == 0) {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + KindOfShip / 2 + 1)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + KindOfShip / 2 + 1)).style.backgroundColor == "rgb(86, 86, 236)") {
-                                                                                    blank = false;
-                                                                              }
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - KindOfShip / 2 + y)) != null) {
+                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - KindOfShip / 2 + y)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
                                                                   }
                                                                   else {
-                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + (KindOfShip - 1) / 2 + 1)) != null) {
-                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + (KindOfShip - 1) / 2 + 1)).style.backgroundColor == "rgb(86, 86, 236)") {
-                                                                                    blank = false;
-                                                                              }
+
+                                                                        if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + y)) != null) {
+                                                                              if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber - (KindOfShip + 1) / 2 + y)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
                                                                         }
                                                                   }
                                                             }
                                                       }
                                                 }
+
+
+
 
                                                 if (blank) {
                                                       futureship.forEach((element, index, arr) => {
