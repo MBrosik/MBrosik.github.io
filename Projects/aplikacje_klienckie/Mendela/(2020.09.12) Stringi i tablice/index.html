@@ -63,7 +63,7 @@
 
 
 
-                for (let y = 0; y < parseInt(rotacja[1]); y++) {
+                for (let y = 0; y < parseInt(rotacja.slice(1, rotacja.length)); y++) {
 
                     for (let x = 0; x < tablica.length; x++) {
 
@@ -96,7 +96,7 @@
                     tablica = tablica1;
                     tablica1 = [];
 
-                    console.log(tablica);
+                    console.log(y+" próba: "+tablica);
 
                 }
             }
