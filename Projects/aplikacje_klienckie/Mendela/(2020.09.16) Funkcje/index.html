@@ -47,7 +47,7 @@
             height: 800px;
             background-image: url("galaxy.jpg");
             background-color: #cccccc;
-            
+
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
@@ -102,7 +102,6 @@
                     pgumaWidth = pgumaWidth * 1.003
                     pguma.style.width = pgumaWidth + "px";
 
-                    // console.log(pguma.style.width);
                     if (parseFloat((pguma.style.width).slice(0, -2)) > 1000) {
                         decision = false;
                     }
@@ -112,7 +111,6 @@
                     pgumaWidth = pgumaWidth / 1.004
                     pguma.style.width = pgumaWidth + "px";
 
-                    // console.log(pguma.style.width);
                     if (parseFloat((pguma.style.width).slice(0, -2)) < 270) {
                         decision = true;
                     }
@@ -132,15 +130,7 @@
             document.write("<input type='text' id='zad2' style='font-family:courier' size='40' readonly>")
 
             input = document.getElementById("zad2");
-            txt = "Przykładowy tekst, który jest"
-
-            var space = "";
-            for (let i = 0; i < input.size; i++) {
-                space += " ";
-
-            }
-
-            txt = space + txt;
+            txt = "Przykładowy tekst, który jest           Przykładowy tekst, który jest           "
 
             setInterval(() => {
                 input.value = txt;
@@ -169,14 +159,17 @@
             txt1.push("        Przykładowy tekst2 \n")
             txt1.push("        Przykładowy tekst3 \n")
 
-            for (let i = 0; i < textarea.rows; i++) {
+            for (let i = 0; i < textarea.rows+3; i++) {
                 txt1.push("\n")
             }
 
-            setInterval(() => {
+            let FirstTxt = txt1;
+            Interval();
+            function Interval() {
+
                 let txt2 = ""
-                txt1.forEach(element => {
-                    txt2 += element
+                txt1.forEach((element, index, arr) => {
+                     txt2 += element
                 });
 
 
@@ -195,11 +188,18 @@
 
                 }
 
+
+                if (FirstTxt[2] != txt1[txt1.length - 1]) {
+                    setTimeout(Interval, 150)
+                }
+                else {
+                    setTimeout(Interval, 1500);
+                }
+
+
                 txt1 = txt3
 
-            }, 150)
-
-
+            }
         }
 
         zad3()
@@ -229,9 +229,6 @@
 
                 rad += 0.003;
 
-                console.log("x: ", x);
-                console.log("y: ", y);
-
                 sasin.style.left = x + "%";
                 sasin.style.top = y + "%";
 
@@ -243,7 +240,6 @@
                     sasin.style.transform = "rotateY(0deg) translate(-50%, -50%)";
                 }
                 else {
-                    console.log("xd");
                     rotate = true;
                 }
 
