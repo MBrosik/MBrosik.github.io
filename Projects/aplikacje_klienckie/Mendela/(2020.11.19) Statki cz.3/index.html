@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://fonts.googleapis.com/css2?family=Commissioner:wght@500&display=swap" rel="stylesheet">
+      <title>Document</title>
+      <script>
+            window.onload = create;
+            function create() {
+                  document.querySelector("body").style.padding = 0;
+                  document.querySelector("body").style.margin = 0;
+
+                  // -------------------------
+                  // container
+                  // -------------------------
+
+                  document.querySelector("body").innerHTML = '<div id="container"></div>'
+
+                  container = document.getElementById("container");
+                  container.style.width = "100vw";
+                  container.style.minWidth = "1424px";
+                  container.style.height = "100vh";
+                  container.style.minHeight = "517px";
+                  container.style.height = "100vh";
+                  container.style.position = "relative";
+
+                  Menu()
+
+                  buttonadd();
+                  CreateComputer();
+                  CreatePlayer();
+                  AddingSomethingToCSS()
+            }
+
+            function CreateComputer() {
+
+                  // -------------------------
+                  // computer
+                  // -------------------------
+
+                  container.innerHTML += "<div id='computer'> <div/>"
+
+                  computer = document.getElementById("computer");
+
+                  computer.style.transform = "translate(0%, -50%)";
+                  computer.style.left = "calc(50% + 100px)"
+                  computer.style.top = "50%"
+                  computer.style.position = "absolute"
+                  computer.style.width = "350px";
+                  computer.style.height = "350px";
+                  computer.style.border = "5px solid black";
+                  computer.style.overflow = "hidden";
+
+                  CreateQuadroArray();
+            }
+
+
+
+            function CreateQuadroArray() {
+
+                  // -------------------------
+                  // create array
+                  // -------------------------
+
+                  QuadrosArray = [];
+
+                  for (let x = 0; x < 12; x++) {
+
+                        QuadrosArray.push([]);
+
+                        for (let y = 0; y < 12; y++) {
+                              QuadrosArray[x].push(0);
+                        }
+                  }
+
+                  SetShips(4, 4)
+                  for (let i = 4; i >= 3; i--) SetShips(3, i)
+                  for (let i = 4; i >= 2; i--) SetShips(2, i)
+                  for (let i = 4; i >= 1; i--) SetShips(1, i)
+
+                  // QuadrosArray = JSON.parse(`[[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,{"ship":13,"rotation":false},0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,{"ship":24,"rotation":false},{"ship":24,"rotation":false},0,0,0,{"ship":34,"rotation":false},{"ship":34,"rotation":false},{"ship":34,"rotation":false},0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,{"ship":44,"rotation":false},{"ship":44,"rotation":false},{"ship":44,"rotation":false},{"ship":44,"rotation":false},0,{"ship":23,"rotation":true},0,0,0,0],[0,0,0,0,0,0,0,{"ship":23,"rotation":true},0,0,0,0],[0,0,0,0,{"ship":14,"rotation":true},0,0,0,0,0,0,0],[0,{"ship":22,"rotation":true},0,0,0,0,{"ship":33,"rotation":false},{"ship":33,"rotation":false},{"ship":33,"rotation":false},0,{"ship":11,"rotation":true},0],[0,{"ship":22,"rotation":true},0,0,{"ship":12,"rotation":false},0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0]]`)
+
+                  // console.table(QuadrosArray);
+
+                  PushingToHTML();
+            }
+
+
+            function SetShips(kind, IdOfShip) {
+
+                  // -------------------------
+                  // random number
+                  // -------------------------
+
+                  directions = [false, true] // false => w prawo; true => w dół
+                  direction = directions[Math.round(Math.random())]
+
+                  // -------------------------
+                  // start point
+                  // -------------------------
+
+                  if (direction == false) {
+                        xPosition = Math.round(Math.random() * (9 - (kind - 1))) + 1;
+                        yPosition = Math.round(Math.random() * 9) + 1;
+
+                  }
+                  else {
+                        xPosition = Math.round(Math.random() * 9) + 1;
+                        yPosition = Math.round(Math.random() * (9 - (kind - 1))) + 1;
+                  }
+
+                  // -------------------------
+                  // testing blank positions
+                  // -------------------------
+
+                  blank = true;
+
+                  for (let x = -1; x <= kind; x++) {
+                        for (let y = -1; y <= 1; y++) {
+                              if (direction == false) {
+                                    if (QuadrosArray[yPosition + y][xPosition + x] != 0) blank = false;
+                              }
+                              else {
+                                    if (QuadrosArray[yPosition + x][xPosition + y] != 0) blank = false;
+                              }
+                        }
+
+                  }
+
+                  // -------------------------
+                  // pushing figure to table
+                  // -------------------------
+
+                  if (blank == true) {
+
+                        if (direction == false) {
+                              for (let x = 0; x < kind; x++) {
+                                    QuadrosArray[yPosition][xPosition + x] = { ship: parseInt(kind.toString() + IdOfShip), rotation: direction };
+                              }
+                        }
+                        else {
+                              for (let x = 0; x < kind; x++) {
+                                    QuadrosArray[yPosition + x][xPosition] = { ship: parseInt(kind.toString() + IdOfShip), rotation: direction };
+                              }
+                        }
+                  }
+                  else {
+                        SetShips(kind, IdOfShip)
+                  }
+            }
+
+
+
+            function PushingToHTML() {
+
+                  // -------------------------
+                  // pushing to html
+                  // -------------------------
+
+                  for (let x = 1; x < 11; x++) {
+
+                        for (let y = 1; y < 11; y++) {
+
+                              if (QuadrosArray[x][y] == 0) {
+                                    ComputerQuadro = document.createElement("div");
+                                    ComputerQuadro.classList.add("Quadros");
+                                    ComputerQuadro.setAttribute(`id`, `Quadro${y - 1}${x - 1}`)
+                                    ComputerQuadro.style.top = parseInt((x - 1) * 10) + "%";
+                                    ComputerQuadro.style.left = parseInt((y - 1) * 10) + "%";
+
+                                    document.getElementById("computer").appendChild(ComputerQuadro);
+                              }
+                              else {
+                                    ComputerQuadro1 = document.createElement("div");
+                                    ComputerQuadro1.classList.add("Quadros");
+                                    ComputerQuadro1.setAttribute(`id`, `Quadro${y - 1}${x - 1}`)
+                                    ComputerQuadro1.classList.add("ships");
+                                    ComputerQuadro1.classList.add(`ship${QuadrosArray[x][y].ship}`);
+                                    ComputerQuadro1.style.top = parseInt((x - 1) * 10) + "%";
+                                    ComputerQuadro1.style.left = parseInt((y - 1) * 10) + "%";
+                                    ComputerQuadro1.dataset.shipid = `ship${QuadrosArray[x][y].ship}`;
+                                    ComputerQuadro1.dataset.direction = QuadrosArray[x][y].rotation
+                                    document.getElementById("computer").appendChild(ComputerQuadro1);
+                              }
+                        }
+                  }
+
+                  document.querySelectorAll(".Quadros").forEach((element, index, arr) => {
+                        arr[index].style.border = "1px solid black";
+                        arr[index].style.position = "absolute";
+                        arr[index].style.width = "10%";
+                        arr[index].style.height = "10%";
+                        arr[index].style.display = "flex";
+                        arr[index].style.fontSize = "22px";
+                        arr[index].style["justifyContent"] = "center";
+                        arr[index].style["alignItems"] = "center";
+                  });
+
+                  document.querySelectorAll(".ships").forEach((element, index, arr) => {
+                        arr[index].style.backgroundColor = "white"
+                  })
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            function CreatePlayer() {
+
+                  // -------------------------
+                  // Create player
+                  // -------------------------
+
+                  direction = true;
+
+                  directionlist = {
+                        top: true,
+                        right: false,
+                  }
+                  container.innerHTML += "<div id='player'> <div/>"
+
+                  player = document.getElementById("player");
+                  player.addEventListener("contextmenu", function () {
+                        if (direction == true) direction = false;
+                        else direction = true;
+                        event.preventDefault();
+                        event.target.onmouseout();
+                        event.target.onmouseover();
+                  })
+                  playstl = player.style;
+
+                  playstl.transform = "translate(-100%, -50%)";
+                  playstl.left = "calc(50% - 100px)"
+                  playstl.top = "50%"
+                  playstl.position = "absolute"
+                  playstl.width = "350px";
+                  playstl.height = "350px";
+                  playstl.border = "5px solid black";
+                  playstl.overflow = "hidden";
+
+
+                  CreatePlayerQuadroArray();
+
+            }
+
+
+            function CreatePlayerQuadroArray() {
+
+
+                  // -------------------------
+                  // pushing to html
+                  // -------------------------
+
+                  for (let y = 0; y < 10; y++) {
+                        for (let x = 0; x < 10; x++) {
+                              Quadro = document.createElement("div");
+                              Quadro.classList = "QuadrosPlayer";
+                              Quadro.setAttribute("id", "QuadroPlayer" + x + y);
+                              Quadro.style.left = parseInt(x * 10) + "%";
+                              Quadro.style.top = parseInt(y * 10) + "%";
+                              Quadro.xnumber = x;
+                              Quadro.ynumber = y;
+
+                              // -------------------------
+                              // adding events
+                              // -------------------------
+                              Quadro.onmouseover = function () {
+                                    if (KindOfShip != 0) {
+                                          futureship = [];
+
+                                          LastShip = 0;
+                                          for (let x = 0; x < KindOfShip; x++) {
+                                                if (direction == directionlist.right) {
+                                                      if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + this.ynumber) == null) {
+                                                            LastShip = KindOfShip - x;
+                                                            break
+                                                      }
+                                                }
+                                                else {
+                                                      if (document.getElementById("QuadroPlayer" + this.xnumber + parseInt(this.ynumber + x)) == null) {
+                                                            LastShip = KindOfShip - x;
+                                                            break
+                                                      }
+                                                }
+                                          }
+
+                                          // -------------------------
+                                          // push to futureship[]
+                                          // -------------------------
+
+                                          for (let x = 0; x < KindOfShip; x++) {
+                                                if (direction == directionlist.right) {
+                                                      futureship.push(document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x - LastShip) + this.ynumber))
+                                                }
+                                                else {
+                                                      futureship.push(document.getElementById("QuadroPlayer" + this.xnumber + parseInt(this.ynumber + x - LastShip)))
+                                                }
+                                          }
+
+                                          // -------------------------
+                                          // checking blank quadros
+                                          // -------------------------
+
+                                          blank = true;
+
+                                          for (let y = KindOfShip; y >= -1; y--) {
+                                                for (let x = -1; x <= 1; x++) {
+                                                      if (direction == directionlist.right) {
+                                                            if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + y - LastShip) + parseInt(this.ynumber + x)) != null) {
+                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + y - LastShip) + parseInt(this.ynumber + x)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
+                                                            }
+                                                      }
+                                                      else {
+
+                                                            if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + y - LastShip)) != null) {
+                                                                  if (document.getElementById("QuadroPlayer" + parseInt(this.xnumber + x) + parseInt(this.ynumber + y - LastShip)).style.backgroundColor == "rgb(86, 86, 236)") blank = false;
+                                                            }
+                                                      }
+                                                }
+                                          }
+
+
+
+
+                                          if (blank) {
+                                                futureship.forEach((element, index, arr) => {
+                                                      if (arr[index].classList.contains("Ship") == false) arr[index].style.backgroundColor = "rgb(128, 224, 108)";
+                                                });
+
+                                                if (this.classList.contains("Ship") == false) {
+                                                      this.onclick = function () {
+                                                            if (KindOfShip != 0) {
+                                                                  futureship.forEach((element, index, arr) => {
+                                                                        arr[index].style.backgroundColor = "rgb(86, 86, 236)";
+                                                                        arr[index].classList.add("Ship");
+                                                                        arr[index].classList.add(`Ship${KindOfShip}${NumberKindOfShip}`)
+                                                                        arr[index].dataset.PlayerIDofShip = `Ship${KindOfShip}${NumberKindOfShip}`;
+                                                                        document.getElementById("choice" + KindOfShip + NumberKindOfShip).style.display = "none";
+                                                                        arr[index].IdOfChoiceShip = document.getElementById("choice" + KindOfShip + NumberKindOfShip);
+                                                                        arr[index].ShipArray = futureship;
+                                                                        arr[index].DirectionOfShip = direction;
+                                                                        arr[index].onclick = function () {
+                                                                              arr[index].IdOfChoiceShip.style.display = "";
+                                                                              arr[index].IdOfChoiceShip.style.backgroundColor = "white";
+                                                                              arr[index].ShipArray.forEach((element, inedex1, arr1) => {
+                                                                                    arr1[inedex1].style.backgroundColor = "white";
+                                                                                    arr1[inedex1].classList.remove("Ship");
+                                                                                    arr1[inedex1].classList.remove(arr1[inedex1].dataset.PlayerIDofShip);
+                                                                              });
+                                                                              this.onmouseover();
+                                                                              DisplayChoice();
+                                                                        }
+                                                                  });
+
+                                                                  DisplayChoice()
+                                                                  function DisplayChoice() {
+                                                                        var DisplayNoneforAllChoiceClass = true;
+                                                                        document.querySelectorAll(".choiceclass").forEach((element, index, arr) => {
+                                                                              if (arr[index].style.display != "none") DisplayNoneforAllChoiceClass = false
+                                                                        });
+
+                                                                        if (DisplayNoneforAllChoiceClass) document.querySelector("button").style.display = ""
+                                                                        else document.querySelector("button").style.display = "none";
+                                                                  }
+
+
+                                                                  KindOfShip = 0;
+                                                            }
+                                                      }
+                                                }
+                                          }
+                                          else {
+                                                futureship.forEach((element, index, arr) => {
+                                                      arr[index].style.backgroundColor = "rgb(231, 89, 89)";
+                                                });
+
+                                                if (this.classList.contains("Ship") == false) { this.onclick = function () { } }
+                                          }
+                                    }
+                              }
+
+                              Quadro.onmouseout = function () {
+                                    document.querySelectorAll(".QuadrosPlayer").forEach((element, index, arr) => {
+                                          if (arr[index].classList.contains("Ship") == false) arr[index].style.backgroundColor = "white";
+                                          else if (arr[index].classList.contains("Ship")) arr[index].style.backgroundColor = "rgb(86, 86, 236)"
+                                    });
+                              }
+                              player.appendChild(Quadro);
+                        }
+                  }
+
+                  document.querySelectorAll(".QuadrosPlayer").forEach((element, index, arr) => {
+                        arr[index].style.border = "1px solid black";
+                        arr[index].style.position = "absolute";
+                        arr[index].style.width = "10%";
+                        arr[index].style.height = "10%";
+                        arr[index].style.display = "flex";
+                        arr[index].style.fontSize = "22px";
+                        arr[index].style["justifyContent"] = "center";
+                        arr[index].style["alignItems"] = "center";
+                  });
+
+                  ChoiceOfTheShips();
+            }
+
+            function ChoiceOfTheShips() {
+
+                  // -------------------------
+                  // pushing choices to html
+                  // -------------------------
+
+                  elementnumber = 10;
+
+                  for (let x = 4; x > 0; x--) {
+
+                        for (let i = 4; i >= x; i--) {
+
+                              var choice = document.createElement("div");
+                              choice.setAttribute("id", "choice" + x + i)
+                              choice.classList = "choiceclass";
+                              choice.style.left = "calc(50% - 700px)";
+                              choice.style.top = "calc(50% - " + parseFloat((elementnumber - 5) * 37) + "px)";
+                              choice.style.position = "absolute";
+                              choice.style.border = "black solid 1px";
+                              choice.style.cursor = "pointer";
+                              choice.CHoiceKindOfShip = x;
+                              choice.ChoiceOfNumberKindOfShip = i;
+
+                              // -------------------------
+                              // adding events
+                              // -------------------------
+
+                              choice.addEventListener("click", function () {
+                                    document.querySelectorAll(".choiceclass").forEach((element, index, arr) => {
+                                          arr[index].style.backgroundColor = "rgba(255, 255, 255, 0)";
+                                    })
+                                    this.style.backgroundColor = "rgb(86, 86, 236)";
+                                    KindOfShip = this.CHoiceKindOfShip;
+                                    NumberKindOfShip = this.ChoiceOfNumberKindOfShip;
+                              })
+                              choice.addEventListener("mouseover", function () {
+                                    if (this.style.backgroundColor != "rgb(86, 86, 236)") {
+                                          this.style.backgroundColor = "rgb(231, 89, 89)";
+                                    }
+                              })
+                              choice.addEventListener("mouseout", function () {
+                                    if (this.style.backgroundColor != "rgb(86, 86, 236)") {
+                                          this.style.backgroundColor = "rgba(255, 255, 255, 0)";
+                                    }
+                              })
+
+
+                              for (let y = 0; y < x; y++) {
+                                    var choicediv = document.createElement("div");
+                                    choicediv.style.height = "30px";
+                                    choicediv.style.width = "30px";
+                                    choicediv.style.border = "black solid 1px";
+                                    choicediv.style.float = "left";
+                                    choice.appendChild(choicediv);
+                              }
+                              elementnumber--;
+
+                              container.appendChild(choice);
+                        }
+
+                  }
+
+                  KindOfShip = 4;
+                  NumberKindOfShip = 4;
+                  document.getElementById("choice44").style.backgroundColor = "rgb(86, 86, 236)";
+
+            }
+
+
+            // ------------------------
+            // Starting a game
+            // ------------------------
+
+            function buttonadd() {
+                  buttonn = document.createElement("button");
+                  buttonn.setAttribute("onclick", "LetsPlayAGame(this)");
+                  buttonn.setAttribute("id", "button");
+                  buttonn.innerHTML = "Play";
+                  buttonn.style.position = "absolute";
+                  buttonn.style.top = "50%";
+                  buttonn.style.left = "50%";
+                  buttonn.style.display = "none";
+                  buttonn.style.transform = "translate(-50%, -50%)";
+
+                  document.getElementById("container").appendChild(buttonn);
+            }
+
+            var turns;
+
+            function LetsPlayAGame(element) {
+
+                  var turnparagraph = document.createElement("p");
+                  turnparagraph.setAttribute("id", "TurnParagraph")
+                  turnparagraph.style.position = "absolute";
+                  turnparagraph.style.transform = "translate(-50%, -50%)";
+                  turnparagraph.style.top = "calc(50% - 250px)";
+                  turnparagraph.style.left = "50%";
+                  turnparagraph.style.fontSize = "25px";
+                  turnparagraph.innerHTML = "Twój ruch";
+                  document.getElementById("container").appendChild(turnparagraph);
+
+                  document.querySelectorAll(".QuadrosPlayer").forEach((element, index, arr) => {
+                        arr[index].onclick = function () { };
+                  })
+
+                  element.style.display = "none";
+
+                  ComputerShipQuadrosUnshot = 20;
+                  PlayerShipQuadrosUnshot = 20;
+
+                  PlayerExistingShips = [4, 3, 2, 1]
+                  ComputerExistingShips = [4, 3, 2, 1]
+
+                  ComputerHasGotTarget = false;
+                  ComputershotQuadrosTargetArray = [];
+                  ComputershotMeterArray = [{ x: 0, y: -1 }, { x: 1, y: 0 }, { x: 0, y: 1 }, { x: -1, y: 0 }];
+                  ComputershotMeterArrayChanger=[...ComputershotMeterArray];
+                  ComputershotMeter = 0;
+
+                  turns = {
+                        Player: true,
+                        Computer: false
+                  }
+
+                  turn = turns.Player;
+
+                  AddingSomethingToCSS()
+                  GameTurns()
+            }
+
+            function GameTurns() {
+                  if (ComputerShipQuadrosUnshot == 0) {
+                        setTimeout(() => {
+                              alert("Brawo Wygrałeś!!")
+                              // document.querySelector("body").innerHTML = " ";
+                              document.body.innerHTML = "";
+                              create()
+                        }, 50)
+                  }
+
+                  else if (PlayerShipQuadrosUnshot == 0) {
+                        document.querySelectorAll(".ships").forEach((element, index, arr) => {
+                              arr[index].style.backgroundColor = "yellow";
+                        });
+                        document.getElementById("TurnParagraph").innerHTML = "Koniec gry";
+                        setTimeout(alert("Przegrałeś :( "), 500)
+                  }
+                  else {
+                        if (turn == true) {
+                              PlayerTurn();
+                        }
+                        else {
+                              ComputerTurn();
+                        }
+                  }
+            }
+
+
+            function ComputerTurn() {
+                  setTimeout(function () { document.getElementById("computer").onclick = function () { alert("Teraz jest ruch przeciwnika!") } }, 10)
+
+                  document.getElementById("TurnParagraph").innerHTML = "Ruch komputera";
+                  setTimeout(() => {
+                        ComputerTurn1();
+
+                        function ComputerTurn1() {
+                              ComputerQuadros = document.querySelectorAll(".QuadrosPlayer");
+
+                              // ---------------------------
+                              // Quadro draw
+                              // ---------------------------
+
+                              if (ComputerHasGotTarget == false) {
+                                    document.querySelectorAll(".QuadrosPlayer").forEach((element, index, arr) => {
+                                          arr[index].dataset.therecanbe = 0;
+                                    })
+                                    for (let i in PlayerExistingShips) {
+                                          if (PlayerExistingShips[i] != 0) {
+                                                for (let x = 0; x < 10; x++) {
+                                                      for (let y = 0; y < 10; y++) {
+                                                            let ItCanBeThere = true;
+                                                            for (let z = 0; z <= parseInt(i); z++) {
+                                                                  if (document.getElementById(`QuadroPlayer${x}${y + z}`) == null
+                                                                        || document.getElementById(`QuadroPlayer${x}${y + z}`).classList.contains(`shot`)) ItCanBeThere = false;
+                                                            }
+                                                            if (ItCanBeThere) {
+                                                                  for (let z = 0; z <= parseInt(i); z++) {
+                                                                        document.getElementById(`QuadroPlayer${x}${y + z}`).dataset.therecanbe = parseInt(document.getElementById(`QuadroPlayer${x}${y + z}`).dataset.therecanbe) + 1;
+                                                                  }
+                                                            }
+                                                      }
+                                                }
+                                          }
+                                          if (PlayerExistingShips[i] != 0 && i != 0) {
+                                                for (let x = 0; x < 10; x++) {
+                                                      for (let y = 0; y < 10; y++) {
+                                                            let ItCanBeThere = true;
+                                                            for (let z = 0; z <= parseInt(i); z++) {
+                                                                  if (document.getElementById(`QuadroPlayer${x + z}${y}`) == null
+                                                                        || document.getElementById(`QuadroPlayer${x + z}${y}`).classList.contains(`shot`)) ItCanBeThere = false;
+                                                            }
+                                                            if (ItCanBeThere) {
+                                                                  for (let z = 0; z <= parseInt(i); z++) {
+                                                                        document.getElementById(`QuadroPlayer${x + z}${y}`).dataset.therecanbe = parseInt(document.getElementById(`QuadroPlayer${x + z}${y}`).dataset.therecanbe) + 1;
+                                                                  }
+                                                            }
+                                                      }
+                                                }
+                                          }
+                                    }
+
+                                    // ? drawnumber = document.querySelectorAll(".QuadrosPlayer")[Math.round(Math.random() * 99)];
+                                    drawnumber = document.querySelector(".QuadrosPlayer");
+                                    document.querySelectorAll(".QuadrosPlayer").forEach((element, index, arr) => {
+                                          if (parseInt(drawnumber.dataset.therecanbe) < parseInt(arr[index].dataset.therecanbe)) {
+                                                drawnumber = arr[index];
+                                          }
+                                    })
+
+                                    ProbabilityTable = [];
+                                    for (let x = 0; x < 10; x++) {
+                                          ProbabilityTable.push([]);
+                                          for (let y = 0; y < 10; y++) {
+                                                ProbabilityTable[x].push(document.getElementById(`QuadroPlayer${y}${x}`).dataset.therecanbe);
+                                          }
+                                    }
+
+                                    // ? console.table(ProbabilityTable);
+                              }
+                              else {
+                                    if (ComputershotQuadrosTargetArray.length == 1) {
+                                          ComputerShooting()
+                                          function ComputerShooting() {
+                                                ReturnComputershotMeter()
+                                                function ReturnComputershotMeter(){
+                                                      ComputershotMeter=Math.round(Math.random()*4);
+                                                      if(ComputershotMeterArrayChanger[ComputershotMeter] == null){
+                                                            ReturnComputershotMeter()
+                                                      }
+                                                      else return
+                                                }
+                                                xdirection = parseFloat(ComputershotQuadrosTargetArray[0].getAttribute("id").substr(-2, 1)) + ComputershotMeterArrayChanger[ComputershotMeter].x;
+                                                ydirection = parseFloat(ComputershotQuadrosTargetArray[0].getAttribute("id").substr(-1, 1)) + ComputershotMeterArrayChanger[ComputershotMeter].y;
+                                                ComputershotMeterArrayChanger[ComputershotMeter] = null;
+                                                // ComputershotMeter++;
+                                                if (document.getElementById("QuadroPlayer" + xdirection + ydirection) != null) {
+                                                      drawnumber = document.getElementById("QuadroPlayer" + xdirection + ydirection)
+                                                }
+                                                else {
+                                                      ComputerShooting();
+                                                }
+                                          }
+                                    }
+                                    else {
+                                          xdiff = parseFloat(ComputershotQuadrosTargetArray[1].getAttribute("id").substr(-2, 1)) - parseFloat(ComputershotQuadrosTargetArray[0].getAttribute("id").substr(-2, 1));
+                                          ydiff = parseFloat(ComputershotQuadrosTargetArray[1].getAttribute("id").substr(-1, 1)) - parseFloat(ComputershotQuadrosTargetArray[0].getAttribute("id").substr(-1, 1));
+                                          var LastNumber = (ComputershotQuadrosTargetArray[ComputershotQuadrosTargetArray.length - 1] == null) ? 2 : 1;
+
+                                          xdirection = parseFloat(ComputershotQuadrosTargetArray[ComputershotQuadrosTargetArray.length - LastNumber].getAttribute("id").substr(-2, 1)) + xdiff;
+                                          ydirection = parseFloat(ComputershotQuadrosTargetArray[ComputershotQuadrosTargetArray.length - LastNumber].getAttribute("id").substr(-1, 1)) + ydiff;
+                                          if (ComputershotQuadrosTargetArray[ComputershotQuadrosTargetArray.length - 1] != null) {
+                                                if (ComputershotQuadrosTargetArray[ComputershotQuadrosTargetArray.length - 1].classList.contains('Ship')) {
+                                                      drawnumber = document.getElementById("QuadroPlayer" + xdirection + ydirection)
+                                                }
+                                                else elsee();
+                                          }
+                                          else elsee();
+                                          function elsee() {
+                                                xdirection = parseFloat(ComputershotQuadrosTargetArray[0].getAttribute("id").substr(-2, 1)) - xdiff;
+                                                ydirection = parseFloat(ComputershotQuadrosTargetArray[0].getAttribute("id").substr(-1, 1)) - ydiff;
+                                                drawnumber = document.getElementById("QuadroPlayer" + xdirection + ydirection);
+                                          }
+                                    }
+                              }
+
+                              // ------------------------------------------
+                              // Checking if the Quadro was shot or null
+                              // ------------------------------------------
+
+                              if (drawnumber == null) {
+                                    if (ComputerHasGotTarget && ComputershotQuadrosTargetArray.length > 1) {
+                                          ComputershotQuadrosTargetArray.push(drawnumber);
+                                    }
+                                    ComputerTurn1();
+                              }
+                              else if (drawnumber.classList.contains("shot")) {
+                                    if (ComputerHasGotTarget && ComputershotQuadrosTargetArray.length > 1) {
+                                          ComputershotQuadrosTargetArray.push(drawnumber);
+                                    }
+                                    ComputerTurn1();
+                              }
+
+                              // ----------------------------------------------------
+                              // if not, let's go to mark Quadro like ship or blank
+                              // ----------------------------------------------------
+
+                              else {
+                                    if (drawnumber.classList.contains("Ship")) {
+                                          drawnumber.innerHTML = "X";
+                                          PlayerShipQuadrosUnshot -= 1;
+                                          turn = turns.Computer;
+                                          drawnumber.classList.add("shot");
+                                          ComputerHasGotTarget = true;
+
+                                          if (ComputershotQuadrosTargetArray.length != 0) {
+                                                if (ComputershotQuadrosTargetArray[ComputershotQuadrosTargetArray.length - 1] != null) {
+                                                      if (ComputershotQuadrosTargetArray[ComputershotQuadrosTargetArray.length - 1].classList.contains('Ship')) {
+                                                            ComputershotQuadrosTargetArray.push(drawnumber);
+                                                      }
+                                                      else {
+                                                            ComputershotQuadrosTargetArray = [drawnumber, ...ComputershotQuadrosTargetArray]
+                                                      }
+                                                }
+                                                else {
+                                                      ComputershotQuadrosTargetArray = [drawnumber, ...ComputershotQuadrosTargetArray]
+                                                }
+                                          }
+                                          else {
+                                                ComputershotQuadrosTargetArray.push(drawnumber);
+                                          }
+
+                                    }
+                                    else {
+                                          drawnumber.innerHTML = ".";
+                                          drawnumber.classList.add("shot");
+                                          if (ComputerHasGotTarget && ComputershotQuadrosTargetArray.length > 1) ComputershotQuadrosTargetArray.push(drawnumber);
+                                          turn = turns.Player;
+                                    }
+
+
+                                    // ---------------------------------------
+                                    // Marking sunken ships
+                                    // ---------------------------------------
+
+                                    for (let c = 0; c < 2; c++) {
+                                          for (let x = 4; x > 0; x--) {
+                                                for (let i = 4; i >= x; i--) {
+                                                      var sunken = true;
+                                                      let TargetPlayerShip = document.querySelector(`.Ship${x}${i}`);
+                                                      TargetPlayerShip.ShipArray.forEach((element, index, arr) => {
+                                                            if (arr[index].classList.contains("shot") == false) sunken = false;
+                                                      })
+                                                      var TheLongest = 4
+                                                      for (let z = 3; z >= 0; z--) {
+                                                            if (PlayerExistingShips[z] != 0) { TheLongest = z + 1; break }
+                                                      }
+                                                      if (sunken == true && TargetPlayerShip.ShipArray.length != TheLongest) {
+                                                            if (x == 1) {
+                                                                  for (const y of ComputershotMeterArray) {
+                                                                        xdirection1 = parseInt(TargetPlayerShip.ShipArray[0].getAttribute("id").substr(-2, 1)) + y.x;
+                                                                        ydirection1 = parseInt(TargetPlayerShip.ShipArray[0].getAttribute("id").substr(-1, 1)) + y.y;
+                                                                        if (document.getElementById(`QuadroPlayer${xdirection1}${ydirection1}`) != null) {
+                                                                              if (document.getElementById(`QuadroPlayer${xdirection1}${ydirection1}`).classList.contains("shot") == false) {
+                                                                                    sunken = false;
+                                                                              }
+                                                                        }
+                                                                  }
+                                                            }
+                                                            else {
+                                                                  xdiff = parseInt(TargetPlayerShip.ShipArray[1].getAttribute("id").substr(-2, 1)) - parseInt(TargetPlayerShip.ShipArray[0].getAttribute("id").substr(-2, 1))
+                                                                  ydiff = parseInt(TargetPlayerShip.ShipArray[1].getAttribute("id").substr(-1, 1)) - parseInt(TargetPlayerShip.ShipArray[0].getAttribute("id").substr(-1, 1))
+                                                                  xdirection1 = parseInt(TargetPlayerShip.ShipArray[0].getAttribute("id").substr(-2, 1)) - xdiff;
+                                                                  ydirection1 = parseInt(TargetPlayerShip.ShipArray[0].getAttribute("id").substr(-1, 1)) - ydiff;
+                                                                  xdirection2 = parseInt(TargetPlayerShip.ShipArray[TargetPlayerShip.ShipArray.length - 1].getAttribute("id").substr(-2, 1)) + xdiff;
+                                                                  ydirection2 = parseInt(TargetPlayerShip.ShipArray[TargetPlayerShip.ShipArray.length - 1].getAttribute("id").substr(-1, 1)) + ydiff;
+                                                                  if (document.getElementById(`QuadroPlayer${xdirection1}${ydirection1}`) != null) {
+                                                                        if (document.getElementById(`QuadroPlayer${xdirection1}${ydirection1}`).classList.contains("shot") == false) {
+                                                                              sunken = false;
+                                                                        }
+                                                                  }
+                                                                  if (document.getElementById(`QuadroPlayer${xdirection2}${ydirection2}`) != null) {
+                                                                        if (document.getElementById(`QuadroPlayer${xdirection2}${ydirection2}`).classList.contains("shot") == false) {
+                                                                              sunken = false;
+                                                                        }
+                                                                  }
+                                                            }
+                                                      }
+
+                                                      if (sunken == true) {
+                                                            if (TargetPlayerShip.classList.contains("Sunken") == false) {
+                                                                  ComputerHasGotTarget = false;
+                                                                  ComputershotQuadrosTargetArray = [];
+                                                                  ComputershotMeter = 0;
+                                                                  PlayerExistingShips[TargetPlayerShip.ShipArray.length - 1]--;
+                                                                  ComputershotMeterArrayChanger=[...ComputershotMeterArray];
+                                                            }
+
+                                                            if (TargetPlayerShip.DirectionOfShip == directionlist.right) {
+                                                                  TargetPlayerShip.ShipArray[0].style.borderLeft = "rgb(231, 89, 89) solid 5px";
+                                                                  TargetPlayerShip.ShipArray[TargetPlayerShip.ShipArray.length - 1].style.borderRight = "rgb(231, 89, 89) solid 5px";
+                                                                  TargetPlayerShip.ShipArray.forEach((element, index, arr) => {
+                                                                        arr[index].classList.add("Sunken");
+                                                                        arr[index].style.borderTop = "rgb(231, 89, 89) solid 5px";
+                                                                        arr[index].style.borderBottom = "rgb(231, 89, 89) solid 5px";
+                                                                  })
+                                                            }
+                                                            else {
+                                                                  TargetPlayerShip.ShipArray[0].style.borderTop = "rgb(231, 89, 89) solid 5px";
+                                                                  TargetPlayerShip.ShipArray[TargetPlayerShip.ShipArray.length - 1].style.borderBottom = "rgb(231, 89, 89) solid 5px";
+                                                                  TargetPlayerShip.ShipArray.forEach((element, index, arr) => {
+                                                                        arr[index].classList.add("Sunken");
+                                                                        arr[index].style.borderLeft = "rgb(231, 89, 89) solid 5px";
+                                                                        arr[index].style.borderRight = "rgb(231, 89, 89) solid 5px";
+                                                                  })
+                                                            }
+
+                                                            xdirection = parseInt(TargetPlayerShip.ShipArray[0].getAttribute("id").substr(-2, 1));
+                                                            ydirection = parseInt(TargetPlayerShip.ShipArray[0].getAttribute("id").substr(-1, 1));
+                                                            if (TargetPlayerShip.DirectionOfShip == directionlist.right) {
+                                                                  for (let y = -1; y <= 1; y++) {
+                                                                        for (let x = -1; x < TargetPlayerShip.ShipArray.length + 1; x++) {
+                                                                              if (document.getElementById("QuadroPlayer" + parseInt(xdirection + x) + parseInt(ydirection + y)) != null) {
+                                                                                    document.getElementById("QuadroPlayer" + parseInt(xdirection + x) + parseInt(ydirection + y)).classList.add("shot");
+                                                                              }
+                                                                        }
+                                                                  }
+                                                            }
+                                                            else {
+                                                                  for (let y = -1; y < TargetPlayerShip.ShipArray.length + 1; y++) {
+                                                                        for (let x = -1; x <= 1; x++) {
+                                                                              if (document.getElementById("QuadroPlayer" + parseInt(xdirection + x) + parseInt(ydirection + y)) != null) {
+                                                                                    document.getElementById("QuadroPlayer" + parseInt(xdirection + x) + parseInt(ydirection + y)).classList.add("shot");
+                                                                              }
+                                                                        }
+                                                                  }
+                                                            }
+                                                      }
+                                                }
+                                          }
+                                    }
+
+                                    document.getElementById("computer").onclick = function () { };
+                                    GameTurns();
+                              }
+                        }
+                  }, 1000)
+            }
+
+            function PlayerTurn() {
+                  document.getElementById("TurnParagraph").innerHTML = "Twój Ruch";
+                  document.querySelectorAll(".Quadros").forEach((element, index, arr) => {
+
+                        if (arr[index].classList.contains("shot") == false) {
+
+
+                              arr[index].onclick = function () {
+                                    document.querySelectorAll(".Quadros").forEach((elementt, indexx, arrr) => {
+                                          arrr[indexx].onclick = function () { };
+                                    })
+
+                                    if (this.classList.contains("ships") == true) {
+                                          ComputerShipQuadrosUnshot -= 1;
+                                          this.classList.add("shot");
+                                          this.classList.add("shot1")
+                                          this.innerHTML = "X";
+                                          turn = turns.Player;
+
+                                          GameTurns();
+                                    }
+                                    else {
+                                          this.innerHTML = ".";
+                                          this.classList.add("shot");
+                                          this.classList.add("shot1")
+                                          turn = turns.Computer;
+                                          GameTurns();
+                                    }
+
+
+                                    // ---------------------------------------
+                                    // Marking sunken ships
+                                    // ---------------------------------------
+
+                                    for (let c = 0; c < 2; c++) {
+                                          for (let x = 4; x > 0; x--) {
+                                                for (let i = 4; i >= x; i--) {
+                                                      let sunken = true;
+                                                      let TargetComputerShip = document.querySelector(`.ship${x}${i}`);
+                                                      let TargetComputerShipArray = document.querySelectorAll(`.ship${x}${i}`)
+                                                      TargetComputerShipArray.forEach((element, index, arr) => {
+                                                            if (arr[index].classList.contains("shot1") == false) sunken = false;
+                                                      })
+                                                      var TheLongest = 4
+                                                      for (let z = 3; z >= 0; z--) {
+                                                            if (ComputerExistingShips[z] != 0) { TheLongest = z + 1; break }
+                                                      }
+                                                      if (sunken == true && TargetComputerShipArray.length != TheLongest) {
+                                                            if (x == 1) {
+                                                                  for (const y of ComputershotMeterArray) {
+                                                                        xdirection1 = parseInt(TargetComputerShipArray[0].getAttribute("id").substr(-2, 1)) + y.x;
+                                                                        ydirection1 = parseInt(TargetComputerShipArray[0].getAttribute("id").substr(-1, 1)) + y.y;
+                                                                        if (document.getElementById(`Quadro${xdirection1}${ydirection1}`) != null) {
+                                                                              if (document.getElementById(`Quadro${xdirection1}${ydirection1}`).classList.contains("shot1") == false) {
+                                                                                    sunken = false;
+                                                                              }
+                                                                        }
+                                                                  }
+                                                            }
+                                                            else {
+                                                                  xdiff = parseInt(TargetComputerShipArray[1].getAttribute("id").substr(-2, 1)) - parseInt(TargetComputerShipArray[0].getAttribute("id").substr(-2, 1))
+                                                                  ydiff = parseInt(TargetComputerShipArray[1].getAttribute("id").substr(-1, 1)) - parseInt(TargetComputerShipArray[0].getAttribute("id").substr(-1, 1))
+                                                                  xdirection1 = parseInt(TargetComputerShipArray[0].getAttribute("id").substr(-2, 1)) - xdiff;
+                                                                  ydirection1 = parseInt(TargetComputerShipArray[0].getAttribute("id").substr(-1, 1)) - ydiff;
+                                                                  xdirection2 = parseInt(TargetComputerShipArray[TargetComputerShipArray.length - 1].getAttribute("id").substr(-2, 1)) + xdiff;
+                                                                  ydirection2 = parseInt(TargetComputerShipArray[TargetComputerShipArray.length - 1].getAttribute("id").substr(-1, 1)) + ydiff;
+                                                                  if (document.getElementById(`Quadro${xdirection1}${ydirection1}`) != null) {
+                                                                        if (document.getElementById(`Quadro${xdirection1}${ydirection1}`).classList.contains("shot1") == false) {
+                                                                              sunken = false;
+                                                                        }
+                                                                  }
+                                                                  if (document.getElementById(`Quadro${xdirection2}${ydirection2}`) != null) {
+                                                                        if (document.getElementById(`Quadro${xdirection2}${ydirection2}`).classList.contains("shot1") == false) {
+                                                                              sunken = false;
+                                                                        }
+                                                                  }
+                                                            }
+                                                      }
+
+                                                      if (sunken == true) {
+
+                                                            if (TargetComputerShip.classList.contains("Sunken") == false) {
+                                                                  ComputerExistingShips[TargetComputerShipArray.length - 1]--;
+                                                            }
+
+                                                            if (TargetComputerShip.dataset.direction == (directionlist.right).toString()) {
+                                                                  TargetComputerShipArray[0].style.borderLeft = "rgb(231, 89, 89) solid 5px";
+                                                                  TargetComputerShipArray[TargetComputerShipArray.length - 1].style.borderRight = "rgb(231, 89, 89) solid 5px";
+                                                                  TargetComputerShipArray.forEach((element, index, arr) => {
+                                                                        arr[index].classList.add("Sunken");
+                                                                        arr[index].style.borderTop = "rgb(231, 89, 89) solid 5px";
+                                                                        arr[index].style.borderBottom = "rgb(231, 89, 89) solid 5px";
+                                                                  })
+                                                            }
+                                                            else {
+                                                                  TargetComputerShipArray[0].style.borderTop = "rgb(231, 89, 89) solid 5px";
+                                                                  TargetComputerShipArray[TargetComputerShipArray.length - 1].style.borderBottom = "rgb(231, 89, 89) solid 5px";
+                                                                  TargetComputerShipArray.forEach((element, index, arr) => {
+                                                                        arr[index].classList.add("Sunken");
+                                                                        arr[index].style.borderLeft = "rgb(231, 89, 89) solid 5px";
+                                                                        arr[index].style.borderRight = "rgb(231, 89, 89) solid 5px";
+                                                                  })
+                                                            }
+
+                                                            xdirection = parseInt(TargetComputerShipArray[0].getAttribute("id").substr(-2, 1));
+                                                            ydirection = parseInt(TargetComputerShipArray[0].getAttribute("id").substr(-1, 1));
+                                                            if (TargetComputerShip.dataset.direction == directionlist.right.toString()) {
+                                                                  for (let y = -1; y <= 1; y++) {
+                                                                        for (let x = -1; x < TargetComputerShipArray.length + 1; x++) {
+                                                                              if (document.getElementById("Quadro" + parseInt(xdirection + x) + parseInt(ydirection + y)) != null) {
+                                                                                    document.getElementById("Quadro" + parseInt(xdirection + x) + parseInt(ydirection + y)).classList.add("shot1");
+                                                                              }
+                                                                        }
+                                                                  }
+                                                            }
+                                                            else {
+                                                                  for (let y = -1; y < TargetComputerShipArray.length + 1; y++) {
+                                                                        for (let x = -1; x <= 1; x++) {
+                                                                              if (document.getElementById("Quadro" + parseInt(xdirection + x) + parseInt(ydirection + y)) != null) {
+                                                                                    document.getElementById("Quadro" + parseInt(xdirection + x) + parseInt(ydirection + y)).classList.add("shot1");
+                                                                              }
+                                                                        }
+                                                                  }
+                                                            }
+                                                      }
+                                                }
+                                          }
+                                    }
+                              }
+                        }
+                  });
+            }
+
+            function AddingSomethingToCSS() {
+
+                  // -------------------------
+                  // Adding something to css
+                  // -------------------------
+
+                  document.querySelectorAll("*").forEach((element, index, arr) => {
+
+                        arr[index].style.boxSizing = "border-box";
+                        arr[index].style.fontFamily = "'Commissioner', sans-serif"
+                  })
+            }
+
+
+            function Menu() {
+                  console.log(`Instrukcje:`);
+                  console.log(`------------------------- Faza stawiania okrętów -------------------------`);
+                  console.log(`1. Wyświetl wylosowane pola przez komputer -------> DisplayComputer()`);
+                  console.log(`-------------------------------- Faza gry --------------------------------`);
+                  console.log(`1. Wyświetl wylosowany kwadrat przez bota --------> drawnumber`);
+                  console.log(`2. Wyświetl tablicę prawdopodobego strzału bota --> ShowProbabilityTable()`);
+            }
+
+            function DisplayComputer() {
+                  document.querySelectorAll(".ships").forEach((element, index, arr) => {
+                        arr[index].style.backgroundColor = "yellow"
+                  })
+            }
+
+            function ShowProbabilityTable() {
+                  console.table(ProbabilityTable)
+            }
+      </script>
+</head>
+
+<body>
+</body>
+
+</html>
