@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+   <script>
+      $(document).ready(() => {
+         $(document).keydown(function (e) {
+            console.log({
+               code: e.code,
+               which: e.which,
+               keyCode: e.keyCode,
+               charCode: e.charCode,
+               key: e.key,
+               metaKey: e.metaKey,
+            })
+            $("#key-output").html(e.which + "<br>" + e.code)
+         })
+      })
+   </script>
+
+   <style>
+      #root {
+         position: absolute;
+         top: 0;
+         left: 0;
+         z-index: -1;
+      }
+
+      #key-output {
+         width: 100%;
+         height: 100vh;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         font-size: 50px;
+      }
+   </style>
+</head>
+
+<body>
+   <div id="key-output"></div>
+</body>
+
+</html>
