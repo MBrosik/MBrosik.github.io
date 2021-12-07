@@ -2504,6 +2504,9 @@ class Helicopter extends _Enemy__WEBPACK_IMPORTED_MODULE_5__.default {
         this.dateNow = Date.now();
         this.timeStamp = 100;
         this.colider = new _utils_TwoJS_raycaster_colorRaycaster__WEBPACK_IMPORTED_MODULE_1__.default(_Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.blocks, [this], _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.camera, _constants_mapInfo__WEBPACK_IMPORTED_MODULE_3__.default.width, _constants_mapInfo__WEBPACK_IMPORTED_MODULE_3__.default.height);
+        if (this.helType == "shooting") {
+            this.bulletColider = new _utils_TwoJS_raycaster_colorRaycaster__WEBPACK_IMPORTED_MODULE_1__.default(_Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.blocks, [this], _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.camera, _constants_mapInfo__WEBPACK_IMPORTED_MODULE_3__.default.width, _constants_mapInfo__WEBPACK_IMPORTED_MODULE_3__.default.height);
+        }
         // ---------------------
         // strike Enemy
         // ---------------------
@@ -2539,7 +2542,7 @@ class Helicopter extends _Enemy__WEBPACK_IMPORTED_MODULE_5__.default {
         if (Date.now() - this.lastShot > this.deltaShot) {
             const { x, y, width, height } = this.map_info;
             let x1 = this.reverse ? this.map_info.x : x + width;
-            let bullet = new _fighterHelicopterBullet__WEBPACK_IMPORTED_MODULE_6__.default(x1, y + height / 2, this.reverse);
+            let bullet = new _fighterHelicopterBullet__WEBPACK_IMPORTED_MODULE_6__.default(x1, y + height / 2, this.reverse, this.bulletColider);
             _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.scene.add(bullet);
             this.lastShot = Date.now();
         }
@@ -2618,19 +2621,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ fighterHelicopterBullet)
 /* harmony export */ });
 /* harmony import */ var _Main__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Main */ "./src/components/Main.ts");
-/* harmony import */ var _utils_TwoJS_raycaster_colorRaycaster__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/TwoJS/raycaster/colorRaycaster */ "./src/components/utils/TwoJS/raycaster/colorRaycaster.ts");
-/* harmony import */ var _utils_TwoJS_raycaster_squareSquareReycaster__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../utils/TwoJS/raycaster/squareSquareReycaster */ "./src/components/utils/TwoJS/raycaster/squareSquareReycaster.ts");
-/* harmony import */ var _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../utils/TwoJS/Renderer */ "./src/components/utils/TwoJS/Renderer.ts");
-/* harmony import */ var _constants_mapInfo__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../constants/mapInfo */ "./src/components/modules/constants/mapInfo.ts");
-/* harmony import */ var _LoadAllAudio__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../LoadAllAudio */ "./src/components/modules/LoadAllAudio.ts");
-
-
+/* harmony import */ var _utils_TwoJS_raycaster_squareSquareReycaster__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../utils/TwoJS/raycaster/squareSquareReycaster */ "./src/components/utils/TwoJS/raycaster/squareSquareReycaster.ts");
+/* harmony import */ var _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../utils/TwoJS/Renderer */ "./src/components/utils/TwoJS/Renderer.ts");
+/* harmony import */ var _LoadAllAudio__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../LoadAllAudio */ "./src/components/modules/LoadAllAudio.ts");
 
 
 
 
 class fighterHelicopterBullet {
-    constructor(x, y, reversed) {
+    constructor(x, y, reversed, colider) {
         this.map_info = {
             width: 10,
             height: 5,
@@ -2640,9 +2639,10 @@ class fighterHelicopterBullet {
         };
         this.reversed = reversed;
         this.move = this.move.bind(this);
-        _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_3__.renderer_functions.push(this.move);
-        this.colider = new _utils_TwoJS_raycaster_colorRaycaster__WEBPACK_IMPORTED_MODULE_1__.default(_Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.blocks, [this], _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.camera, _constants_mapInfo__WEBPACK_IMPORTED_MODULE_4__.default.width, _constants_mapInfo__WEBPACK_IMPORTED_MODULE_4__.default.height);
-        let audio = _LoadAllAudio__WEBPACK_IMPORTED_MODULE_5__.default.audios.helicopterStrike.cloneNode(true);
+        _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_2__.renderer_functions.push(this.move);
+        // this.colider = new colorRaycaster(mainInstance.blocks, [this], mainInstance.camera, mapInfo.width, mapInfo.height);
+        this.colider = colider;
+        let audio = _LoadAllAudio__WEBPACK_IMPORTED_MODULE_3__.default.audios.helicopterStrike.cloneNode(true);
         audio.play();
     }
     action(ctx, camera) {
@@ -2656,22 +2656,24 @@ class fighterHelicopterBullet {
         this.map_info.x += this.reversed ? -20 : 20;
         if (this.map_info.y - _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.camera.y < 0) {
             _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.scene.remove(this);
-            _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_3__.renderer_functions.removeIf(el => el == this.move);
+            _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_2__.renderer_functions.removeIf(el => el == this.move);
         }
         else {
             this.checkCollision();
         }
     }
     checkCollision() {
-        if ((0,_utils_TwoJS_raycaster_squareSquareReycaster__WEBPACK_IMPORTED_MODULE_2__.default)(_Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.player.map_info, this.map_info)) {
+        if ((0,_utils_TwoJS_raycaster_squareSquareReycaster__WEBPACK_IMPORTED_MODULE_1__.default)(_Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.player.map_info, this.map_info)) {
             _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.player.checkLives();
             _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.scene.remove(this);
-            _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_3__.renderer_functions.removeIf(el => el == this.move);
+            _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_2__.renderer_functions.removeIf(el => el == this.move);
             return;
         }
+        this.colider.aPaint = _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.blocks;
+        this.colider.bPaint = [this];
         if (this.colider.getCollision()) {
             _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.scene.remove(this);
-            _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_3__.renderer_functions.removeIf(el => el == this.move);
+            _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_2__.renderer_functions.removeIf(el => el == this.move);
         }
     }
 }
