@@ -557,6 +557,20 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/images/wtc.png":
+/*!****************************!*\
+  !*** ./src/images/wtc.png ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + "images/212c200ff294906a8cd26d90e5d21427-wtc.png");
+
+/***/ }),
+
 /***/ "./src/audio/Health.wav":
 /*!******************************!*\
   !*** ./src/audio/Health.wav ***!
@@ -1035,6 +1049,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_LoadAllAudio__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modules/LoadAllAudio */ "./src/components/modules/LoadAllAudio.ts");
 /* harmony import */ var _modules_GameConfig__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./modules/GameConfig */ "./src/components/modules/GameConfig.ts");
 /* harmony import */ var _modules_mapElements_BlackFloor__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./modules/mapElements/BlackFloor */ "./src/components/modules/mapElements/BlackFloor.ts");
+/* harmony import */ var _modules_mapElements_enemies_WTC__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./modules/mapElements/enemies/WTC */ "./src/components/modules/mapElements/enemies/WTC.ts");
+
 
 
 
@@ -1173,6 +1189,11 @@ class Main {
                     this.scene.add(batBallon);
                     // console.log(this.scene);
                     this.enemies.push(batBallon);
+                }
+                else if (other.type == "wtc") {
+                    let batWTC = new _modules_mapElements_enemies_WTC__WEBPACK_IMPORTED_MODULE_20__.default(other.position.x, other.position.y + boostY, other.moveable, other.reversed);
+                    this.scene.add(batWTC);
+                    this.enemies.push(batWTC);
                 }
                 // ----------------
                 // Other
@@ -1471,12 +1492,12 @@ let level1 = {
             moveable: false,
             reversed: false,
         },
-        {
-            type: "ballon",
-            position: getPos(0.4, -3.3),
-            moveable: true,
-            reversed: true,
-        },
+        // {
+        //    type:"ballon",
+        //    position:getPos(0.4, -3.3),
+        //    moveable:true,
+        //    reversed:true,
+        // },
         //---------------
         // fuels
         //---------------
@@ -1522,6 +1543,18 @@ let level1 = {
             startPos: getPos(0.9, -3.5),
             endPos: getPos(0.74, -3.5),
             shotPos: getPos(0.65, -3.45),
+        },
+        {
+            type: "wtc",
+            position: getPos(0.4, -3.3),
+            moveable: true,
+            reversed: true,
+        },
+        {
+            type: "wtc",
+            position: getPos(0.45, -3.3),
+            moveable: true,
+            reversed: true,
         },
     ]
 };
@@ -1745,8 +1778,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _images_fuel_png__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../../images/fuel.png */ "./src/images/fuel.png");
 /* harmony import */ var _images_bridge_png__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ../../images/bridge.png */ "./src/images/bridge.png");
 /* harmony import */ var _images_gasStatusBar_png__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ../../images/gasStatusBar.png */ "./src/images/gasStatusBar.png");
-/* harmony import */ var _images_levels_level1_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../images/levels/level1.png */ "./src/images/levels/level1.png");
-/* harmony import */ var _images_levels_level2_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../images/levels/level2.png */ "./src/images/levels/level2.png");
+/* harmony import */ var _images_wtc_png__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ../../images/wtc.png */ "./src/images/wtc.png");
+/* harmony import */ var _images_levels_level1_png__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ../../images/levels/level1.png */ "./src/images/levels/level1.png");
+/* harmony import */ var _images_levels_level2_png__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ../../images/levels/level2.png */ "./src/images/levels/level2.png");
 
 
 // -------------
@@ -1779,6 +1813,7 @@ __webpack_require__.r(__webpack_exports__);
 // -------------
 // enemies
 // -------------
+
 
 
 
@@ -1849,10 +1884,11 @@ async function loadAllImages() {
                 reversed: await (0,_utils_img_loader__WEBPACK_IMPORTED_MODULE_0__.default)(_images_enemies_fighterPlane_png__WEBPACK_IMPORTED_MODULE_21__.default),
             },
             ballon: await (0,_utils_img_loader__WEBPACK_IMPORTED_MODULE_0__.default)(_images_enemies_ballon_png__WEBPACK_IMPORTED_MODULE_22__.default),
+            wtc: await (0,_utils_img_loader__WEBPACK_IMPORTED_MODULE_0__.default)(_images_wtc_png__WEBPACK_IMPORTED_MODULE_26__.default),
         },
         levels: {
-            level1: await (0,_utils_img_loader__WEBPACK_IMPORTED_MODULE_0__.default)(_images_levels_level1_png__WEBPACK_IMPORTED_MODULE_26__.default),
-            level2: await (0,_utils_img_loader__WEBPACK_IMPORTED_MODULE_0__.default)(_images_levels_level2_png__WEBPACK_IMPORTED_MODULE_27__.default)
+            level1: await (0,_utils_img_loader__WEBPACK_IMPORTED_MODULE_0__.default)(_images_levels_level1_png__WEBPACK_IMPORTED_MODULE_27__.default),
+            level2: await (0,_utils_img_loader__WEBPACK_IMPORTED_MODULE_0__.default)(_images_levels_level2_png__WEBPACK_IMPORTED_MODULE_28__.default)
         },
         fuel: await (0,_utils_img_loader__WEBPACK_IMPORTED_MODULE_0__.default)(_images_fuel_png__WEBPACK_IMPORTED_MODULE_23__.default),
         bridge: await (0,_utils_img_loader__WEBPACK_IMPORTED_MODULE_0__.default)(_images_bridge_png__WEBPACK_IMPORTED_MODULE_24__.default),
@@ -2456,15 +2492,15 @@ class ScoreBoard {
         // if (Date.now() - this.loseFuelDateNow <= this.loseFuelTimeStamp) return
         // this.loseFuelDateNow = Date.now();
         if (_KeyboardManager__WEBPACK_IMPORTED_MODULE_4__.Keys.KeyW) {
-            this.fuelStatus -= 0.01 / 8;
+            this.fuelStatus -= 0.01 / 10;
             // this.fuelStatus -= 0.01 
         }
         else if (_KeyboardManager__WEBPACK_IMPORTED_MODULE_4__.Keys.KeyS) {
-            this.fuelStatus -= 0.002 / 8;
+            this.fuelStatus -= 0.002 / 10;
             // this.fuelStatus -= 0.002
         }
         else {
-            this.fuelStatus -= (0.005 / 8);
+            this.fuelStatus -= (0.005 / 10);
             // this.fuelStatus -= 0.005
         }
         if (this.fuelStatus < 0.3 && this.fuelStatus > 0)
@@ -2864,6 +2900,35 @@ class Ship extends _Enemy__WEBPACK_IMPORTED_MODULE_4__.default {
         let col2 = this.colider.getCollision();
         this.image_info.source = this.image_info.source == ship.normal ? ship.reversed : ship.normal;
         return col1 || col2;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/components/modules/mapElements/enemies/WTC.ts":
+/*!***********************************************************!*\
+  !*** ./src/components/modules/mapElements/enemies/WTC.ts ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ WTC)
+/* harmony export */ });
+/* harmony import */ var _loadAllImages__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../loadAllImages */ "./src/components/modules/loadAllImages.ts");
+/* harmony import */ var _Enemy__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Enemy */ "./src/components/modules/mapElements/Enemy.ts");
+
+
+class WTC extends _Enemy__WEBPACK_IMPORTED_MODULE_1__.default {
+    constructor(x, y, moveable, reverse) {
+        const { wtc } = _loadAllImages__WEBPACK_IMPORTED_MODULE_0__.allImages.enemies;
+        let ratio = wtc.width / wtc.height;
+        super(wtc, { dx: x, dy: y, dw: 40, dh: 40 / ratio });
+        this.movable = moveable;
+        this.reverse = reverse;
+    }
+    move() {
     }
 }
 
