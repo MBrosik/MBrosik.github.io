@@ -1082,7 +1082,8 @@ class Main {
         this.bridges = [];
         this.fuels = [];
         this.startBool = false;
-        this.levelArr = [_modules_constants_Levels_level1__WEBPACK_IMPORTED_MODULE_0__.default, _modules_constants_Levels_level2__WEBPACK_IMPORTED_MODULE_15__.default, _modules_constants_Levels_level1__WEBPACK_IMPORTED_MODULE_0__.default, _modules_constants_Levels_level2__WEBPACK_IMPORTED_MODULE_15__.default, _modules_constants_Levels_level1__WEBPACK_IMPORTED_MODULE_0__.default, _modules_constants_Levels_level2__WEBPACK_IMPORTED_MODULE_15__.default,];
+        // levelArr = [level1, level2, level1, level2, level1, level2,]
+        this.levelArr = [_modules_constants_Levels_level1__WEBPACK_IMPORTED_MODULE_0__.default, _modules_constants_Levels_level2__WEBPACK_IMPORTED_MODULE_15__.default,];
         mainInstance = this;
         document.getElementById("root")?.appendChild(this.renderer.html_dom);
         this.init();
@@ -2010,7 +2011,7 @@ class Bridge extends _utils_TwoJS_Image_Mesh__WEBPACK_IMPORTED_MODULE_1__.defaul
         this.tank.speed = 300;
         _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.scene.add(this.tank);
         this.colorRaycaster = new _utils_TwoJS_raycaster_colorRaycaster__WEBPACK_IMPORTED_MODULE_2__.default([this], [this.tank], _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.camera, _constants_mapInfo__WEBPACK_IMPORTED_MODULE_4__.default.width, _constants_mapInfo__WEBPACK_IMPORTED_MODULE_4__.default.height);
-        document.getElementById("aa")?.appendChild(this.colorRaycaster.html_dom);
+        // document.getElementById("aa")?.appendChild(this.colorRaycaster.html_dom);
     }
     async destroy() {
         if (this.colorRaycaster.getCollision()) {
@@ -2287,6 +2288,7 @@ class Player extends _utils_TwoJS_Image_Mesh__WEBPACK_IMPORTED_MODULE_2__.defaul
         this.deltaShot = 200;
         this.lastShot = Date.now();
         this.enemyColider = new _utils_TwoJS_raycaster_colorRaycaster__WEBPACK_IMPORTED_MODULE_3__.default([_Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.enemies, _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.blocks], [this], _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.camera, _constants_mapInfo__WEBPACK_IMPORTED_MODULE_7__.default.width, _constants_mapInfo__WEBPACK_IMPORTED_MODULE_7__.default.height);
+        // document.getElementById("aa")?.appendChild(this.enemyColider.html_dom);
         _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_5__.renderer_functions.push(this.playerMove.bind(this));
     }
     async init() {
@@ -2374,8 +2376,9 @@ class Player extends _utils_TwoJS_Image_Mesh__WEBPACK_IMPORTED_MODULE_2__.defaul
         // collision with enemy
         // --------------------
         let colideEnemy = _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.enemies.find(el => {
-            this.enemyColider.aPaint = [el];
-            return this.enemyColider.getCollision();
+            // this.enemyColider.aPaint = [el]
+            // return this.enemyColider.getCollision()
+            return (0,_utils_TwoJS_raycaster_squareSquareReycaster__WEBPACK_IMPORTED_MODULE_4__.default)(el.map_info, this.map_info);
         });
         if (colideEnemy != undefined) {
             colideEnemy.destroy();
@@ -3210,7 +3213,7 @@ class TankBullet extends _utils_TwoJS_Image_Mesh__WEBPACK_IMPORTED_MODULE_1__.de
                 this.map_info.y = this.endPos.y - (this.map_info.height / 2);
             }
             else {
-                this.colorRaycaster.html_dom.remove();
+                // this.colorRaycaster.html_dom.remove()
                 _Main__WEBPACK_IMPORTED_MODULE_0__.mainInstance.scene.remove(this);
                 _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_3__.renderer_functions.removeIf(el => el == this.boom);
             }
@@ -3480,40 +3483,70 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ colorRaycaster)
 /* harmony export */ });
+/* harmony import */ var _Camera__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Camera */ "./src/components/utils/TwoJS/Camera.ts");
+
 class colorRaycaster {
     // bPaint: Mesh[];
     constructor(aPaint, bPaint, camera, width, height) {
         this.aPaint = aPaint;
         this.bPaint = bPaint;
         this.camera = camera;
+        this.scale = 1;
         this.html_dom = document.createElement("canvas");
         this.html_dom.width = width;
         this.html_dom.height = height;
         this.ctx = this.html_dom.getContext("2d");
+        const el = this.bPaint[0];
+        const { width: width1, height: height1, x, y } = el.map_info;
+        this.html_dom.width = width1 * this.scale;
+        this.html_dom.height = height1 * this.scale;
+        // this.ctx.save();
+        // console.log(this.ctx.globalCompositeOperation);
+        // this.ctx.globalCompositeOperation = "source-over";
+        this.empty_canvas = this.html_dom.toDataURL();
     }
     getCollision(specificColor = null) {
-        // console.time();
+        console.time();
         this.ctx.clearRect(0, 0, this.html_dom.width, this.html_dom.height);
+        const el = this.bPaint[0];
+        let { width, height, x, y } = el.map_info;
+        this.camera = new _Camera__WEBPACK_IMPORTED_MODULE_0__.default(x * this.scale, y * this.scale);
+        this.html_dom.width = width * this.scale;
+        this.html_dom.height = height * this.scale;
         for (const el of this.aPaint.flat()) {
+            el.map_info.x *= this.scale;
+            el.map_info.y *= this.scale;
+            el.map_info.width *= this.scale;
+            el.map_info.height *= this.scale;
             el.action(this.ctx, this.camera);
+            el.map_info.x /= this.scale;
+            el.map_info.y /= this.scale;
+            el.map_info.width /= this.scale;
+            el.map_info.height /= this.scale;
         }
-        niceFor: for (const el of this.bPaint.flat()) {
-            let { width, height, x, y } = el.map_info;
-            const imgData = this.ctx.getImageData(x - this.camera.x, y - this.camera.y, width, height);
-            el.action(this.ctx, this.camera);
-            const imgDataAfter = this.ctx.getImageData(x - this.camera.x, y - this.camera.y, width, height);
-            // console.log( imgData.data.length);
-            for (let i = 0; i < imgData.data.length; i += 4) {
-                let count = imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2];
-                let count1 = imgDataAfter.data[i] + imgDataAfter.data[i + 1] + imgDataAfter.data[i + 2];
-                // && count != 255 * 3
-                if (count != 0 && count != count1) {
-                    // console.timeEnd();
-                    return true;
-                }
+        const imgData = this.ctx.getImageData(0, 0, width * this.scale, height * this.scale);
+        // console.log(imgData.data.length);
+        el.map_info.x *= this.scale;
+        el.map_info.y *= this.scale;
+        el.map_info.width *= this.scale;
+        el.map_info.height *= this.scale;
+        el.action(this.ctx, this.camera);
+        el.map_info.x /= this.scale;
+        el.map_info.y /= this.scale;
+        el.map_info.width /= this.scale;
+        el.map_info.height /= this.scale;
+        const imgDataAfter = this.ctx.getImageData(0, 0, width * this.scale, height * this.scale);
+        // console.log( imgData.data.length);
+        for (let i = 0; i < imgData.data.length; i += 4) {
+            let count = imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2];
+            let count1 = imgDataAfter.data[i] + imgDataAfter.data[i + 1] + imgDataAfter.data[i + 2];
+            // && count != 255 * 3
+            if (count != 0 && count != count1) {
+                console.timeEnd();
+                return true;
             }
         }
-        // console.timeEnd();
+        console.timeEnd();
         return false;
     }
 }
