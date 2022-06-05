@@ -1103,8 +1103,7 @@ class Main {
         this.scene.mesh_array = [];
         _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_3__.renderer_functions.removeIf(el => true);
         _utils_TwoJS_Renderer__WEBPACK_IMPORTED_MODULE_3__.renderer_functions_after.removeIf(el => true);
-        // renderer_functions.push(() => {
-        //    console.log("kurwa");
+        // renderer_functions.push(() => {        
         //    let levelNumber = this.scoreBoard.levelPos + 10
         //    if (levelNumber > this.levelArr.length) {
         //       this.levelArr.push(levelNumber % 2 == 0 ? level2 : level1);
