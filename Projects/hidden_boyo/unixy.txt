@@ -1,0 +1,125 @@
+-------------------------------------------------------------------------------------------------------------------
+1. alias lst = 'find -printf "%TY-%Tm-%Td %TT %p\n" | sort -n -r | head -n 1'
+	a) home/mbros/.bashrc   <-   tutaj wstawic kolejna linijke
+
+
+-------------------------------------------------------------------------------------------------------------------
+2. PS1='$(pwd):$(ps -aux | tail -n +2 |wc -l)\n$'
+
+// Tak samo w .bashrc zmienić
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+3. 
+	a) cp -r ~wojnicki/lab/zdjecia/* ~/test
+	b) for a in ./*.JPG; do mv "$a" "$(basename -- "$a" .JPG).jpg"; done 
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+4. 
+
+echo $PATH
+Jeśli nie ma tam <ścieżka do naszego kat. domowego>/bin to w ~/.bashrc dodajemy:
+PATH=$PATH:~/bin
+
+
+
+
+#!/bin/bash
+
+if(($# == 0)) 
+then
+        for a in ./*.JPG 
+        do
+                mv "$a" "$(basename -- "$a" .JPG).jpg"; 
+        done
+elif [ $1 == "-h" ]
+then
+        echo "JPG2jpg [folder location]"
+else 
+        for a in $1/*.JPG; do
+                mv "$a" "$(dirname "$a")/$(basename -- "$a" .JPG).jpg";
+        done
+fi
+
+
+
+// Skopiować do /bin i nadać uprawnienia chmod +x <nazwa pliku/>
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+5.
+
+#!/bin/bash
+
+for a in $(find ./* -type f)
+do
+	if [[ $(file $a | grep "JPEG") == "" ]]
+	then
+		rm $a;
+	fi
+done
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+6.
+#!/bin/bash
+
+today=$(date +%Y-%m-%d);
+
+while read line
+do
+	date=$(echo $line | cut -d " " -f 1)
+	
+	if [ $date == $today ] 
+	then
+		echo $(echo $line | cut -d " " -f 1 --complement);
+	fi
+done < ~/reminder
+
+
+Dopisać do ~.bashrc 
+echo "Przypmnienie na dzis:"
+bash <ściezka do skryptu>
+
+
+
+-------------------------------------------------------------------------------------------------------------------
+7.
+
+#!/bin/bash
+
+textFile=~/myps.log 
+
+trap 'echo "sigterm nie dziala" ' SIGTERM
+trap 'echo "ctrlc tez nie dziala"' SIGINT
+trap 'echo "" > $textFile; echo "File $textFile is empty"' SIGUSR1
+
+while [ true ]
+do
+        newDate=$(date +"%Y-%m-%d %H:%M");
+        processCount=$(ps -aux | tail -n +2 | wc -l)
+        loading=$(uptime | cut -d ":" -f4);
+        echo "$newDate,$processCount,$loading" >> $textFile;
+
+        sleep 3;
+done
+
+
+Testy:
+kill 7997
+
+Wywołanie sigusr1:
+kill -s SIGUSR1 7997
+
+Wywołanie komendy autokiil:
+kill -s SIGKILL 7718 
