@@ -1,0 +1,159 @@
+UNIX ISI Lab 5
+
+Bash
+
+trap, sleep
+alias, basename
+
+1. Dodaj alias lst, który będzie pokazywał ostatnio zmodyfikowane pliki w bieżącym katalogu (podpowiedź: find), zrób zmianę permanentną (umieść odpowiednie polecenia w odpowiednim pliku konfiguracyjnym bash).
+ODP:
+Otworz za pomocą vima plik : .bashrc 
+Wpisz: alias lst="find . -mtime -2" 
+Teraz po wpisaniu lst pokażą nam pliki utworzoe w przeciągu dwóch dni
+w aktualnym katalogu.
+Po wstawieniu aliasu należy zresetować terminal
+
+
+2. Zmień swój znak zachęty bash, tak aby był 2-linijkowy, w 1-szej linii pokazywał: aktualny katalog oraz liczbę zadań w tle, w drugiej linii znak $.
+ ODP: Zaprogramuj w/w zmianę tak, aby było to domyślne ustawienie po zalogowaniu.
+
+vim .bashrc
+następnie w plini PS1 wpisz '\W \j\n$ '
+
+3. Skopiuj wszystkie pliki z katalogu ~wojnicki/lab/zdjecia do katalogu ~/lab5.
+Napisz polecenie, które zmieni nazwy plików w katalogu ~/lab5 z  kończących się na .JPG  na kończące się na .jpg.
+Podpowiedź: skorzystaj z pętli for oraz basename.
+
+ODP: cp -r ~wojnicki/lab/zdjecia ~/lab5
+    SKRYPT:
+#!/bin/bash
+cd ~/Zdjecia
+for I in *.JPG
+do 
+	mv $I `basename -s .JPG $I`.jpg;
+done
+(WYJAŚNIENIE) 
+mv - zmiana 
+$I nazw plików kończących się na .JPG 
+`basename -s .JPG $I`.jpg     na nazwy plików kończących się na .JPG ale z .jpg
+W praktyce `basename -s .JPG $I` usuwa końcówki .JPG ze wszystkich plików $I które je posiadają i dopisujemy do nich .jpg
+
+W praktyce praktyce: mając plik pies.JPG polecenie basename -s .JPG pies.JPG -> pies
+aby na końcu było .jpg musimy do tego dopisać: `basename -s.JPG pies.JPG`.jpg 
+
+
+4. Zapisz polecenie z poprzedniego zadania w pliku ~/bin/JPG2jpg, tak aby można je było uruchomić jako polecenie JPG2jpg ODP: utwórz katalog bin w katalogu domowym, dodaj w katalogu .bashrc takie coś:
+export PATH=$PATH':~/bin'
+Zmodyfikuj je tak, aby:
+a. jeżeli polecenie nie ma argumentu, konwersja nazw plików realizowana była w bieżącym katalogu,
+b. jeżeli polecenie ma 1 argument, i jest to katalog, wykonaj konwersję w tym katalogu,
+c. jeżeli polecenie ma opcje -h, wyświetl informacje o tym co robi i jaka jest składnia. 
+
+#!/bin/bash	
+if [ -z $1 ]                       				   //Jeżeli wartość argumentu ma zerową wartość  
+then                             				  // To wykona się to co poniżej (zamiana .JPG na .jpg)
+
+for I in *.JPG
+do
+	mv $I `basename -s .JPG $I`.jpg
+done				
+
+elif [ $1 == "-h" ]        				  //Jeżeli wartość argumentu jest równa -h 
+then			  				 // To wykona się to co poniżej (wypisze się informacja o składni bla bla bla)
+	echo "This is help"
+else                    			 // W przeciwnym razie
+	cd $1       				//wejdzie w katalog o nazwie argumentu i w nim wykona konwersję nazw z .JPG na .jpg
+	for I in *.JPG
+	do
+	mv $I `basename -s .JPG $I`.jpg
+	done
+fi                			 //zakończenie pętli if to fi 
+
+
+
+
+
+
+
+
+5. Napisz polecenie, które usunie z katalogu ~/lab5 pliki, które nie są obrazkami JPG.
+Podpowiedź: użyj pętli for oraz file.
+
+#!/bin/bash
+cd ~/lab5;					 //wchodzi w katalog zadany
+for I in *;					//dla bytów o dowolnej nazwie 
+do                                             //wykonaj
+	if [[ `file $I` != *JPEG* ]];         //(podwójny nawias bo pętla jest w pętli) jeżeli w opisie dowolnego pliku w katalogu lab5 nie znajduje się ciąg znaków JPEG to należy taki byt usunąć.
+	then
+		rm $I;
+	fi;				 //koniec pętli if
+done;					//koniec pętli for
+
+
+
+
+
+
+
+
+
+6. Zaprogramuj przypominacz, narzędzie, które przypomni o określonej dacie określoną treść.
+W pliku ~/reminder umieść daty i treści, o których przypominacz ma przypomnieć, 1 linijka 1 przypomnienie, w formacie:
+
+YYYY-MM-DD tekst do przypomnienia
+
+a. Napisz skrypt, który wyświetli przypomnienia dla dzisiejszej daty.
+ 		
+SPOSÓB PIERWSZY ROZWIĄZANIA:
+#!/bin/bash
+while read f;									  // podczas czytania linia po linii pliku określonego w done
+do					       					 // zrób
+if [[ `date +%Y-%m-%d` == `echo "$f" | cut -d ' ' -f1` ]] 			// jeżeli dzisiejsza data jest ta sama co data w linii przypominajki to:      ((echo "$f" wyświetla każdą linię, działa tak jak cat plik))
+then
+	echo "$f" | cut -d " " -f2-						//wyświetli wszystko od drugiej kolumny czyli nasze zadania do zrobienia
+fi
+done < ~/reminder								//ten plik ma być czytany, plik określony w pętli while 
+
+SPOSÓB DRUGI ROZWIĄZANIA:
+
+#!/bin/bash
+
+i=1							//deklaracja zmiennej i=1
+L=$((`cat ~/reminder | wc -l`+1))			//deklaracja zmiennej L= ilość linii pliku reminder powiększona o 1
+
+while [ $i -lt $L ];                             //pętla uruchamia się gdy $i jest większa od $L
+do
+	if [[ `cat ~/reminder | head -n $i | tail -n 1 | cut -d ' ' -f1` == `date +%Y-%m-%d` ]];        //sprawdza czy data przy poszczególnej linii się zgadza, jeżeli się zgadza to:
+then
+	cat ~/reminder | head -n $i | tail -n 1;							//wypisuje tą linię
+fi
+	((i=i+1));											//zwiększa liczbę o jeden (kolejne przejście pętli sprawdza kolejną linię)
+done
+	
+UWAGA: //Liczba wierszy L jest po to zwiększona o jeden aby pętla gładko przeszła przez każdy wiersz: przykładowo dla 3 linii w pliku pętla pierw sprawdza pierwszy linię ponieważ 1<3+1 następnie
+sprawdza drugą linię 2<3+1, następnie sprawdza trzecią linię bo 3<3+1 następnie NIE sprawdza czwartej linii bo jej nie ma 4<4 (sprzeczność).
+Można ułatwić to, nie trzeba do L dodawać 1 wystarczy zamiast -lt w pętli while użyć le 
+
+
+
+7. Napisz skrypt, który:
+a. co 3 sekundy będzie dodawać do pliku ~/myps.log pojedynczą linię zawierającą informacje o aktualnej dacie i czasie, ilości uruchomionych procesów oraz obciążeniu systemu, w formacie:
+YYYY-MM-DD HH:MM:SS,n,l1,l5,l15
+gdzie n to ilość procesów, l1, l5, l15 to obciążenie systemu (load) odpowiednio w ciągu ostatnich 1, 5, 15 minut,
+a. zaprogramuj aby w/w nazwa pliku (~/myps.log) była przechowywana w zmiennej, aby w razie potrzeby można było ją łatwo zmienić,
+a. spraw, aby skrypt był odporny na SIGTERM oraz C-c (ctrl c) (podpowiedź: użyj trap),
+b. spraw, aby skrypt po otrzymaniu SIGUSR1 kasował aktualną zawartość pliku ~/myps.log i wyświetlał na wyjściu błędów: "File ~/myps.log cleaned" (podpowied: użyj trap).
+
+#!/bin/bash
+PLIK=~/myps.log
+
+trap 'echo "wowołano sigterm, ale nic sie nie dzieje' SIGTERM          //przechwycenie sygnału SIGTERM 'co ma się dziać'
+trap 'echo "wyowłano ctrlc i zamykanie; exit 1' INT
+trap 'cat /dev/null > $PLIK && echo "File $PLIK cleaned" ' SIGUSR1
+
+while [ true ];
+do
+	echo `date +%Y-%m-%d` `date+%T` $((`ps aux | wc -l` -1)), `uptime | cut -d ':' -f5` >> $PLIK;
+	sleep 3;
+done;
+

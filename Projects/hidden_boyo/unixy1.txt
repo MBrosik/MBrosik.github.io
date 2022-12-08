@@ -1,0 +1,139 @@
+1.
+alias lst="find ./ -type f -mmin -2 2>/dev/null"
+przekleić tą linijkę do ~/.bashrc
+
+
+2.
+W pliku .bashrc dodać linijkę
+PS1="\w \j\n\$ "
+
+Nowy prompt pojawi się w każdym nowo uruchomionym terminalu
+
+
+3.
+#!/bin/bash
+
+files=$(find ~/lab5/*.JPG)
+
+for file in $files
+do
+    dir=$(dirname $file)
+    new_name="$(basename $file .JPG).jpg"
+    new_path="$dir/$new_name"
+
+    mv $file $new_path
+done
+
+
+4.
+echo $PATH
+Jeśli nie ma tam <ścieżka do naszego kat. domowego>/bin to w ~/.bashrc dodajemy:
+PATH=$PATH:~/bin
+
+#!/bin/bash
+
+num_of_args=$#
+target_dir=""
+
+if [ $num_of_args -eq 0 ]
+then
+    # W bieżącym folderze
+    target_dir=$(pwd)
+elif [ $num_of_args -eq 1 ]
+then
+    arg=$1
+
+    if [ $arg == "-h" ]
+    then
+        # Pomoc i składnia
+        echo "JPG2jpg [-h] [directory]"
+    elif [ -d $arg ]
+    then
+        # W podanym folderze
+        target_dir=$arg
+    fi
+fi
+
+if [ $target_dir == "" ]
+then
+    exit
+fi
+
+files=$(find $target_dir/*.JPG)
+
+for file in $files
+do
+    dir=$(dirname $file)
+
+    new_name="$(basename $file .JPG).jpg"
+    new_path="$dir/$new_name"
+
+    mv $file $new_path
+done
+
+
+5.
+#!/bin/bash
+
+files=$(find ~/lab5/* -type f)
+
+for file in $files
+do
+    file_output=$(file $file)
+    fo_grep=$(echo $file_output | grep "JPEG")
+
+    if [[ $fo_grep != "" ]]
+    then
+        rm $file
+    fi
+done
+
+
+6.
+#!/bin/bash
+
+reminder_file=~/reminder
+today=$(date +%Y-%m-%d)
+
+while read line
+do
+    date=$(echo $line | cut -d " " -f 1)
+    #echo $date
+
+    rest=$(echo $line | cut -d " " -f 1 --complement)
+    #echo $rest
+
+    if [ $date == $today ]
+    then
+        echo $rest
+    fi
+done < $reminder_file
+
+W pliku ~/.bashrc dodać:
+echo
+echo "Przypomnienia na dziś:"
+bash ~/lab5/zad6
+# ostatnia linia to lokalizacja skryptu
+
+
+7.
+#!/bin/bash
+
+output_file=~/myps.log
+
+trap "" SIGTERM
+trap "" SIGINT
+trap "echo > $output_file; echo 'File ~/myps.log was cleaned' >&2" SIGUSR1
+
+while [ true ]
+do
+    datetime=$(date "+%Y-%m-%d %T")
+    process_count=$(( $(ps aux | wc -l) -1 ))
+    load=$(uptime | cut -d ":" -f 5)
+    echo "$datetime, $process_count,$load" >> $output_file
+    sleep 3
+done
+
+
+Jak zabić taki proces (bo CTRL-C i kill $PID nie działa)?
+kill -s SIGKILL $PID
