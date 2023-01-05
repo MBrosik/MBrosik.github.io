@@ -1,0 +1,142 @@
+1.
+
+cd ~
+ssh-keygen -t rsa
+ssh-copy-id user@borg.kis.agh.edu.pl
+cd ./.ssh
+cat id_rsa.pub | ssh user@borg.kis.agh.edu.pl ’cat >> .ssh/authorized_keys’
+
+UWAGA: nazwa użytkownika, z którego wykonujemy zadanie musi pokrywać się z nazwą użytkownika na serwerze
+
+
+
+2.
+
+Co robi polecenie?
+mkdir -p tworzy katalog i wszystkie katalogi nadrzędne, które nie istnieją, tj.
+mkdir -p x/y/z/a/b/c stworzy 6 katalogów, zagnieżdżonych w sobie
+mkdir x/y/z/a/b/c wyrzuci błąd, jeśli któryś z pierwszych 5 nie istnieje
+
+To, co jest w {} oddzielone przecinkiem należy traktować jako różne podstawienia za cały nawias, które zostaną sekwencyjne użyte, tj.
+mkdir -p a/{b,c,d} stworzy 3 katalogi: a/b, a/c i a/d
+Można to rozumieć jako wykonanie polecenia 3 razy, za każdym razem wybierając inną opcję z {}
+
+Dlaczego (ls -ld a | cut -f 2 -d' ') zwraca 5?
+Ta "5" to ilość nazw danego katalogu, aka w ilu miejscach w strukturze plików występuje odwołanie do tego katalogu/pliku
+
+Gdzie te odwołania znaleźć?
+1. Katalog, w którym zawiera się 'a'
+2. Jeśli wejdziemy w 'a' i zrobimy 'ls -la' zobaczymy katalog '.' - wskazuje on na obecny katalog, czyli 'a'
+3-5. W każdym z katalogów b,c,d znajduje się '..' - odwołanie do katalogu nadrzędnego, którym jest 'a'
+
+
+
+3.
+
+Co robi polecenie?
+Polecenia oddzielone są ';', można wywołać je sekwencyjnie
+Pierwsze jest z poprzedniego zadania
+Drugie tworzy dowiązanie symboliczne do katalogu 'a' w a/b/link
+Przy czym należy zwrócić uwagę, że wyrażenie w backtickach `pwd` jest wykonywane najpierw, a potem do jego wyniku doklejane '/a'
+
+cd a/b/link/b/link/b
+Symbol zachęty będzie pokazywał, że jesteśmy w a/b/link/b/link/b - co więcej, możemy dalej wchodzić głębiej
+Tak naprawdę jesteśmy w katalogu 'a' (zrobienie 'ls' pokaże znajomą strukturę katalogów)
+Można to sprawdzić za pomocą 'pwd -P', flaga ta ignoruje dowiązania symboliczne i pokazuje prawdziwą lokalizację w drzewie katalogów
+
+
+
+4.
+
+umask - maska dla uprawnień przy nowo tworzonych plikach/katalogach
+
+Polecenie 'umask' pokazuje obecnie ustawioną maskę, domyślnie "0022"
+
+Jak wyliczać maskę:
+https://www.computernetworkingnotes.org/images/linux/rhce-study-guide/ls22-c-1-calculate-default-permisison.png
+
+Gdzie "default" to uprawnienia, jakie będą zastosowane przy tworzeniu nowych plików/katalogów
+Trzeba więc dobrać taką maskę, żeby po wykonaniu odejmowania uprawnienia się zgadzały
+
+Inny wzór: permission = initial & ~umask
+
+A żeby umask był pernamentny to wrzucić go w ~/.bashrc
+
+
+
+5.
+
+AFAIK to na serwerach to nie działa bo uprawnienia w Linuxie są trochę bardziej skomplikowane niż 3 cyferki
+
+Generalnie trzeba zaufać że działa
+
+chmod 711 ~
+mkdir ~/pub-r
+chmod 755 ~/pub-r
+
+'pwd' sprawdzam gdzie jestem i proszę kogoś, żeby wszedł do mojego katalogu domowego
+
+cd /home/students/u/user - działa
+ls - wyrzuci błąd, że brak dostępu
+cd pub-r (alternatywnie 'cd /home/students/u/user/pub-r') - działa
+ls - działa
+
+Czyli nikt nie ma dostępu do mojego katalogu domowego, ale ma dostęp do 'pub-r', który znajduje się wewnątrz (jeśli wie że taki istnieje, bo nie sprawdzi 'ls')
+
+
+6. 
+#!/bin/bash
+
+target_user=$1
+me="$(whoami)"
+
+while [ true ]
+do
+    users="$(users)"
+    found=0
+
+    for user in $users
+    do
+        if [ $user = $target_user ]
+        then
+            found=1
+        fi
+    done
+
+    if [ $found = 1 ]
+    then
+        for pts in /dev/pts/*
+        do
+            ls_output="$(ls -ld $pts | cut -d ' ' -f 3)"
+
+            if [ $ls_output = $me ]
+            then
+                echo -e "\n$target_user zalogował się" > $pts
+            fi
+        done
+
+        while [ true  ]
+        do
+            users="$(users)"
+            found=0
+
+            for user in $users
+            do
+                if [ $user = $target_user ]
+                then
+                    found=1
+                fi
+            done
+
+            if [ $found = 0 ]
+            then
+                echo "$target_user wylogował się"
+                break
+            fi
+
+            sleep 1
+        done
+    fi
+
+    sleep 1
+done
